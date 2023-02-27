@@ -1,0 +1,107 @@
+section {
+    padding: 15px;
+    font-family: 'Pangea';
+}
+
+#locations {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+}
+
+.location {
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    height: 350px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 15px;
+}
+
+.location-data {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 0 0 10px 10px;
+}
+
+.location-data button {
+    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.location-data button:hover {
+    background: -webkit-linear-gradient(to right, #4bafd1, #286fca);
+    background: linear-gradient(to right, #4bafd1, #286fca);
+    transition: .3s;
+}
+
+.iguazu {
+    background-image: url("../../../../../../../assets/img/locations/puerto_iguazu.jpg"); /*NgStyle with backend call*/
+}
+
+.tigre {
+    background-image: url("../../../../../../../assets/img/locations/tigre.jpg"); /*NgStyle with backend call*/
+}
+
+.madryn {
+    background-image: url("../../../../../../../assets/img/locations/puerto_madryn.jpg"); /*NgStyle with backend call*/
+}
+
+.acsibi {
+    background-image: url("../../../../../../../assets/img/locations/cuevas_de_acsibi.jpg"); /*NgStyle with backend call*/
+}
+
+#locations-page-link {
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: #2F80ED;
+    transition: .3s;
+}
+
+#locations-page-link:hover {
+    color: #286fca;
+    text-decoration: underline;
+    transition: .3s;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 25px;
+    }
+
+    #locations {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1038px) {
+    section h2 {
+        font-size: 2.5rem;
+    }
+
+    #locations {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .location-data {
+        padding: 10px;
+    }
+}

@@ -1,9 +1,10 @@
 header {
-    width: 100vw;
-    height: calc(100vh - 60px);
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 60px;
 }
 
 header h1 {
@@ -42,7 +43,7 @@ header h1 {
 }
 
 .index-hero-grid1 {
-    background-image: url("../../../../../../../assets/img/bsas.jpg"); /*NgStyle with backend call*/
+    background-image: url("../../../../../../../assets/img/provinces/bsas.jpg"); /*NgStyle with backend call*/
 }
 
 .index-hero-grid2, .index-hero-grid3 {
@@ -50,10 +51,6 @@ header h1 {
 }
 
 @media (min-width: 768px) {
-    header {
-        height: calc(100vh - 80px);
-    }
-
     header h1 {
         font-size: 4rem;
     }
@@ -103,13 +100,13 @@ header h1 {
         display: flex;
         grid-column: 2;
         grid-row: 1;
-        background-image: url("../../../../../../../assets/img/rio_negro.jpg"); /*NgStyle with backend call*/
+        background-image: url("../../../../../../../assets/img/provinces/rio_negro.jpg"); /*NgStyle with backend call*/
     }
     
     .index-hero-grid3 {
         display: flex;
         grid-column: 3;
         grid-row: 1;
-        background-image: url("../../../../../../../assets/img/chubut.jpg"); /*NgStyle with backend call*/
+        background-image: url("../../../../../../../assets/img/provinces/chubut.jpg"); /*NgStyle with backend call*/
     }
 }

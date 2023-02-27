@@ -1,0 +1,20 @@
+{
+    "GENERAL": {
+        "DETAILS": "Detalhes"
+    },
+    "NAVBAR": {
+        "HOME": "Início",
+        "PROVINCES": "Províncias",
+        "LOCATIONS": "Localidades",
+        "ACTIVITIES": "Atividades",
+        "CART": "Carrinho",
+        "ACCOUNT": "Conta"
+    },
+    "ECOMMERCE": {
+        "INDEX": {
+            "LOCATIONS": {
+                "MORE_LOCATIONS_LINK": "Mais localidades >>"
+            }
+        }
+    }
+}
