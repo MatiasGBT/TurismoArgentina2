@@ -1,0 +1,163 @@
+nav {
+    height: 60px;
+    width: 100%;
+    padding: 0 10px;
+    background: #2F80ED;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav i {
+    font-size: 1.75rem;
+    color: white;
+}
+
+nav i:hover {
+    color: rgb(218, 218, 218);
+}
+
+nav button {
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    min-width: 25px;
+    position: absolute;
+}
+
+#logo {
+    margin: 0 auto;
+}
+
+#logo img {
+    width: 50px;
+    height: 50px;
+}
+
+nav ul {
+    display: none;
+    list-style: none;
+}
+
+nav ul li a p {
+    font-family: 'Roboto';
+}
+
+.menu-opened {
+    display: flex !important;
+    justify-content: center;
+    align-content: center;
+    gap: 15px;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: -webkit-linear-gradient(to bottom, #2F80ED, #56CCF2);
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    padding: 0 0 15px 10px;
+    animation: menu-opened-animation .15s normal ease-out;
+}
+
+.menu-opened li a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.menu-opened li a i {
+    font-size: 1.25rem;
+    min-width: 30px;
+}
+
+.menu-opened li a p {
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    nav {
+        height: 80px;
+        padding: 0 25px;
+    }
+
+    #logo img {
+        width: 70px;
+        height: 70px;
+    }
+
+    nav i {
+        font-size: 2rem;
+    }
+
+    nav button {
+        min-width: 28px;
+    }
+
+    .menu-opened {
+        padding: 0 0 15px 25px;
+        top: 80px;
+    }
+
+    .menu-opened li a p {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1038px) {
+    #logo {
+        margin: 0;
+    }
+
+    nav button {
+        display: none;
+    }
+
+    nav i {
+        font-size: 1.25rem;
+        color: white;
+    }
+
+    nav i:hover {
+        color: white
+    }
+
+    nav ul {
+        display: flex;
+        gap: 15px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.25rem;
+        display: flex;
+        gap: 5px;
+        /*Animated line*/
+        background-image: linear-gradient(90deg, white, white, white);
+        background-repeat: no-repeat;
+        background-size: 0% 2px;
+        background-position: center bottom;
+        transition: background-size .3s ease-in-out;
+    }
+
+    nav ul li a:hover {
+        /*Animated line*/
+        background-size: 100% 2px;
+    }
+}
+
+@keyframes menu-opened-animation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
