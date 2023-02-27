@@ -6,6 +6,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 -2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 nav i {
@@ -59,6 +60,7 @@ nav ul li a p {
     background: linear-gradient(to bottom, #2F80ED, #56CCF2);
     padding: 0 0 15px 10px;
     animation: menu-opened-animation .15s normal ease-out;
+    z-index: 9999;
 }
 
 .menu-opened li a {

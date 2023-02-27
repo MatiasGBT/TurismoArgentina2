@@ -5,6 +5,11 @@
 }
 
 @font-face {
+    font-family: 'Pangea';
+    src: url('assets/fonts/PangeaAfrikanTrial-SemiBold.otf');
+}
+
+@font-face {
     font-family: 'BlackJack';
     src: url('assets/fonts/blackjack.otf');
 }
