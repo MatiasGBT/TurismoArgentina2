@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvincesSectionComponent } from './provinces-section.component';
+import { ProvincesSectionComponent } from './locations-section.component';
 
 describe('ProvincesSectionComponent', () => {
   let component: ProvincesSectionComponent;

@@ -6,7 +6,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 -2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
     position: fixed;
     z-index: 9999;
 }
@@ -63,6 +63,7 @@ nav ul li a p {
     padding: 0 0 15px 10px;
     animation: menu-opened-animation .15s normal ease-out;
     z-index: 9999;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .menu-opened li a {

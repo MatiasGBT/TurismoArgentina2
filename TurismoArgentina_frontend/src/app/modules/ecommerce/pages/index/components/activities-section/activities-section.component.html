@@ -1,0 +1,23 @@
+<section>
+    <h2>{{'NAVBAR.ACTIVITIES' | translate}}</h2>
+
+    <div id="activities">
+        <div class="activity selected-activity" [ngStyle]="{'background-image': 'url(' + selectedActivity.image1 + ')'}">
+            <div class="activity-data">
+                <p>{{selectedActivity.name}} ({{selectedActivity.location.name}})</p>
+                <button [attr.aria-label]="selectedActivity.name + ' page'">{{'GENERAL.DETAILS' | translate}}</button>
+            </div>
+        </div>
+
+        <div class="activity" *ngFor="let activity of activities" [ngStyle]="{'background-image': 'url(' + activity.image1 + ')'}" (click)="selectActivity(activity)">
+            <div class="activity-data">
+                <p>{{activity.name}} ({{activity.location.name}})</p>
+                <button [attr.aria-label]="activity.name + ' page'">{{'GENERAL.DETAILS' | translate}}</button>
+            </div>
+            <i class="fa-solid fa-hand-pointer"></i>
+        </div>
+    </div>
+
+    <a href="" aria-label="Activities page"
+        id="activities-page-link">{{'ECOMMERCE.INDEX.ACTIVITIES.MORE_ACTIVITIES_LINK' | translate}}</a>
+</section>

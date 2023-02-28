@@ -1,0 +1,14 @@
+<section>
+    <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
+
+    <div id="locations">
+        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(' + location.image + ')'}">
+            <div class="location-data">
+                <p>{{location.name}} ({{location.province.name}})</p>
+                <button [attr.aria-label]="location.name + ' page'">{{'GENERAL.DETAILS' | translate}}</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="" aria-label="Locations page" id="locations-page-link">{{'ECOMMERCE.INDEX.LOCATIONS.MORE_LOCATIONS_LINK' | translate}}</a>
+</section>

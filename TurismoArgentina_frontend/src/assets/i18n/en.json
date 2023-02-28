@@ -14,6 +14,9 @@
         "INDEX": {
             "LOCATIONS": {
                 "MORE_LOCATIONS_LINK": "More locations >>"
+            },
+            "ACTIVITIES": {
+                "MORE_ACTIVITIES_LINK": "More activities >>"
             }
         }
     }

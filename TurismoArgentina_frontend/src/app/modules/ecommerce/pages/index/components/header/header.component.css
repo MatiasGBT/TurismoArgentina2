@@ -23,6 +23,10 @@ header h1 {
     background-position: center center;
 }
 
+.index-province-hero:nth-child(2), .index-province-hero:nth-child(3) {
+    display: none;
+}
+
 .province-wrapper {
     width: 100%;
     height: 100%;
@@ -40,14 +44,6 @@ header h1 {
     text-shadow: 0 0 10px #2F80ED;
     min-width: 150px;
     text-align: center;
-}
-
-.index-hero-grid1 {
-    background-image: url("../../../../../../../assets/img/provinces/bsas.jpg"); /*NgStyle with backend call*/
-}
-
-.index-hero-grid2, .index-hero-grid3 {
-    display: none;
 }
 
 @media (min-width: 768px) {
@@ -76,6 +72,23 @@ header h1 {
         justify-content: flex-start;
     }
 
+    .index-province-hero:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .index-province-hero:nth-child(2)  {
+        display: flex;
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .index-province-hero:nth-child(3) {
+        display: flex;
+        grid-column: 3;
+        grid-row: 1;
+    }
+
     .province-wrapper {
         justify-content: flex-start;
         background: rgba(0, 0, 0, 0.75);
@@ -89,24 +102,5 @@ header h1 {
 
     .province-name {
         text-align: left;
-    }
-
-    .index-hero-grid1 {
-        grid-column: 1;
-        grid-row: 1;
-    }
-    
-    .index-hero-grid2 {
-        display: flex;
-        grid-column: 2;
-        grid-row: 1;
-        background-image: url("../../../../../../../assets/img/provinces/rio_negro.jpg"); /*NgStyle with backend call*/
-    }
-    
-    .index-hero-grid3 {
-        display: flex;
-        grid-column: 3;
-        grid-row: 1;
-        background-image: url("../../../../../../../assets/img/provinces/chubut.jpg"); /*NgStyle with backend call*/
     }
 }
