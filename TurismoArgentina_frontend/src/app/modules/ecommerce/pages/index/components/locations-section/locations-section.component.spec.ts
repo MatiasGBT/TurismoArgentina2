@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { ProvincesSectionComponent } from './locations-section.component';
+import { LocationsSectionComponent } from './locations-section.component';
 
 describe('ProvincesSectionComponent', () => {
-  let component: ProvincesSectionComponent;
-  let fixture: ComponentFixture<ProvincesSectionComponent>;
+  let component: LocationsSectionComponent;
+  let fixture: ComponentFixture<LocationsSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProvincesSectionComponent ]
+      imports: [TranslateModule.forRoot()],
+      declarations: [ LocationsSectionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProvincesSectionComponent);
+    fixture = TestBed.createComponent(LocationsSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

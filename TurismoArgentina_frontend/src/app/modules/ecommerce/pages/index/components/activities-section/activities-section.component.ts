@@ -85,6 +85,11 @@ export class ActivitiesSectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*
+  The selected activity is the one that is displayed larger than the others.
+  This method is used so that, when you click on an activity that is not selected,
+  it is selected and the old selected activity goes to the list.
+  */
   public selectActivity(activity: any): void {
     this.pushSelectedActivityIntoActivities();
     this.removeActivityFromActivities(activity);
