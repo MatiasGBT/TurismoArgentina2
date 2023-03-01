@@ -6,13 +6,15 @@ import { ECommerceRoutingModule } from './ecommerce-routing.module';
 import { HeaderComponent } from './pages/index/components/header/header.component';
 import { LocationsSectionComponent } from './pages/index/components/locations-section/locations-section.component';
 import { ActivitiesSectionComponent } from './pages/index/components/activities-section/activities-section.component';
+import { ContactSectionComponent } from './pages/index/components/contact-section/contact-section.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     HeaderComponent,
     LocationsSectionComponent,
-    ActivitiesSectionComponent
+    ActivitiesSectionComponent,
+    ContactSectionComponent
   ],
   imports: [
     CommonModule,

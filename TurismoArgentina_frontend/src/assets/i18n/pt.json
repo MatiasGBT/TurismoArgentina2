@@ -17,6 +17,14 @@
             },
             "ACTIVITIES": {
                 "MORE_ACTIVITIES_LINK": "Mais atividades >>"
+            },
+            "CONTACT": {
+                "TITLE": "Contate-nos",
+                "FORM": {
+                    "NAME": "Nome",
+                    "MESSAGE": "Mensagem",
+                    "SEND": "Enviar"
+                }
             }
         }
     }

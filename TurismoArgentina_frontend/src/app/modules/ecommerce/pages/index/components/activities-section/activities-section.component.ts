@@ -90,10 +90,11 @@ export class ActivitiesSectionComponent implements OnInit {
   This method is used so that, when you click on an activity that is not selected,
   it is selected and the old selected activity goes to the list.
   */
-  public selectActivity(activity: any): void {
+  public selectActivity(activity: any, selectedActivityDomElement: HTMLElement): void {
     this.pushSelectedActivityIntoActivities();
     this.removeActivityFromActivities(activity);
     this.setSelectedActivity(activity);
+    this.moveToSelectedActivity(selectedActivityDomElement);
   }
 
   private pushSelectedActivityIntoActivities(): void {
@@ -107,5 +108,9 @@ export class ActivitiesSectionComponent implements OnInit {
 
   private setSelectedActivity(activity: any): void {
     this.selectedActivity = activity;
+  }
+
+  private moveToSelectedActivity(selectedActivityDomElement: HTMLElement): void {
+    selectedActivityDomElement.scrollIntoView({behavior: 'smooth'});
   }
 }

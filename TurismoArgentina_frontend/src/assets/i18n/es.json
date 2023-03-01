@@ -5,7 +5,7 @@
     "NAVBAR": {
         "HOME": "Inicio",
         "PROVINCES": "Provincias",
-        "LOCATIONS": "Locaciones",
+        "LOCATIONS": "Localidades",
         "ACTIVITIES": "Actividades",
         "CART": "Carrito",
         "ACCOUNT": "Cuenta"
@@ -17,6 +17,14 @@
             },
             "ACTIVITIES": {
                 "MORE_ACTIVITIES_LINK": "Más actividades >>"
+            },
+            "CONTACT": {
+                "TITLE": "Contáctanos",
+                "FORM": {
+                    "NAME": "Nombre",
+                    "MESSAGE": "Mensaje",
+                    "SEND": "Enviar"
+                }
             }
         }
     }
