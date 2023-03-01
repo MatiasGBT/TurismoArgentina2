@@ -94,7 +94,11 @@ export class ActivitiesSectionComponent implements OnInit {
     this.pushSelectedActivityIntoActivities();
     this.removeActivityFromActivities(activity);
     this.setSelectedActivity(activity);
-    this.moveToSelectedActivity(selectedActivityDomElement);
+    //On small screens it is necessary to scroll the users so that they can see the
+    //change when clicking on an activity.
+    if(window.innerWidth < 1038) {
+      this.moveToSelectedActivity(selectedActivityDomElement);
+    }
   }
 
   private pushSelectedActivityIntoActivities(): void {
