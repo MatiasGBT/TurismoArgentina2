@@ -1,0 +1,14 @@
+<section>
+    <h1>{{'NAVBAR.PROVINCES' | translate}}</h1>
+
+    <ecommerce-provinces-provinces-section-select-province></ecommerce-provinces-provinces-section-select-province>
+
+    <div id="provinces">
+        <div class="province" *ngFor="let province of provinces">
+            <img [src]="province.image" [alt]="province.name + ' image'">
+            <p>{{province.name}}</p>
+        </div>
+    </div>
+
+    <ecommerce-provinces-provinces-section-province-pagination></ecommerce-provinces-provinces-section-province-pagination>
+</section>

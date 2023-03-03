@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public activateMenu(): void {
+  public toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
     this.isMenuOpen ? this.openMenu() : this.closeMenu();
   }

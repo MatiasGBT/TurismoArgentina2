@@ -26,6 +26,12 @@
                     "SEND": "Enviar"
                 }
             }
+        },
+        "PROVINCES": {
+            "SELECT": {
+                "TEXT": "Elige una provincia",
+                "DEFAULT_OPTION": "Todas"
+            }
         }
     }
 }

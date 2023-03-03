@@ -1,0 +1,27 @@
+#paginator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Pangea';
+}
+
+#paginator button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #2F80ED;
+    color: white;
+    transition: .3s;
+}
+
+#paginator button:hover {
+    background: #286fca;
+}
+
+#paginator button:disabled {
+    background: #4f85cc;
+    cursor: default;
+}

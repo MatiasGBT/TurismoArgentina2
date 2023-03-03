@@ -1,5 +1,5 @@
 <nav>
-    <button id="menu" type="button" aria-label="Menu" (click)="activateMenu()">
+    <button id="menu" type="button" aria-label="Menu" (click)="toggleMenu()">
         <i class="fa-solid fa-bars" #menuButton></i>
     </button>
 
@@ -9,13 +9,13 @@
     
     <ul #navbarList>
         <li>
-            <a href="">
+            <a [routerLink]="['/shop/index']">
                 <i class="fa-solid fa-house"></i>
                 <p>{{'NAVBAR.HOME' | translate}}</p>
             </a>
         </li>
         <li>
-            <a href="">
+            <a [routerLink]="['/shop/provinces']">
                 <i class="fa-solid fa-location-dot"></i>
                 <p>{{'NAVBAR.PROVINCES' | translate}}</p>
             </a>

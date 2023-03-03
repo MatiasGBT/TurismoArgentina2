@@ -1,0 +1,8 @@
+<header>
+    <h1>Turismo Argentina</h1>
+    <div class="index-province-hero" *ngFor="let province of provinces" [ngStyle]="{'background-image': 'url(' + province.image + ')'}">
+        <div class="province-wrapper">
+            <h2 class="province-name">{{province.name}}</h2>
+        </div>
+    </div>
+</header>
