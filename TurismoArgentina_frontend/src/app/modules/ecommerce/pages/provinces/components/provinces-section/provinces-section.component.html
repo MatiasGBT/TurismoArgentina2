@@ -1,7 +1,7 @@
 <section>
     <h1>{{'NAVBAR.PROVINCES' | translate}}</h1>
 
-    <ecommerce-provinces-provinces-section-select-province></ecommerce-provinces-provinces-section-select-province>
+    <ecommerce-province-selector></ecommerce-province-selector>
 
     <div id="provinces">
         <div class="province" *ngFor="let province of provinces">
@@ -10,5 +10,5 @@
         </div>
     </div>
 
-    <ecommerce-provinces-provinces-section-province-pagination></ecommerce-provinces-provinces-section-province-pagination>
+    <ecommerce-paginator></ecommerce-paginator>
 </section>

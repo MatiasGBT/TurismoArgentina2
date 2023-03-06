@@ -17,7 +17,7 @@ export class ActivitiesSectionComponent implements OnInit {
     'duration': 0,
     'deletionDate': null,
     'location': {
-      'name': 'Buenos Aires'
+      'name': 'Ciudad Autónoma de Buenos Aires'
     }
   }
 

@@ -11,28 +11,35 @@ section h1 {
     font-family: 'Pangea';
 }
 
-.province {
+.location {
     width: 100%;
     height: 340px;
     margin-bottom: 15px;
     cursor: pointer;
 }
 
-.province:hover {
+.location:hover {
     text-decoration: underline;
 }
 
-.province img {
+.location img {
     width: 100%;
-    height: 90%;
+    height: 85%;
     object-fit: cover;
     border-radius: 15px;
 }
 
-.province p {
-    height: 10%;
+.location-province {
+    font-family: 'Pangea';
+    font-size: 1rem;
+    line-height: 1rem;
+    color: rgb(58, 58, 58);
+}
+
+.location-name {
     font-family: 'Pangea';
     font-size: 1.25rem;
+    line-height: 1.25rem;
     color: black;
 }
 
@@ -44,7 +51,7 @@ section h1 {
         font-size: 4rem;
     }
 
-    #provinces {
+    #locations {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 25px;
@@ -56,7 +63,11 @@ section h1 {
         font-size: 5rem;
     }
 
-    .province {
+    .location {
         height: 260px;
+    }
+
+    .location-province {
+        line-height: normal;
     }
 }

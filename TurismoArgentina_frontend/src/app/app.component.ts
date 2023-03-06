@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -6,11 +6,15 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'TurismoArgentina_frontend';
 
-  constructor(translate: TranslateService) {
+  constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
-    translate.use('en');
+  }
+
+  ngOnInit(): void {
+    const lang = localStorage.getItem('lang');
+    lang ? this.translate.use(lang) : this.translate.use('en');
   }
 }

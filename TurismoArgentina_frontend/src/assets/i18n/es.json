@@ -8,9 +8,15 @@
         "LOCATIONS": "Localidades",
         "ACTIVITIES": "Actividades",
         "CART": "Carrito",
-        "ACCOUNT": "Cuenta"
+        "ACCOUNT": "Cuenta",
+        "ADMIN": "Panel de administración"
     },
     "ECOMMERCE": {
+        "SELECTORS": {
+            "PROVINCE": "Elige una provincia",
+            "LOCATION": "Elige una localidad",
+            "DEFAULT_OPTION": "Todas"
+        },
         "INDEX": {
             "LOCATIONS": {
                 "MORE_LOCATIONS_LINK": "Más localidades >>"
@@ -25,12 +31,6 @@
                     "MESSAGE": "Mensaje",
                     "SEND": "Enviar"
                 }
-            }
-        },
-        "PROVINCES": {
-            "SELECT": {
-                "TEXT": "Elige una provincia",
-                "DEFAULT_OPTION": "Todas"
             }
         }
     }

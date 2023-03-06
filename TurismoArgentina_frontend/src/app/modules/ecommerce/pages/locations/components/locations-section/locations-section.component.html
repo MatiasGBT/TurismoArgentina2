@@ -1,0 +1,15 @@
+<section>
+    <h1>{{'NAVBAR.LOCATIONS' | translate}}</h1>
+
+    <ecommerce-province-selector></ecommerce-province-selector>
+
+    <div id="locations">
+        <div class="location" *ngFor="let location of locations">
+            <img [src]="location.image" [alt]="location.name + ' image'">
+            <p class="location-province">{{location.province.name}}</p>
+            <p class="location-name">{{location.name}}</p>
+        </div>
+    </div>
+
+    <ecommerce-paginator></ecommerce-paginator>
+</section>

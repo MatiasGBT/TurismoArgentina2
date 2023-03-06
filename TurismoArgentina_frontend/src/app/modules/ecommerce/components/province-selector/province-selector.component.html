@@ -1,0 +1,10 @@
+<div id="select-container">
+    <label for="provinces-select">{{'ECOMMERCE.SELECTORS.PROVINCE' | translate}}: </label>
+
+    <select name="provinces-select" id="provinces-select" (change)="selectProvince()">
+        <option value="default" selected>{{'ECOMMERCE.SELECTORS.DEFAULT_OPTION' | translate}}</option>
+        <option *ngFor="let provinceName of provincesNames" value="provinceName">
+            {{provinceName}}
+        </option>
+    </select>
+</div>

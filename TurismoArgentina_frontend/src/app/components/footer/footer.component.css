@@ -130,10 +130,6 @@ hr {
 }
 
 @media (min-width: 1038px) {
-    footer {
-        font-size: 1.25rem;
-    }
-
     #company-data img {
         width: 80px;
         height: 80px;

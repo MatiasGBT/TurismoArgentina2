@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ProvincesHeaderComponent } from './provinces-header.component';
+import { ProvinceSelectorComponent } from './province-selector.component';
 
-describe('ProvincesHeaderComponent', () => {
-  let component: ProvincesHeaderComponent;
-  let fixture: ComponentFixture<ProvincesHeaderComponent>;
+describe('ProvinceSelectorComponent', () => {
+  let component: ProvinceSelectorComponent;
+  let fixture: ComponentFixture<ProvinceSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [ ProvincesHeaderComponent ]
+      declarations: [ ProvinceSelectorComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProvincesHeaderComponent);
+    fixture = TestBed.createComponent(ProvinceSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

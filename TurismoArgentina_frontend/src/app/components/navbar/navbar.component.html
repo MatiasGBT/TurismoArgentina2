@@ -21,13 +21,13 @@
             </a>
         </li>
         <li>
-            <a href=""> 
+            <a [routerLink]="['/shop/locations']"> 
                 <i class="fa-solid fa-mountain-sun"></i>
                 <p>{{'NAVBAR.LOCATIONS' | translate}}</p>
             </a>
         </li>
         <li>
-            <a href="">
+            <a [routerLink]="['/shop/activities']">
                 <i class="fa-solid fa-person-snowboarding"></i>
                 <p>{{'NAVBAR.ACTIVITIES' | translate}}</p>
             </a>
@@ -42,6 +42,12 @@
             <a href="">
                 <i class="fa-solid fa-user"></i>
                 <p>{{'NAVBAR.ACCOUNT' | translate}}</p>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <p>{{'NAVBAR.ADMIN' | translate}}</p>
             </a>
         </li>
     </ul>

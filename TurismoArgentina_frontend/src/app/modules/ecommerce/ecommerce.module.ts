@@ -11,8 +11,15 @@ import { ProvincesComponent } from './pages/provinces/provinces.component';
 import { ParallaxDirective } from './directives/parallax.directive';
 import { ProvincesHeaderComponent } from './pages/provinces/components/provinces-header/provinces-header.component';
 import { ProvincesSectionComponent } from './pages/provinces/components/provinces-section/provinces-section.component';
-import { SelectProvinceComponent } from './pages/provinces/components/provinces-section/select-province/select-province.component';
-import { ProvincePaginationComponent } from './pages/provinces/components/provinces-section/province-pagination/province-pagination.component';
+import { ProvinceSelectorComponent } from './components/province-selector/province-selector.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { LocationsComponent } from './pages/locations/locations.component';
+import { LocationsHeaderComponent } from './pages/locations/components/locations-header/locations-header.component';
+import { LocationsPageLocationsSectionComponent } from './pages/locations/components/locations-section/locations-section.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ActivitiesHeaderComponent } from './pages/activities/components/activities-header/activities-header.component';
+import { ActivitiesPageSectionComponent } from './pages/activities/components/activities-section/activities-section.component';
+import { LocationSelectorComponent } from './components/location-selector/location-selector.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +32,15 @@ import { ProvincePaginationComponent } from './pages/provinces/components/provin
     ParallaxDirective,
     ProvincesHeaderComponent,
     ProvincesSectionComponent,
-    SelectProvinceComponent,
-    ProvincePaginationComponent
+    ProvinceSelectorComponent,
+    PaginatorComponent,
+    LocationsComponent,
+    LocationsHeaderComponent,
+    LocationsPageLocationsSectionComponent,
+    ActivitiesComponent,
+    ActivitiesHeaderComponent,
+    ActivitiesPageSectionComponent,
+    LocationSelectorComponent
   ],
   imports: [
     CommonModule,

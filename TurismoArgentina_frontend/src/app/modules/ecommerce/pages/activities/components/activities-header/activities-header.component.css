@@ -1,0 +1,21 @@
+header {
+    width: 100%;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header img {
+    z-index: -1;
+    position: fixed;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    header {
+        padding-top: 80px;
+    }
+}

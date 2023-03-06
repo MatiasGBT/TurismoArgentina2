@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ecommerce-provinces-provinces-section-select-province',
-  templateUrl: './select-province.component.html',
-  styleUrls: ['./select-province.component.css']
+  selector: 'ecommerce-province-selector',
+  templateUrl: './province-selector.component.html',
+  styleUrls: ['./province-selector.component.css']
 })
-export class SelectProvinceComponent implements OnInit {
+export class ProvinceSelectorComponent implements OnInit {
   public provincesNames: string[] = [
     "Buenos Aires",
     "Río Negro",
@@ -23,7 +23,7 @@ export class SelectProvinceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public goToProvincePage(): void {
+  public selectProvince(): void {
     console.log("unsupported")
   }
 }

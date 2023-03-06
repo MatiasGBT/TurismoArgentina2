@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ecommerce-provinces-header',
@@ -8,11 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ProvincesHeaderComponent implements OnInit {
 
-  constructor(private translate: TranslateService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    const lang = localStorage.getItem('lang');
-    lang ? this.translate.use(lang) : this.translate.use('en');
   }
 
 }
