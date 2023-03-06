@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
   selector: 'ecommerce-provinces-provinces-section',
@@ -72,9 +73,13 @@ export class ProvincesSectionComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private provinceService: ProvinceService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToProvince(idProvince: number): void {
+    this.provinceService.navigateToProvince(idProvince);
   }
 
 }

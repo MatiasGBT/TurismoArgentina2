@@ -1,0 +1,32 @@
+section {
+    width: 100%;
+    margin-top: 300px;
+    padding: 15px;
+    background: white;
+}
+
+section h1 {
+    font-size: 3rem;
+    font-family: 'Pangea';
+}
+
+section p {
+    font-size: 1rem;
+    font-family: 'Pangea';
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 25px;
+    }
+
+    section h1 {
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 1038px) {
+    section h1 {
+        font-size: 5rem;
+    }
+}

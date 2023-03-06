@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
   selector: 'ecommerce-index-header',
@@ -30,9 +31,13 @@ export class IndexHeaderComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private provinceService: ProvinceService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToProvince(idProvince: number): void {
+    this.provinceService.navigateToProvince(idProvince);
   }
 
 }

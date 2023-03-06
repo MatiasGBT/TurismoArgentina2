@@ -1,0 +1,9 @@
+<section>
+    <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
+
+    <div id="locations">
+        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(' + location.image + ')'}">
+            <p>{{location.name}}</p>
+        </div>
+    </div>
+</section>

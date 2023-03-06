@@ -20,6 +20,10 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ActivitiesHeaderComponent } from './pages/activities/components/activities-header/activities-header.component';
 import { ActivitiesPageSectionComponent } from './pages/activities/components/activities-section/activities-section.component';
 import { LocationSelectorComponent } from './components/location-selector/location-selector.component';
+import { ProvinceComponent } from './pages/province/province.component';
+import { ProvinceHeaderComponent } from './pages/province/components/province-header/province-header.component';
+import { ProvinceDataComponent } from './pages/province/components/province-data/province-data.component';
+import { ProvinceLocationsComponent } from './pages/province/components/province-locations/province-locations.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { LocationSelectorComponent } from './components/location-selector/locati
     ActivitiesComponent,
     ActivitiesHeaderComponent,
     ActivitiesPageSectionComponent,
-    LocationSelectorComponent
+    LocationSelectorComponent,
+    ProvinceComponent,
+    ProvinceHeaderComponent,
+    ProvinceDataComponent,
+    ProvinceLocationsComponent
   ],
   imports: [
     CommonModule,
