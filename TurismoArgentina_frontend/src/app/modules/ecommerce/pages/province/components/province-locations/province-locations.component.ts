@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'ecommerce-province-locations',
@@ -8,9 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProvinceLocationsComponent implements OnInit {
   @Input() locations: any[] = [];
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToLocation(idLocation: number): void {
+    this.locationService.navigateToLocation(idLocation);
   }
 
 }

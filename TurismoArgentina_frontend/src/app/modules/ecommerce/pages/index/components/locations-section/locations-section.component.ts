@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'ecommerce-index-locations-section',
@@ -53,9 +54,13 @@ export class LocationsSectionComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToLocation(idLocation: number): void {
+    this.locationService.navigateToLocation(idLocation);
   }
 
 }

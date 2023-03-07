@@ -4,7 +4,7 @@
     <ecommerce-province-selector></ecommerce-province-selector>
 
     <div id="locations">
-        <div class="location" *ngFor="let location of locations">
+        <div class="location" *ngFor="let location of locations" (click)="goToLocation(location.idLocation)">
             <img [src]="location.image" [alt]="location.name + ' image'">
             <p class="location-province">{{location.province.name}}</p>
             <p class="location-name">{{location.name}}</p>

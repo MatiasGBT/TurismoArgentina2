@@ -24,6 +24,11 @@ import { ProvinceComponent } from './pages/province/province.component';
 import { ProvinceHeaderComponent } from './pages/province/components/province-header/province-header.component';
 import { ProvinceDataComponent } from './pages/province/components/province-data/province-data.component';
 import { ProvinceLocationsComponent } from './pages/province/components/province-locations/province-locations.component';
+import { LocationComponent } from './pages/location/location.component';
+import { LocationActivitiesComponent } from './pages/location/components/location-activities/location-activities.component';
+import { LocationHeaderComponent } from './pages/location/components/location-header/location-header.component';
+import { LocationDataComponent } from './pages/location/components/location-data/location-data.component';
+import { LocationBuyComponent } from './pages/location/components/location-buy/location-buy.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { ProvinceLocationsComponent } from './pages/province/components/province
     ProvinceComponent,
     ProvinceHeaderComponent,
     ProvinceDataComponent,
-    ProvinceLocationsComponent
+    ProvinceLocationsComponent,
+    LocationComponent,
+    LocationActivitiesComponent,
+    LocationHeaderComponent,
+    LocationDataComponent,
+    LocationBuyComponent
   ],
   imports: [
     CommonModule,

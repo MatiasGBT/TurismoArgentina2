@@ -5,14 +5,16 @@ import { ProvincesComponent } from './pages/provinces/provinces.component';
 import { LocationsComponent } from './pages/locations/locations.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ProvinceComponent } from './pages/province/province.component';
+import { LocationComponent } from './pages/location/location.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: IndexComponent},
   {path: 'provinces', component: ProvincesComponent},
-  {path: 'locations', component: LocationsComponent},
-  {path: 'activities', component: ActivitiesComponent},
   {path: 'provinces/:id', component: ProvinceComponent},
+  {path: 'locations', component: LocationsComponent},
+  {path: 'locations/:id', component: LocationComponent},
+  {path: 'activities', component: ActivitiesComponent},
 ]
 
 @NgModule({

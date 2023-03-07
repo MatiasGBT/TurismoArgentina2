@@ -5,7 +5,7 @@
         <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(' + location.image + ')'}">
             <div class="location-data">
                 <p>{{location.name}} ({{location.province.name}})</p>
-                <button [attr.aria-label]="location.name + ' page'">{{'GENERAL.DETAILS' | translate}}</button>
+                <button [attr.aria-label]="location.name + ' page'" (click)="goToLocation(location.idLocation)">{{'GENERAL.DETAILS' | translate}}</button>
             </div>
         </div>
     </div>

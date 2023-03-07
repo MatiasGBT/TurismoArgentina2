@@ -7,8 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'TurismoArgentina_frontend';
-
+  
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
   }

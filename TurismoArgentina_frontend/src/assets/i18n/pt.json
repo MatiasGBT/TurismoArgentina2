@@ -32,6 +32,15 @@
                     "SEND": "Enviar"
                 }
             }
+        },
+        "LOCATION": {
+            "BUY": {
+                "TITLE": "Vamos voar!",
+                "FORM": {
+                    "LABEL": "Quantas pessoas irão viajar?",
+                    "SEND_BUTTON": "Adicionar ao carrinho"
+                }
+            }
         }
     }
 }

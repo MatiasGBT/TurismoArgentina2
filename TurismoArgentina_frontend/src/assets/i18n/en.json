@@ -32,6 +32,15 @@
                     "SEND": "Send"
                 }
             }
+        },
+        "LOCATION": {
+            "BUY": {
+                "TITLE": "Let's fly!",
+                "FORM": {
+                    "LABEL": "How many people will travel?",
+                    "SEND_BUTTON": "Add to cart"
+                }
+            }
         }
     }
 }

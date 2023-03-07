@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../app.module';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -9,13 +10,16 @@ import { HttpClient } from '@angular/common/http';
     TranslateModule.forChild({
       defaultLanguage: 'en',
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
   ],
-  exports: [TranslateModule],
-  providers:[TranslateStore]
+  exports: [
+    TranslateModule,
+    FormsModule
+  ],
+  providers: [TranslateStore]
 })
 export class SharedModule { }
