@@ -5,7 +5,7 @@
     <ecommerce-location-selector></ecommerce-location-selector>
 
     <div id="activities">
-        <div class="activity" *ngFor="let activity of activities">
+        <div class="activity" *ngFor="let activity of activities" (click)="goToActivity(activity.idActivity)">
             <img [src]="activity.image1" [alt]="activity.name + ' image'">
             <p class="activity-location">{{activity.location.name}} ({{activity.location.province.name}})</p>
             <p class="activity-name">{{activity.name}}</p>

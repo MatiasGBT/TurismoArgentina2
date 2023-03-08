@@ -10,78 +10,12 @@ section h2 {
     font-family: 'Pangea';
 }
 
-section img {
-    display: none;
-}
-
-#buy-form {
+section p {
     font-family: 'Pangea';
 }
 
-#people-quantity-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-.people-quantity-button {
-    height: 30px;
-    border: none;
-    border-bottom: 2px solid rgb(184, 184, 184);
-    border-radius: 5px;
-    background: rgb(221, 221, 221);
-    width: 10%;
-    cursor: pointer;
-}
-
-.people-quantity-button:focus {
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    background: rgb(221, 221, 221);
-    width: 10%;
-}
-
-#buy-form input[type=number] {
-    -moz-appearance: textfield;
-    background: rgb(221, 221, 221);
-    border: none;
-    border-bottom: 2px solid rgb(184, 184, 184);
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 5px;
-    width: 80%;
-    margin: 10px 0;
-    text-align: center;
-}
-
-#buy-form input[type=number]:focus {
-    outline: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-#buy-form input[type=submit] {
-    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
-    background: linear-gradient(to right, #56CCF2, #2F80ED);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 5px;
-    width: 100%;
-    margin-top: 5px;
-    cursor: pointer;
-}
-
-#buy-form input[type=submit]:hover {
-    background: -webkit-linear-gradient(to right, #4bafd1, #286fca);
-    background: linear-gradient(to right, #4bafd1, #286fca);
+section img {
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -98,9 +32,8 @@ input::-webkit-inner-spin-button {
         text-align: center;
     }
 
-    #buy-form {
-        width: 50%;
-        margin: auto 0;
+    section p {
+        margin-bottom: 10px;
     }
 }
 
@@ -111,9 +44,5 @@ input::-webkit-inner-spin-button {
         height: auto;
         object-fit: cover;
         margin-top: 15px;
-    }
-
-    #buy-form {
-        width: 35%;
     }
 }

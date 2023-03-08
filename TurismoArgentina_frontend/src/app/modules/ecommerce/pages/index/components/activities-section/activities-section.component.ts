@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'ecommerce-index-activities-section',
@@ -80,7 +81,7 @@ export class ActivitiesSectionComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
   }
@@ -116,5 +117,9 @@ export class ActivitiesSectionComponent implements OnInit {
 
   private moveToSelectedActivity(selectedActivityDomElement: HTMLElement): void {
     selectedActivityDomElement.scrollIntoView({behavior: 'smooth'});
+  }
+
+  public goToActivity(idActivity: number): void {
+    this.activityService.navigateToActivity(idActivity);
   }
 }

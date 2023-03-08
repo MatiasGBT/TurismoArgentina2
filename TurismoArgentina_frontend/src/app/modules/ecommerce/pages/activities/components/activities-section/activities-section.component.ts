@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'ecommerce-activities-activities-section',
@@ -162,9 +163,13 @@ export class ActivitiesPageSectionComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToActivity(idActivity: number): void {
+    this.activityService.navigateToActivity(idActivity);
   }
 
 }

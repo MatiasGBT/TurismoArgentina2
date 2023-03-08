@@ -17,6 +17,10 @@
             "LOCATION": "Choose a location",
             "DEFAULT_OPTION": "All"
         },
+        "BUY_FORM": {
+            "LABEL": "How many people will go?",
+            "SEND_BUTTON": "Add to cart"
+        },
         "INDEX": {
             "LOCATIONS": {
                 "MORE_LOCATIONS_LINK": "More locations >>"
@@ -35,11 +39,12 @@
         },
         "LOCATION": {
             "BUY": {
-                "TITLE": "Let's fly!",
-                "FORM": {
-                    "LABEL": "How many people will travel?",
-                    "SEND_BUTTON": "Add to cart"
-                }
+                "TITLE": "Let's fly!"
+            }
+        },
+        "ACTIVITY": {
+            "BUY": {
+                "TITLE": "Let's have some fun!"
             }
         }
     }

@@ -2,7 +2,7 @@
     <h2>{{'NAVBAR.ACTIVITIES' | translate}}</h2>
 
     <div id="activities">
-        <div class="activity" *ngFor="let activity of activities" [ngStyle]="{'background-image': 'url(' + activity.image1 + ')'}">
+        <div class="activity" *ngFor="let activity of activities" [ngStyle]="{'background-image': 'url(' + activity.image1 + ')'}" (click)="goToActivity(activity.idActivity)">
             <p>{{activity.name}}</p>
         </div>
     </div>

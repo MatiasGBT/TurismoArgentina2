@@ -29,6 +29,12 @@ import { LocationActivitiesComponent } from './pages/location/components/locatio
 import { LocationHeaderComponent } from './pages/location/components/location-header/location-header.component';
 import { LocationDataComponent } from './pages/location/components/location-data/location-data.component';
 import { LocationBuyComponent } from './pages/location/components/location-buy/location-buy.component';
+import { ActivityComponent } from './pages/activity/activity.component';
+import { ActivityHeaderComponent } from './pages/activity/components/activity-header/activity-header.component';
+import { ActivityDataComponent } from './pages/activity/components/activity-data/activity-data.component';
+import { ActivityImagesComponent } from './pages/activity/components/activity-images/activity-images.component';
+import { ActivityBuyComponent } from './pages/activity/components/activity-buy/activity-buy.component';
+import { BuyFormComponent } from './components/buy-form/buy-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +64,13 @@ import { LocationBuyComponent } from './pages/location/components/location-buy/l
     LocationActivitiesComponent,
     LocationHeaderComponent,
     LocationDataComponent,
-    LocationBuyComponent
+    LocationBuyComponent,
+    ActivityComponent,
+    ActivityHeaderComponent,
+    ActivityDataComponent,
+    ActivityImagesComponent,
+    ActivityBuyComponent,
+    BuyFormComponent
   ],
   imports: [
     CommonModule,

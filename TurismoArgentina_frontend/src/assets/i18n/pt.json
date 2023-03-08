@@ -17,6 +17,10 @@
             "LOCATION": "Escolha uma localidade",
             "DEFAULT_OPTION": "Todas"
         },
+        "BUY_FORM": {
+            "LABEL": "Quantas pessoas irão?",
+            "SEND_BUTTON": "Adicionar ao carrinho"
+        },
         "INDEX": {
             "LOCATIONS": {
                 "MORE_LOCATIONS_LINK": "Mais localidades >>"
@@ -35,11 +39,12 @@
         },
         "LOCATION": {
             "BUY": {
-                "TITLE": "Vamos voar!",
-                "FORM": {
-                    "LABEL": "Quantas pessoas irão viajar?",
-                    "SEND_BUTTON": "Adicionar ao carrinho"
-                }
+                "TITLE": "Vamos voar!"
+            }
+        },
+        "ACTIVITY": {
+            "BUY": {
+                "TITLE": "Vamos nos divertir!"
             }
         }
     }

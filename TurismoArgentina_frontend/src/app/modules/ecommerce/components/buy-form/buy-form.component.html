@@ -1,0 +1,14 @@
+<form id="buy-form" (submit)="addToCart()">
+    <label for="people-quantity">{{'ECOMMERCE.BUY_FORM.LABEL' | translate}}</label>
+    <div id="people-quantity-container">
+        <button type="button" class="people-quantity-button" (click)="reducePeopleQuantity()">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+        <input id="people-quantity" name="people-quantity" type="number" value="1" min="1" max="6"
+            [(ngModel)]="peopleQuantity" (change)="verifyValues()">
+        <button type="button" class="people-quantity-button" (click)="increasePeopleQuantity()">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+    <input type="submit" [value]="addToCartButton">
+</form>

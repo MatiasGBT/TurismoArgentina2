@@ -37,13 +37,10 @@ footer {
     text-decoration: none;
     color: white;
     font-family: 'Pangea';
-    transition: .3s;
 }
 
 #navigation-container ul li a:hover {
-    color: #0f0e17;
     text-decoration: underline;
-    transition: .3s;
 }
 
 hr {

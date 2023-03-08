@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'ecommerce-location-activities',
@@ -8,9 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LocationActivitiesComponent implements OnInit {
   @Input() activities: any[] = [];
 
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
+  }
+
+  public goToActivity(idActivity: number): void {
+    this.activityService.navigateToActivity(idActivity);
   }
 
 }

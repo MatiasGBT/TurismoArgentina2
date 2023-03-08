@@ -1,0 +1,8 @@
+<section *ngIf="activity?.image1 || activity?.image2 || activity?.image3">
+    <h2>Images</h2>
+    <div id="images">
+        <img *ngIf="activity?.image1" [src]="activity.image1" [alt]="activity.name + ' First image'">
+        <img *ngIf="activity?.image2" [src]="activity.image2" [alt]="activity.name + ' Second image'">
+        <img *ngIf="activity?.image3" [src]="activity.image3" [alt]="activity.name + ' Third image'">
+    </div>
+</section>
