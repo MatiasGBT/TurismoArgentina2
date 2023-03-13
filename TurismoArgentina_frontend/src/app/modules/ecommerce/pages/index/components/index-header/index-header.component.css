@@ -96,7 +96,7 @@ header h1 {
     }
     
     .province-wrapper:hover {
-        background: rgba(0, 0, 0, 0.25);
+        background: transparent;
         transition: .3s;
     }
 

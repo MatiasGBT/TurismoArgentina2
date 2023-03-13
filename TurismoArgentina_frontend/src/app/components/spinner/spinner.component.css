@@ -1,0 +1,74 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 60px;
+  width: 100%;
+  min-height: 200px;
+}
+
+.spinner-container p {
+  font-family: 'Pangea';
+}
+
+.spinner {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  background: #2F80ED;
+  animation-duration: 2.5s;
+  animation-name: sprin-animation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  margin: auto;
+}
+
+.spinner,
+.spinner:before,
+.spinner:after {
+  border-radius: 50%;
+}
+
+.spinner:before,
+.spinner:after {
+  content: '';
+  position: absolute;
+  border: 8px solid transparent;
+}
+
+.spinner:before {
+  width: 75%;
+  height: 75%;
+  background: rgba(255, 255, 255, .13);
+  left: 12.5%;
+  top: 12.5%;
+  border-left: 8px solid rgba(255, 255, 255, 1);
+  border-bottom: 8px solid rgba(255, 255, 255, 1);
+}
+
+.spinner:after {
+  width: 40%;
+  height: 40%;
+  left: 30%;
+  top: 30%;
+  border-right: 8px solid #fcbf49;
+  border-left: 8px solid #fcbf49;
+  border-bottom: 8px solid #fcbf49;
+}
+
+@keyframes sprin-animation {
+  50% {
+    transform: rotateZ(180deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .spinner-container {
+    padding-top: 80px;
+  }
+}

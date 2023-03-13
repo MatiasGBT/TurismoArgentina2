@@ -36,4 +36,10 @@ public class ProvinceService implements IProvinceService<Province> {
     public Province findById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Province> getThreeRandom() {
+        return repository.findThreeRandom();
+    }
 }

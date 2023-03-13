@@ -7,33 +7,12 @@ import { ProvinceService } from 'src/app/services/province.service';
   styleUrls: ['./index-header.component.css']
 })
 export class IndexHeaderComponent implements OnInit {
-  public provinces: any[] = [
-    {
-      'idProvince': 1,
-      'name': 'Buenos Aires',
-      'description': '',
-      'image': '../../../../../../../assets/img/provinces/bsas.jpg',
-      'deletionDate': null
-    },
-    {
-      'idProvince': 2,
-      'name': 'Río Negro',
-      'description': '',
-      'image': '../../../../../../../assets/img/provinces/rio_negro.jpg',
-      'deletionDate': null
-    },
-    {
-      'idProvince': 3,
-      'name': 'Chubut',
-      'description': '',
-      'image': '../../../../../../../assets/img/provinces/chubut.jpg',
-      'deletionDate': null
-    }
-  ]
+  public provinces: any[] = []
 
   constructor(private provinceService: ProvinceService) { }
 
   ngOnInit(): void {
+    this.provinceService.getThreeRandom().subscribe(provinces => this.provinces = provinces);
   }
 
   public goToProvince(idProvince: number): void {

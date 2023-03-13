@@ -1,6 +1,11 @@
-<header>
+<app-spinner *ngIf="provinces.length == 0"></app-spinner>
+
+<header *ngIf="provinces.length > 0">
     <h1>Turismo Argentina</h1>
-    <div class="index-province-hero" *ngFor="let province of provinces" [ngStyle]="{'background-image': 'url(' + province.image + ')'}" (click)="goToProvince(province.idProvince)">
+
+    <div class="index-province-hero" *ngFor="let province of provinces"
+        [ngStyle]="{'background-image': 'url(http://localhost:8090/api/provinces/img/' + province.image + ')'}"
+        (click)="goToProvince(province.idProvince)">
         <div class="province-wrapper">
             <h2 class="province-name">{{province.name}}</h2>
         </div>

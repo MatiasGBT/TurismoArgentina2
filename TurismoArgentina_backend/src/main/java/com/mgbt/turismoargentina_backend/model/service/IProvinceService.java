@@ -9,4 +9,5 @@ public interface IProvinceService<Province> {
     Province save(Province entity);
     void delete(Province entity);
     Province findById(Long id);
+    List<Province> getThreeRandom();
 }
