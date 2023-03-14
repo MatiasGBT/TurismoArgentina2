@@ -11,6 +11,9 @@
         "ACCOUNT": "Cuenta",
         "ADMIN": "Panel de administración"
     },
+    "SPINNER": {
+        "LOADING": "Cargando..."
+    },
     "ECOMMERCE": {
         "SELECTORS": {
             "PROVINCE": "Elige una provincia",

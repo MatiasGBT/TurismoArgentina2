@@ -3,13 +3,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 60px;
   width: 100%;
   min-height: 200px;
 }
 
 .spinner-container p {
   font-family: 'Pangea';
+  margin-bottom: 15px;
 }
 
 .spinner {
@@ -64,11 +64,5 @@
 
   100% {
     transform: rotateZ(360deg);
-  }
-}
-
-@media (min-width: 768px) {
-  .spinner-container {
-    padding-top: 80px;
   }
 }

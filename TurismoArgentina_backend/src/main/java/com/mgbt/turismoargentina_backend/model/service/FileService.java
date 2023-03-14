@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.model.service;
 
 import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import org.springframework.core.io.*;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
@@ -14,7 +15,20 @@ public class FileService implements IFileService {
     private final static String PRINCIPAL_DIRECTORY = "images";
 
     @Override
-    public Resource charge(String fileName, String finalDirectory) throws MalformedURLException {
+    public ResponseEntity<Resource> getPhoto(String fileName, String finalDirectory) {
+        Resource resource = null;
+        HttpHeaders header = null;
+        try {
+            resource = this.charge(fileName, finalDirectory);
+            header = new HttpHeaders();
+            header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(resource, header, HttpStatus.OK);
+    }
+
+    private Resource charge(String fileName, String finalDirectory) throws MalformedURLException {
         Path filePath = getPath(fileName, finalDirectory);
         Resource resource = new UrlResource(filePath.toUri());
         if(!resource.exists() && !resource.isReadable()) {

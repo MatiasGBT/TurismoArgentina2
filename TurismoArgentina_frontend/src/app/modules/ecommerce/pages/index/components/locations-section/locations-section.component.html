@@ -1,8 +1,10 @@
 <section>
     <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
 
-    <div id="locations">
-        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(' + location.image + ')'}">
+    <app-spinner *ngIf="locations.length == 0"></app-spinner>
+
+    <div id="locations" *ngIf="locations.length > 0">
+        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(http://localhost:8090/api/locations/img/' + location.image + ')'}">
             <div class="location-data">
                 <p>{{location.name}} ({{location.province.name}})</p>
                 <button [attr.aria-label]="location.name + ' page'" (click)="goToLocation(location.idLocation)">{{'GENERAL.DETAILS' | translate}}</button>
