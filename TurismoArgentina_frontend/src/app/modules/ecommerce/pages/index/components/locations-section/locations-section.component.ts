@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { LocationService } from 'src/app/services/location.service';
   styleUrls: ['./locations-section.component.css']
 })
 export class LocationsSectionComponent implements OnInit {
-  public locations: any[] = [];
+  public locations: Location[] = [];
 
   constructor(private locationService: LocationService) { }
 

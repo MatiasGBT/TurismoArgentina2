@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
@@ -7,83 +8,17 @@ import { ActivityService } from 'src/app/services/activity.service';
   styleUrls: ['./activities-section.component.css']
 })
 export class ActivitiesSectionComponent implements OnInit {
-  public selectedActivity: any = {
-    'idActivity': 1,
-    'name': 'Entrada para el Teatro Colón',
-    'description': '',
-    'image1': '../../../../../../../assets/img/activities/teatro_colon.jpg',
-    'image2': null,
-    'image3': null,
-    'price': 0,
-    'duration': 0,
-    'deletionDate': null,
-    'location': {
-      'name': 'Ciudad Autónoma de Buenos Aires'
-    }
-  }
+  public selectedActivity: Activity | undefined;
 
-  public activities: any[] = [
-    {
-      'idActivity': 2,
-      'name': 'Tour por el cañón del Atuel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/canon_del_atuel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'San Rafael'
-      }
-    },
-    {
-      'idActivity': 3,
-      'name': 'Día de spa en las aguas termales de Cacheuta',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/spa.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Mendoza Capital'
-      }
-    },
-    {
-      'idActivity': 4,
-      'name': 'Aventura Privada de Tirolina y Rappel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/tirolina_y_rapel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Puerto Iguazú'
-      }
-    },
-    {
-      'idActivity': 5,
-      'name': 'Entrada para Termas de Federación',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/termas_federacion.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Federación'
-      }
-    },
-  ]
+  public activities: Activity[] = [];
 
   constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
+    this.activityService.getFiveRandom().subscribe(activities => {
+      this.selectedActivity = activities.shift();
+      this.activities = activities;
+    });
   }
 
   /*
@@ -103,7 +38,8 @@ export class ActivitiesSectionComponent implements OnInit {
   }
 
   private pushSelectedActivityIntoActivities(): void {
-    this.activities.push(this.selectedActivity);
+    if (this.selectedActivity)
+      this.activities.push(this.selectedActivity);
   }
 
   private removeActivityFromActivities(activity: any): void {

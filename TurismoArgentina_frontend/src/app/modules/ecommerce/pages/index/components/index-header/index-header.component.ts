@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Province } from 'src/app/models/province';
 import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { ProvinceService } from 'src/app/services/province.service';
   styleUrls: ['./index-header.component.css']
 })
 export class IndexHeaderComponent implements OnInit {
-  public provinces: any[] = []
+  public provinces: Province[] = []
 
   constructor(private provinceService: ProvinceService) { }
 

@@ -1,8 +1,10 @@
 <section>
     <h2>{{'NAVBAR.ACTIVITIES' | translate}}</h2>
 
-    <div id="activities">
-        <div #selectedActivityDomElement class="activity selected-activity" [ngStyle]="{'background-image': 'url(' + selectedActivity.image1 + ')'}">
+    <app-spinner *ngIf="activities.length == 0"></app-spinner>
+
+    <div id="activities" *ngIf="selectedActivity && activities.length > 0">
+        <div #selectedActivityDomElement class="activity selected-activity" [ngStyle]="{'background-image': 'url(http://localhost:8090/api/activities/img/' + selectedActivity.image1 + ')'}">
             <div class="activity-data">
                 <p>{{selectedActivity.name}} ({{selectedActivity.location.name}})</p>
                 <button [attr.aria-label]="selectedActivity.name + ' page'" (click)="goToActivity(selectedActivity.idActivity)">{{'GENERAL.DETAILS' | translate}}</button>
