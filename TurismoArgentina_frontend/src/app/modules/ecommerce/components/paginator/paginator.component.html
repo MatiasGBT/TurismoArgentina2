@@ -1,15 +1,15 @@
 <div id="paginator">
-    <button disabled aria-label="First page">
+    <button [disabled]="isFirstPage" aria-label="First page" (click)="goFirstPage()">
         <i class="fa-solid fa-angles-left"></i>
     </button>
-    <button disabled aria-label="Previous page">
+    <button [disabled]="isFirstPage" aria-label="Previous page" (click)="goPreviousPage()">
         <i class="fa-solid fa-angle-left"></i>
     </button>
-    1
-    <button  aria-label="Next page">
+    {{page + 1}}
+    <button [disabled]="isLastPage" aria-label="Next page" (click)="goNextPage()">
         <i class="fa-solid fa-angle-right"></i>
     </button>
-    <button  aria-label="Last page">
+    <button [disabled]="isLastPage" aria-label="Last page" (click)="goLastPage()">
         <i class="fa-solid fa-angles-right"></i>
     </button>
 </div>

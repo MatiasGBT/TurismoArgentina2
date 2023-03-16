@@ -1,8 +1,10 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
+import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Province;
 import com.mgbt.turismoargentina_backend.model.repository.IProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -15,8 +17,8 @@ public class ProvinceService implements IProvinceService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Province> getAll() {
-        return repository.findAll();
+    public Page<Province> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
@@ -34,7 +36,9 @@ public class ProvinceService implements IProvinceService {
     @Override
     @Transactional(readOnly = true)
     public Province findById(Long id) {
-        return repository.findById(id).orElse(null);
+        Province province = repository.findById(id).orElse(null);
+        if (province == null) throw new EntityNotFoundException("Province not found");
+        return province;
     }
 
     @Override
@@ -42,4 +46,8 @@ public class ProvinceService implements IProvinceService {
     public List<Province> getThreeRandom() {
         return repository.findThreeRandom();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> getAllProvinceNames() { return repository.findAllProvinceNames(); }
 }

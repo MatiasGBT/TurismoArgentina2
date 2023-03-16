@@ -13,4 +13,8 @@ public interface IProvinceRepository extends JpaRepository<Province, Long> {
             "ORDER BY RANDOM() LIMIT 3",
             nativeQuery = true)
     List<Province> findThreeRandom();
+
+    @Query(value = "SELECT p.id_province, p.name FROM turismo_argentina.provinces p " +
+            "WHERE p.deletion_date IS NULL", nativeQuery = true)
+    List<String> findAllProvinceNames();
 }

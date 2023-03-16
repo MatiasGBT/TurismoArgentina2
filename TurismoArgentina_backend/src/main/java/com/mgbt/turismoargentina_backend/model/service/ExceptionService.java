@@ -1,5 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
+import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
@@ -18,6 +19,14 @@ public class ExceptionService implements IExceptionService {
         Map<String, Object> response = new HashMap<>();
         response.put("message", messageSource.getMessage("error.database", null, locale));
         response.put("error", ex.getMessage() + ": " + ex.getMostSpecificCause().getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwEntityNotFoundException(EntityNotFoundException ex, Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", messageSource.getMessage("error.entityNotFound", null, locale));
+        response.put("error", ex.getMessage() + ": " + ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
