@@ -1,10 +1,10 @@
 <div id="select-container">
     <label for="locations-select">{{'ECOMMERCE.SELECTORS.LOCATION' | translate}}: </label>
 
-    <select name="locations-select" id="locations-select" (change)="selectLocation()">
-        <option value="default" selected>{{'ECOMMERCE.SELECTORS.DEFAULT_OPTION' | translate}}</option>
-        <option *ngFor="let locationName of locationsNames" value="locationName">
-            {{locationName}}
+    <select name="locations-select" id="locations-select" (change)="selectLocation()" [(ngModel)]="selectedOption">
+        <option value="0" selected>{{'ECOMMERCE.SELECTORS.DEFAULT_OPTION' | translate}}</option>
+        <option *ngFor="let locationName of locationNames" [value]="locationName.split(',')[0]">
+            {{locationName.split(',')[1]}}
         </option>
     </select>
 </div>

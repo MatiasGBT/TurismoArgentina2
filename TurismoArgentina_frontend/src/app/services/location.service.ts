@@ -18,8 +18,44 @@ export class LocationService {
     this.router.navigate([`shop/locations/${idLocation}`]);
   }
 
+  public getAll(page: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${page}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public getFourRandom(): Observable<Location[]> {
     return this.http.get<Location[]>(`${this.baseUrl}/random`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getAllLocationNames(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/names`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getById(idLocation: number): Observable<Location> {
+    return this.http.get<Location>(`${this.baseUrl}/id/${idLocation}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getByProvinceId(page: number, provinceName: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${page}/${provinceName}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

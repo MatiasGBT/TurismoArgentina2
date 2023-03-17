@@ -2,9 +2,9 @@
     <label for="provinces-select">{{'ECOMMERCE.SELECTORS.PROVINCE' | translate}}: </label>
 
     <select name="provinces-select" id="provinces-select" (change)="selectProvince()" [(ngModel)]="selectedOption">
-        <option value="default" selected>{{'ECOMMERCE.SELECTORS.DEFAULT_OPTION' | translate}}</option>
-        <option *ngFor="let provinceName of provinceNames" [value]="provinceName.split(',')[0]">
-            {{provinceName.split(',')[1]}}
+        <option value="all" selected>{{'ECOMMERCE.SELECTORS.DEFAULT_OPTION' | translate}}</option>
+        <option *ngFor="let provinceName of provinceNames" [value]="provinceName">
+            {{provinceName}}
         </option>
     </select>
 </div>

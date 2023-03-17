@@ -1,15 +1,17 @@
 <section>
     <h1>{{'NAVBAR.LOCATIONS' | translate}}</h1>
 
-    <ecommerce-province-selector></ecommerce-province-selector>
+    <ecommerce-province-selector (selectProvinceEvent)="sortByProvince($event)"></ecommerce-province-selector>
 
-    <div id="locations">
+    <app-spinner *ngIf="locations.length == 0"></app-spinner>
+
+    <div id="locations" *ngIf="locations.length > 0">
         <div class="location" *ngFor="let location of locations" (click)="goToLocation(location.idLocation)">
-            <img [src]="location.image" [alt]="location.name + ' image'">
+            <img [src]="'http://localhost:8090/api/locations/img/' + location.image" [alt]="location.name + ' image'">
             <p class="location-province">{{location.province.name}}</p>
             <p class="location-name">{{location.name}}</p>
         </div>
     </div>
 
-    <ecommerce-paginator></ecommerce-paginator>
+    <ecommerce-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></ecommerce-paginator>
 </section>

@@ -1,8 +1,6 @@
 <section>
     <h1>{{'NAVBAR.PROVINCES' | translate}}</h1>
 
-    <ecommerce-province-selector (selectProvinceEvent)="goToProvince($event)"></ecommerce-province-selector>
-
     <app-spinner *ngIf="provinces.length == 0"></app-spinner>
 
     <div id="provinces" *ngIf="provinces.length > 0">
