@@ -38,7 +38,7 @@ export class LocationsPageLocationsSectionComponent implements OnInit {
 
   private getLocations(): void {
     if (!this.sortedByProvince) this.getAllLocations();
-    else this.getSortedByProvinceLocations(this.provinceName);
+    else this.getSortedByProvinceName(this.provinceName);
   }
 
   private getAllLocations(): void {
@@ -47,8 +47,8 @@ export class LocationsPageLocationsSectionComponent implements OnInit {
     });
   }
 
-  private getSortedByProvinceLocations(provinceName: string): void {
-    this.locationService.getByProvinceId(this.page, provinceName).subscribe(response => {
+  private getSortedByProvinceName(provinceName: string): void {
+    this.locationService.getByProvinceName(this.page, provinceName).subscribe(response => {
       this.setPublicVariables(response);
     });
   }

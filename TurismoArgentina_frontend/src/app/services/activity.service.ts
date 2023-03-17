@@ -18,8 +18,35 @@ export class ActivityService {
     this.router.navigate([`shop/activities/${idActivity}`]);
   }
 
+  public getAll(page: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${page}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public getFiveRandom(): Observable<Activity[]> {
     return this.http.get<Activity[]>(`${this.baseUrl}/random`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getById(idActivity: number): Observable<Activity> {
+    return this.http.get<Activity>(`${this.baseUrl}/id/${idActivity}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getByLocationName(page: number, locationName: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${page}/${locationName}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

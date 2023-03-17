@@ -8,19 +8,16 @@ import { LocationService } from 'src/app/services/location.service';
 })
 export class LocationSelectorComponent implements OnInit {
   public locationNames: string[] = [];
-  public selectedOption: string = '0';
-  @Output() selectLocationEvent = new EventEmitter<number>();
+  public selectedOption: string = 'all';
+  @Output() selectLocationEvent = new EventEmitter<string>();
 
   constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
-    //As the API documentation says, the location names come with
-    //their ID interposed, so the view uses the split method to
-    //show only the names or send the id as needed.
     this.locationService.getAllLocationNames().subscribe(locationNames => this.locationNames = locationNames);
   }
 
   public selectLocation(): void {
-    this.selectLocationEvent.emit(parseInt(this.selectedOption));
+    this.selectLocationEvent.emit(this.selectedOption);
   }
 }

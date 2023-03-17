@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
@@ -7,169 +9,64 @@ import { ActivityService } from 'src/app/services/activity.service';
   styleUrls: ['./activities-section.component.css']
 })
 export class ActivitiesPageSectionComponent implements OnInit {
-  public activities: any[] = [
-    {
-      'idActivity': 1,
-      'name': 'Entrada para el Teatro Colón por Cachaueta',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/teatro_colon.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Ciudad Autónoma de Buenos Aires',
-        'province': {
-          'name': 'Buenos Aires'
-        }
-      }
-    },
-    {
-      'idActivity': 2,
-      'name': 'Tour por el cañón del Atuel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/canon_del_atuel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'San Rafael',
-        'province': {
-          'name': 'Mendoza'
-        }
-      }
-    },
-    {
-      'idActivity': 3,
-      'name': 'Día de spa en las aguas termales de Cacheuta',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/spa.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Mendoza Capital',
-        'province': {
-          'name': 'Mendoza'
-        }
-      }
-    },
-    {
-      'idActivity': 4,
-      'name': 'Aventura Privada de Tirolina y Rappel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/tirolina_y_rapel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Puerto Iguazú',
-        'province': {
-          'name': 'Misiones'
-        }
-      }
-    },
-    {
-      'idActivity': 5,
-      'name': 'Entrada para Termas de Federación',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/termas_federacion.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Federación',
-        'province': {
-          'name': 'Entre Ríos'
-        }
-      }
-    },
-    {
-      'idActivity': 2,
-      'name': 'Tour por el cañón del Atuel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/canon_del_atuel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'San Rafael',
-        'province': {
-          'name': 'Mendoza'
-        }
-      }
-    },
-    {
-      'idActivity': 3,
-      'name': 'Día de spa en las aguas termales de Cacheuta',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/spa.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Mendoza Capital',
-        'province': {
-          'name': 'Mendoza'
-        }
-      }
-    },
-    {
-      'idActivity': 4,
-      'name': 'Aventura Privada de Tirolina y Rappel',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/tirolina_y_rapel.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Puerto Iguazú',
-        'province': {
-          'name': 'Misiones'
-        }
-      }
-    },
-    {
-      'idActivity': 5,
-      'name': 'Entrada para Termas de Federación',
-      'description': '',
-      'image1': '../../../../../../../assets/img/activities/termas_federacion.jpg',
-      'image2': null,
-      'image3': null,
-      'price': 0,
-      'duration': 0,
-      'deletionDate': null,
-      'location': {
-        'name': 'Federación',
-        'province': {
-          'name': 'Entre Ríos'
-        }
-      }
-    },
-  ]
+  public activities: Activity[] = [];
+  public page: number = 0;
+  public isFirstPage: boolean = true;
+  public isLastPage: boolean = false;
+  public totalPages: number = 1;
+  private sortedByLocation: boolean = false;
+  private locationName: string = 'all';
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private activityService: ActivityService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['page']) this.page = params['page'];
+      this.getActivities();
+    });
   }
 
   public goToActivity(idActivity: number): void {
     this.activityService.navigateToActivity(idActivity);
   }
 
+  public changePage(pageToGo: number): void {
+    this.page = pageToGo;
+    this.activities = [];
+    this.getActivities();
+  }
+
+  private getActivities(): void {
+    if (!this.sortedByLocation) this.getAllActivities();
+    else this.getSortedByLocationName(this.locationName);
+  }
+
+  private getAllActivities(): void {
+    this.activityService.getAll(this.page).subscribe(response => {
+      this.setPublicVariables(response);
+    });
+  }
+
+  private getSortedByLocationName(provinceName: string): void {
+    this.activityService.getByLocationName(this.page, provinceName).subscribe(response => {
+      this.setPublicVariables(response);
+    });
+  }
+
+  private setPublicVariables(response: any): void {
+    this.activities = response.content;
+    this.isFirstPage = response.first;
+    this.isLastPage = response.last;
+    this.totalPages = response.totalPages;
+  }
+
+  //The child component "location-selector" returns the name of the selected location or
+  //the string "all" (when no location is selected). Therefore, the property "activities"
+  //will be obtained filtered or not by the backend based on the returned string.
+  public sortByLocation(locationName: string) {
+    locationName == 'all' ? this.sortedByLocation = false : this.sortedByLocation = true;
+    this.locationName = locationName;
+    this.page = 0;
+    this.getActivities();
+  }
 }

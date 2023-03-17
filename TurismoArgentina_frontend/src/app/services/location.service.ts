@@ -54,7 +54,7 @@ export class LocationService {
     );
   }
 
-  public getByProvinceId(page: number, provinceName: string): Observable<any> {
+  public getByProvinceName(page: number, provinceName: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${page}/${provinceName}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);

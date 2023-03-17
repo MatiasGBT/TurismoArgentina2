@@ -1,16 +1,15 @@
 <section>
     <h1>{{'NAVBAR.ACTIVITIES' | translate}}</h1>
 
-    <ecommerce-province-selector></ecommerce-province-selector>
-    <ecommerce-location-selector></ecommerce-location-selector>
+    <ecommerce-location-selector (selectLocationEvent)="sortByLocation($event)"></ecommerce-location-selector>
 
     <div id="activities">
         <div class="activity" *ngFor="let activity of activities" (click)="goToActivity(activity.idActivity)">
-            <img [src]="activity.image1" [alt]="activity.name + ' image'">
+            <img [src]="'http://localhost:8090/api/activities/img/' + activity.image1" [alt]="activity.name + ' image'">
             <p class="activity-location">{{activity.location.name}} ({{activity.location.province.name}})</p>
             <p class="activity-name">{{activity.name}}</p>
         </div>
     </div>
 
-    <ecommerce-paginator></ecommerce-paginator>
+    <ecommerce-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></ecommerce-paginator>
 </section>

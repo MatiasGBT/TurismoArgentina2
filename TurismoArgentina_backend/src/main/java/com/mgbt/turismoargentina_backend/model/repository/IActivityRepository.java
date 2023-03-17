@@ -1,6 +1,7 @@
 package com.mgbt.turismoargentina_backend.model.repository;
 
 import com.mgbt.turismoargentina_backend.model.entity.Activity;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -13,4 +14,6 @@ public interface IActivityRepository extends JpaRepository<Activity, Long> {
             "ORDER BY RANDOM() LIMIT 5",
             nativeQuery = true)
     List<Activity> findFiveRandom();
+
+    Page<Activity> findByLocationName(Pageable pageable, String locationName);
 }
