@@ -1,3 +1,3 @@
-<header>
-    <img parallaxDirective [ratio]="0.5" [src]="province.image" [alt]="province.name + ' header image'">
+<header *ngIf="province">
+    <img parallaxDirective [ratio]="0.5" [src]="'http://localhost:8090/api/provinces/img/' + province.image" [alt]="province.name + ' header image'">
 </header>

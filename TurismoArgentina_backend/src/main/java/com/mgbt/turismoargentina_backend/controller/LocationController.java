@@ -76,7 +76,7 @@ public class LocationController {
     }
 
     @GetMapping("/names")
-    @Operation(summary = "Get all the names of locations (the id of every location is interposed with a comma, ex.: 1,Ciudad Autónoma de Buenos Aires).")
+    @Operation(summary = "Get all the names of locations.")
     @ApiResponse(responseCode = "200", description = "Array of strings",
             content = { @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class))) })
     public ResponseEntity<?> getAllLocationNames(Locale locale) {
@@ -88,14 +88,27 @@ public class LocationController {
         }
     }
 
-    @GetMapping("/{page}/{provinceName}")
+    @GetMapping("/province/{provinceName}/{page}")
     @Operation(summary = "Gets all locations of a province (by name) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getByProvinceId(@PathVariable Integer page, @PathVariable String provinceName, Locale locale) {
+    public ResponseEntity<?> getByProvinceName(@PathVariable Integer page, @PathVariable String provinceName, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Location> locations = this.locationService.getByProvinceName(pageable, provinceName);
+            return new ResponseEntity<>(locations, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/province/{idProvince}")
+    @Operation(summary = "Gets all locations of a province (by id).")
+    @ApiResponse(responseCode = "200", description = "Array of locations",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Location.class)) })
+    public ResponseEntity<?> getByProvinceId(@PathVariable Long idProvince, Locale locale) {
+        try {
+            List<Location> locations = this.locationService.getByProvinceId(idProvince);
             return new ResponseEntity<>(locations, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

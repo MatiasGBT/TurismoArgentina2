@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: IndexComponent},
   {path: 'provinces', component: ProvincesComponent},
-  {path: 'provinces/:name', component: ProvinceComponent},
+  {path: 'provinces/:id', component: ProvinceComponent},
   {path: 'locations', component: LocationsComponent},
   {path: 'locations/:id', component: LocationComponent},
   {path: 'activities', component: ActivitiesComponent},

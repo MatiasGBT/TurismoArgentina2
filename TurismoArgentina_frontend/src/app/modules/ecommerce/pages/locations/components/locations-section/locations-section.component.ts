@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 
@@ -17,13 +16,10 @@ export class LocationsPageLocationsSectionComponent implements OnInit {
   private sortedByProvince: boolean = false;
   private provinceName: string = 'all';
 
-  constructor(private locationService: LocationService, private activatedRoute: ActivatedRoute) { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if (params['page']) this.page = params['page'];
-      this.getLocations();
-    });
+    this.getLocations();
   }
 
   public goToLocation(idLocation: number): void {

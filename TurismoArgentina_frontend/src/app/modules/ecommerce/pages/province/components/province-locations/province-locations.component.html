@@ -2,7 +2,7 @@
     <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
 
     <div id="locations">
-        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(' + location.image + ')'}" (click)="goToLocation(location.idLocation)">
+        <div class="location" *ngFor="let location of locations" [ngStyle]="{'background-image': 'url(http://localhost:8090/api/locations/img/' + location.image + ')'}" (click)="goToLocation(location.idLocation)">
             <p>{{location.name}}</p>
         </div>
     </div>

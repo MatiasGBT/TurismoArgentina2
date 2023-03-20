@@ -39,6 +39,7 @@ export class ActivityService {
   public getById(idActivity: number): Observable<Activity> {
     return this.http.get<Activity>(`${this.baseUrl}/id/${idActivity}`).pipe(
       catchError(ex => {
+        this.router.navigate(['/shop/activities']);
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
       })
@@ -46,7 +47,7 @@ export class ActivityService {
   }
 
   public getByLocationName(page: number, locationName: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${page}/${locationName}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/location/${locationName}/${page}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

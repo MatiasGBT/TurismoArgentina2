@@ -77,7 +77,7 @@ public class ProvinceController {
     }
 
     @GetMapping("/names")
-    @Operation(summary = "Get all the names of provinces (the id of every province is interposed with a comma, ex.: 1,Buenos Aires).")
+    @Operation(summary = "Get all the names of provinces.")
     @ApiResponse(responseCode = "200", description = "Array of strings",
             content = { @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class))) })
     public ResponseEntity<?> getAllProvinceNames(Locale locale) {

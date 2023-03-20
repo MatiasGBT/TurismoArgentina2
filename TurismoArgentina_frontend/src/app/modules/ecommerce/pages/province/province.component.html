@@ -1,3 +1,10 @@
-<ecommerce-province-header [province]="province"></ecommerce-province-header>
-<ecommerce-province-data [province]="province"></ecommerce-province-data>
-<ecommerce-province-locations [locations]="locations"></ecommerce-province-locations>
+<app-spinner *ngIf="!province"></app-spinner>
+<app-spinner *ngIf="locations.length == 0"></app-spinner>
+
+<ng-container *ngIf="province">
+    <ecommerce-province-header [province]="province"></ecommerce-province-header>
+    <ecommerce-province-data [province]="province"></ecommerce-province-data>
+</ng-container>
+<ng-container *ngIf="locations.length > 0">
+    <ecommerce-province-locations [locations]="locations"></ecommerce-province-locations>
+</ng-container>

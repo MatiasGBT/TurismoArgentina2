@@ -48,6 +48,7 @@ export class LocationService {
   public getById(idLocation: number): Observable<Location> {
     return this.http.get<Location>(`${this.baseUrl}/id/${idLocation}`).pipe(
       catchError(ex => {
+        this.router.navigate(['/shop/locations']);
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
       })
@@ -55,7 +56,16 @@ export class LocationService {
   }
 
   public getByProvinceName(page: number, provinceName: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${page}/${provinceName}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/province/${provinceName}/${page}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getByProvinceId(idProvince: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/province/${idProvince}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

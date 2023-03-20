@@ -56,4 +56,10 @@ public class LocationService implements ILocationService {
     public Page<Location> getByProvinceName(Pageable pageable, String provinceName) {
         return repository.findByProvinceName(pageable, provinceName);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Location> getByProvinceId(Long idProvince) {
+        return repository.findByProvinceIdProvince(idProvince);
+    }
 }

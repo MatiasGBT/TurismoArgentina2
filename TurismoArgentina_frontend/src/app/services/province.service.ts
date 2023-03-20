@@ -48,6 +48,7 @@ export class ProvinceService {
   public getById(idProvince: number): Observable<Province> {
     return this.http.get<Province>(`${this.baseUrl}/id/${idProvince}`).pipe(
       catchError(ex => {
+        this.router.navigate(['/shop/provinces']);
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
       })

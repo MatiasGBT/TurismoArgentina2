@@ -54,11 +54,11 @@ public class ActivityController {
         }
     }
 
-    @GetMapping("/{page}/{locationName}")
+    @GetMapping("/location/{locationName}/{page}")
     @Operation(summary = "Gets all activities of a location (by name) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getByProvinceId(@PathVariable Integer page, @PathVariable String locationName, Locale locale) {
+    public ResponseEntity<?> getByLocationId(@PathVariable Integer page, @PathVariable String locationName, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Activity> activities = this.activityService.getByLocationName(pageable, locationName);

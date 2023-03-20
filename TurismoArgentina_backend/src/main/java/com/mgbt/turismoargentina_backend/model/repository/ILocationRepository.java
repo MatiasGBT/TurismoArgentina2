@@ -20,4 +20,6 @@ public interface ILocationRepository extends JpaRepository<Location, Long> {
     List<String> findAllLocationNames();
 
     Page<Location> findByProvinceName(Pageable pageable, String provinceName);
+
+    List<Location> findByProvinceIdProvince(Long idProvince);
 }

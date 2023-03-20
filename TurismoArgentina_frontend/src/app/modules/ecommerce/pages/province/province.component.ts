@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from 'src/app/models/location';
+import { Province } from 'src/app/models/province';
+import { LocationService } from 'src/app/services/location.service';
+import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
   selector: 'app-province',
@@ -6,53 +11,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./province.component.css']
 })
 export class ProvinceComponent implements OnInit {
-  public province: any = {
-    'idProvince': 1,
-    'name': 'Buenos Aires',
-    'description': 'Buenos Aires es la gran capital cosmopolita de Argentina. Su centro es la Plaza de Mayo, rodeada de imponentes edificios del siglo XIX, incluida la Casa Rosada, el icónico palacio presidencial que tiene varios balcones. Entre otras atracciones importantes, se incluyen el Teatro Colón, un lujoso teatro de ópera de 1908 con cerca de 2,500 asientos, y el moderno museo MALBA, que exhibe arte latinoamericano.',
-    'image': '../../../../../../../assets/img/provinces/bsas.jpg',
-    'deletionDate': null
-  }
+  public province: Province | undefined;
+  public locations: Location[] = [];
 
-  public locations: any[] = [
-    {
-      'idLocation': 1,
-      'name': 'Puerto Iguazú',
-      'description': '',
-      'image': '../../../../../../../assets/img/locations/puerto_iguazu.jpg',
-      'price': 0,
-      'deletionDate': null,
-      'province': {
-        'name': 'Misiones'
-      }
-    },
-    {
-      'idLocation': 2,
-      'name': 'Tigre',
-      'description': '',
-      'image': '../../../../../../../assets/img/locations/tigre.jpg',
-      'price': 0,
-      'deletionDate': null,
-      'province': {
-        'name': 'Buenos Aires'
-      }
-    },
-    {
-      'idLocation': 3,
-      'name': 'Puerto Madryn',
-      'description': '',
-      'image': '../../../../../../../assets/img/locations/puerto_madryn.jpg',
-      'price': 0,
-      'deletionDate': null,
-      'province': {
-        'name': 'Chubut'
-      }
-    }
-  ]
-
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private provinceService: ProvinceService,
+    private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.getProvince(params['id']);
+        this.getLocations(params['id']);
+      }
+    });
   }
 
+  private getProvince(idProvince: number): void {
+    this.provinceService.getById(idProvince).subscribe(province => this.province = province);
+  }
+
+  private getLocations(idProvince: number): void {
+    this.locationService.getByProvinceId(idProvince).subscribe(locations => this.locations = locations);
+  }
 }

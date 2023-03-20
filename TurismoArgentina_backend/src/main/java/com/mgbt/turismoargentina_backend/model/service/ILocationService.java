@@ -14,4 +14,5 @@ public interface ILocationService {
     List<Location> getFourRandom();
     List<String> getAllLocationNames();
     Page<Location> getByProvinceName(Pageable pageable, String provinceName);
+    List<Location> getByProvinceId(Long idProvince);
 }
