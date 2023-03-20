@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'ecommerce-location-buy',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./location-buy.component.css']
 })
 export class LocationBuyComponent implements OnInit {
-  @Input() location: any = {};
+  @Input() location!: Location;
 
   constructor() { }
 

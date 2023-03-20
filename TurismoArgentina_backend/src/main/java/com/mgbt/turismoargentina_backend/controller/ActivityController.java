@@ -58,10 +58,24 @@ public class ActivityController {
     @Operation(summary = "Gets all activities of a location (by name) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getByLocationId(@PathVariable Integer page, @PathVariable String locationName, Locale locale) {
+    public ResponseEntity<?> getByLocationName(@PathVariable Integer page, @PathVariable String locationName, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Activity> activities = this.activityService.getByLocationName(pageable, locationName);
+            return new ResponseEntity<>(activities, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/location/{idLocation}")
+    @Operation(summary = "Gets all activities of a location (by id) paginated.")
+    @ApiResponse(responseCode = "200", description = "Array of activities",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Activity.class)) })
+    public ResponseEntity<?> getByLocationId(@PathVariable Long idLocation, Locale locale) {
+        try {
+            List<Activity> activities = this.activityService.getByLocationId(idLocation);
+            System.out.println(activities);
             return new ResponseEntity<>(activities, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

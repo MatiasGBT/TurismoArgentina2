@@ -64,8 +64,8 @@ export class LocationService {
     );
   }
 
-  public getByProvinceId(idProvince: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/province/${idProvince}`).pipe(
+  public getByProvinceId(idProvince: number): Observable<Location[]> {
+    return this.http.get<Location[]>(`${this.baseUrl}/province/${idProvince}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

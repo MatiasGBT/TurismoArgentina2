@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { LocationService } from 'src/app/services/location.service';
   styleUrls: ['./province-locations.component.css']
 })
 export class ProvinceLocationsComponent implements OnInit {
-  @Input() locations: any[] = [];
+  @Input() locations: Location[] = [];
 
   constructor(private locationService: LocationService) { }
 

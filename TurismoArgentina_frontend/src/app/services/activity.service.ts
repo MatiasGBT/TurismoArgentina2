@@ -54,4 +54,13 @@ export class ActivityService {
       })
     );
   }
+
+  public getByLocationId(idLocation: number): Observable<Activity[]> {
+    return this.http.get<Activity[]>(`${this.baseUrl}/location/${idLocation}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
 }

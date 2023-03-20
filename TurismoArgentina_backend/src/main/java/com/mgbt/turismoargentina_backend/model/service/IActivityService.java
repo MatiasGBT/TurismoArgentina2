@@ -13,4 +13,5 @@ public interface IActivityService {
     Activity findById(Long id);
     List<Activity> getFiveRandom();
     Page<Activity> getByLocationName(Pageable pageable, String locationName);
+    List<Activity> getByLocationId(Long idLocation);
 }

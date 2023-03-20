@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { ActivityService } from 'src/app/services/activity.service';
   styleUrls: ['./location-activities.component.css']
 })
 export class LocationActivitiesComponent implements OnInit {
-  @Input() activities: any[] = [];
+  @Input() activities: Activity[] = [];
 
   constructor(private activityService: ActivityService) { }
 

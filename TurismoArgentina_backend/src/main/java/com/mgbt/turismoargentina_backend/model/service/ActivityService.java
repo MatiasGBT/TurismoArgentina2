@@ -49,4 +49,10 @@ public class ActivityService implements IActivityService {
     public Page<Activity> getByLocationName(Pageable pageable, String locationName) {
         return repository.findByLocationName(pageable, locationName);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Activity> getByLocationId(Long idLocation) {
+        return repository.findByLocationIdLocation(idLocation);
+    }
 }

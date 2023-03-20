@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Province } from 'src/app/models/province';
 
 @Component({
   selector: 'ecommerce-province-header',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./province-header.component.css']
 })
 export class ProvinceHeaderComponent implements OnInit {
-  @Input() province: any = {};
+  @Input() province!: Province;
 
   constructor() { }
 

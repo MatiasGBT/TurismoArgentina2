@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'ecommerce-location-header',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./location-header.component.css']
 })
 export class LocationHeaderComponent implements OnInit {
-  @Input() location: any = {};
+  @Input() location!: Location;
 
   constructor() { }
 

@@ -16,4 +16,6 @@ public interface IActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> findFiveRandom();
 
     Page<Activity> findByLocationName(Pageable pageable, String locationName);
+
+    List<Activity> findByLocationIdLocation(Long idLocation);
 }
