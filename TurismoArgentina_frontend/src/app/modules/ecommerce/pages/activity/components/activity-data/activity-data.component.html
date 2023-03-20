@@ -2,5 +2,5 @@
     <h1>{{activity.name}}</h1>
     <a *ngIf="activity?.location" [routerLink]="['/shop/locations/', activity.location.idLocation]">({{activity.location.name}})</a>
     <p>{{activity.description}}</p>
-    <p><i class="fa-solid fa-clock"></i> Duration: {{activity.duration}}hs</p>
+    <p *ngIf="activity?.duration"><i class="fa-solid fa-clock"></i> Duration: {{activity.duration}}hs</p>
 </section>

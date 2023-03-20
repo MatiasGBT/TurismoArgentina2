@@ -1,10 +1,12 @@
 package com.mgbt.turismoargentina_backend.controller;
 
+import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Activity;
 import com.mgbt.turismoargentina_backend.model.service.*;
+import com.mgbt.turismoargentina_backend.utility_classes.InternalServerError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
@@ -38,6 +40,25 @@ public class ActivityController {
             return new ResponseEntity<>(activities, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/id/{id}")
+    @Operation(summary = "Gets a activity by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Activity object",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Activity.class)) }),
+            @ApiResponse(responseCode = "404", description = "Activity not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> getById(@PathVariable Long id, Locale locale) {
+        try {
+            Activity activity = this.activityService.findById(id);
+            return new ResponseEntity<>(activity, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
         }
     }
 
@@ -75,7 +96,6 @@ public class ActivityController {
     public ResponseEntity<?> getByLocationId(@PathVariable Long idLocation, Locale locale) {
         try {
             List<Activity> activities = this.activityService.getByLocationId(idLocation);
-            System.out.println(activities);
             return new ResponseEntity<>(activities, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

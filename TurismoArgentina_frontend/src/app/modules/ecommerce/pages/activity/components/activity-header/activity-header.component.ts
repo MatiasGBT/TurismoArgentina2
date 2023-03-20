@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 
 @Component({
   selector: 'ecommerce-activity-header',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./activity-header.component.css']
 })
 export class ActivityHeaderComponent implements OnInit {
-  @Input() activity: any = {};
+  @Input() activity!: Activity;
 
   constructor() { }
 

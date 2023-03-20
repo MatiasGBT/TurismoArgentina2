@@ -48,7 +48,7 @@ public class LocationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Location object",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Location.class)) }),
-            @ApiResponse(responseCode = "404", description = "Province not found",
+            @ApiResponse(responseCode = "404", description = "Location not found",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
     public ResponseEntity<?> getById(@PathVariable Long id, Locale locale) {

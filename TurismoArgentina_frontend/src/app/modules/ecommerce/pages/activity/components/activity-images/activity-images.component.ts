@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 
 @Component({
   selector: 'ecommerce-activity-images',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./activity-images.component.css']
 })
 export class ActivityImagesComponent implements OnInit {
-  @Input() activity: any = {};
+  @Input() activity!: Activity;
 
   constructor() { }
 
