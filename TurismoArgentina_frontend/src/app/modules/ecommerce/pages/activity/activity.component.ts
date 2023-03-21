@@ -22,10 +22,7 @@ export class ActivityComponent implements OnInit {
   }
 
   private getActivity(idActivity: number): void {
-    this.activityService.getById(idActivity).subscribe(activity => {
-      console.log(activity)
-      this.activity = activity
-    });
+    this.activityService.getById(idActivity).subscribe(activity => this.activity = activity);
   }
 
 }

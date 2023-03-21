@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="activity" *ngFor="let activity of activities" [ngStyle]="{'background-image': 'url(' + activity.image1 + ')'}" (click)="selectActivity(activity, selectedActivityDomElement)">
+        <div class="activity" *ngFor="let activity of activities" [ngStyle]="{'background-image': 'url(http://localhost:8090/api/activities/img/' + activity.image1 + ')'}" (click)="selectActivity(activity, selectedActivityDomElement)">
             <div class="activity-data">
                 <p>{{activity.name}} ({{activity.location.name}})</p>
                 <button [attr.aria-label]="activity.name + ' page'" (click)="goToActivity(activity.idActivity)">{{'GENERAL.DETAILS' | translate}}</button>
