@@ -49,6 +49,15 @@
             "BUY": {
                 "TITLE": "¡Vamos a divertirnos!"
             }
+        },
+        "CART": {
+            "LOCATIONS": "No tienes ninguna localidad en el carrito",
+            "ACTIVITIES": "No tienes ninguna actividad en el carrito",
+            "BUY_FORM": {
+                "BUY": "Comprar",
+                "COUPON": "Canjear cupón",
+                "APPLY_COUPON": "Aplicar"
+            }
         }
     }
 }

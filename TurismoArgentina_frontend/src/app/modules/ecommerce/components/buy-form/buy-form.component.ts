@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class BuyFormComponent implements OnInit {
   public peopleQuantity: number = 1;
   public addToCartButton: string = '';
+  @Output() addToCartEvent = new EventEmitter<number>();
 
   constructor(private translate: TranslateService) { }
 
@@ -17,7 +18,7 @@ export class BuyFormComponent implements OnInit {
   }
 
   public addToCart(): void {
-    console.log("unsupported");
+    this.addToCartEvent.emit(this.peopleQuantity);
   }
 
   public reducePeopleQuantity(): void {

@@ -11,4 +11,5 @@ export class Activity {
     duration: number | undefined;
     deletionDate: Date | undefined;
     location!: Location;
+    peopleQuantity: number | undefined;
 }

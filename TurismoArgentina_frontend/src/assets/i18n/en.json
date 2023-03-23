@@ -49,6 +49,15 @@
             "BUY": {
                 "TITLE": "Let's have some fun!"
             }
+        },
+        "CART": {
+            "LOCATIONS": "You do not have any locations in your shopping cart",
+            "ACTIVITIES": "You do not have any activity in your shopping cart",
+            "BUY_FORM": {
+                "BUY": "Buy",
+                "COUPON": "Redeem coupon",
+                "APPLY_COUPON": "Apply"
+            }
         }
     }
 }

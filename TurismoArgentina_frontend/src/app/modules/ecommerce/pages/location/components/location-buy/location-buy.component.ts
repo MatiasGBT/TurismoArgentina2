@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from 'src/app/models/location';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'ecommerce-location-buy',
@@ -9,10 +10,13 @@ import { Location } from 'src/app/models/location';
 export class LocationBuyComponent implements OnInit {
   @Input() location!: Location;
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
-    
   }
 
+  public addToCart(peopleQuantity: number): void {
+    this.location.peopleQuantity = peopleQuantity;
+    this.locationService.addToCart(this.location);
+  }
 }

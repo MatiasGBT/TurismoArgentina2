@@ -1,0 +1,15 @@
+<section>
+    <div id="items-container">
+        <ecommerce-cart-locations-section (totalLocationsPriceEvent)="getTotalLocationsPrice($event)" (removeLocationEvent)="removeTotalLocationPrice($event)"></ecommerce-cart-locations-section>
+        <ecommerce-cart-activities-section (totalActivitiesPrice)="getTotalActivitiesPrice($event)" (removeActivityEvent)="removeTotalActivityPrice($event)"></ecommerce-cart-activities-section>
+    </div>
+    
+    <div id="buy-container">
+        <p>Total: ${{getTotalPrice()}} ARS</p>
+        <button type="button" aria-label="Buy cart button">{{'ECOMMERCE.CART.BUY_FORM.BUY' | translate}}</button>
+        <div id="coupon">
+            <input type="text" [placeholder]="buyFormPlaceholder" maxlength="30">
+            <button type="button" aria-label="Apply coupon button">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
+        </div>
+    </div>
+</section>

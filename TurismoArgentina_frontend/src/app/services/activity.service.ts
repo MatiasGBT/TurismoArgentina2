@@ -10,6 +10,7 @@ import { CatchErrorService } from './catch-error.service';
 })
 export class ActivityService {
   private baseUrl = "http://localhost:8090/api/activities";
+  private cartActivities: Activity[] = [];
 
   constructor(private router: Router, private http: HttpClient,
     private catchErrorService: CatchErrorService) { }
@@ -62,5 +63,22 @@ export class ActivityService {
         return throwError(() => ex);
       })
     );
+  }
+
+  public addToCart(actity: Activity): void {
+    //It is necessary to do it this way so that the position in memory of the objects
+    //is not validated and the same activity cannot be added twice by re-entering the
+    //page of that activity.
+    let array = JSON.stringify(this.cartActivities);
+    if (!array.includes(JSON.stringify(actity))) this.cartActivities.push(actity);
+    else console.log("The activity is already in the cart");
+  }
+
+  public deleteFromCart(idActivity: number): void {
+    this.cartActivities = this.cartActivities.filter(activity => activity.idActivity != idActivity);
+  }
+
+  public getCartActivities(): Activity[] {
+    return this.cartActivities;
   }
 }

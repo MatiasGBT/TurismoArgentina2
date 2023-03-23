@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Activity } from 'src/app/models/activity';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'ecommerce-activity-buy',
@@ -9,9 +10,13 @@ import { Activity } from 'src/app/models/activity';
 export class ActivityBuyComponent implements OnInit {
   @Input() activity!: Activity;
 
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
   }
 
+  public addToCart(peopleQuantity: number): void {
+    this.activity.peopleQuantity = peopleQuantity;
+    this.activityService.addToCart(this.activity);
+  }
 }

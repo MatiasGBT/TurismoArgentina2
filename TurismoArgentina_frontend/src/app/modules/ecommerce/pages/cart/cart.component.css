@@ -1,0 +1,84 @@
+section {
+    display: flex;
+    flex-direction: column;
+    padding: 75px 15px 15px 15px;
+    gap: 15px;
+    min-height: 80vh;
+}
+
+#buy-container {
+    width: 100%;
+    border-radius: 10px;
+    background: #DDDDDD;
+    padding: 10px;
+    color: black;
+    font-family: 'Pangea';
+    height: fit-content;
+}
+
+#buy-container button {
+    font-family: 'Pangea';
+    padding: 5px;
+    width: 100%;
+    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#buy-container button:hover {
+    background: -webkit-linear-gradient(to right, #4bafd1, #286fca);
+    background: linear-gradient(to right, #4bafd1, #286fca);
+}
+
+#coupon {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+#coupon input {
+    font-family: 'Pangea';
+    padding: 5px;
+    width: 80%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(184, 184, 184);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#coupon button {
+    width: 20%;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 105px 25px 25px 25px;
+    }
+
+    #buy-container {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1038px) {
+    section {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    #items-container {
+        max-width: 70%;
+    }
+
+    #buy-container {
+        width: 30%;
+        margin: auto 0;
+    }
+}

@@ -10,6 +10,7 @@ import { CatchErrorService } from './catch-error.service';
 })
 export class LocationService {
   private baseUrl = "http://localhost:8090/api/locations";
+  private cartLocations: Location[] = [];
 
   constructor(private router: Router, private http: HttpClient,
     private catchErrorService: CatchErrorService) { }
@@ -71,5 +72,22 @@ export class LocationService {
         return throwError(() => ex);
       })
     );
+  }
+
+  public addToCart(location: Location): void {
+    //It is necessary to do it this way so that the position in memory of the objects
+    //is not validated and the same location cannot be added twice by re-entering the
+    //page of that location.
+    let array = JSON.stringify(this.cartLocations);
+    if (!array.includes(JSON.stringify(location))) this.cartLocations.push(location);
+    else console.log("The location is already in the cart");
+  }
+
+  public deleteFromCart(idLocation: number): void {
+    this.cartLocations = this.cartLocations.filter(location => location.idLocation != idLocation);
+  }
+
+  public getCartLocations(): Location[] {
+    return this.cartLocations;
   }
 }

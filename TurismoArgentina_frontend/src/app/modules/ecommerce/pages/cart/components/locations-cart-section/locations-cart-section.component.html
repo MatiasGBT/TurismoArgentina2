@@ -1,0 +1,15 @@
+<section>
+    <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
+    <p *ngIf="locations.length == 0">You have no locations on the cart</p>
+    <div id="locations">
+        <div class="location" *ngFor="let location of locations">
+            <button type="button" aria-label="Delete location from cart" (click)="deleteFromCart(location)"><i class="fa-solid fa-xmark"></i></button>
+            <img [src]="'http://localhost:8090/api/locations/img/' + location.image" [alt]="location.name + ' image'">
+            <p>{{location.name}}</p>
+            <p>${{location.price}} ARS</p>
+            <p>{{location.peopleQuantity}} <i class="fa-solid fa-person"></i></p>
+            <hr>
+            <p>Total: ${{getTotalPrice(location)}} ARS</p>
+        </div>
+    </div>
+</section>

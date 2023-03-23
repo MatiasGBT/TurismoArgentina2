@@ -35,6 +35,9 @@ import { ActivityDataComponent } from './pages/activity/components/activity-data
 import { ActivityImagesComponent } from './pages/activity/components/activity-images/activity-images.component';
 import { ActivityBuyComponent } from './pages/activity/components/activity-buy/activity-buy.component';
 import { BuyFormComponent } from './components/buy-form/buy-form.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { LocationsCartSectionComponent } from './pages/cart/components/locations-cart-section/locations-cart-section.component';
+import { ActivitiesCartSectionComponent } from './pages/cart/components/activities-cart-section/activities-cart-section.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { BuyFormComponent } from './components/buy-form/buy-form.component';
     ActivityDataComponent,
     ActivityImagesComponent,
     ActivityBuyComponent,
-    BuyFormComponent
+    BuyFormComponent,
+    CartComponent,
+    LocationsCartSectionComponent,
+    ActivitiesCartSectionComponent
   ],
   imports: [
     CommonModule,

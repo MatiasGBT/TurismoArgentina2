@@ -2,7 +2,7 @@
     <h2>{{'ECOMMERCE.LOCATION.BUY.TITLE' | translate}}</h2>
 
     <p><i class="fa-solid fa-tag"></i> ${{location.price}} ARS <i class="fa-solid fa-xmark"></i><i class="fa-solid fa-person"></i></p>
-    <ecommerce-buy-form></ecommerce-buy-form>
+    <ecommerce-buy-form (addToCartEvent)="addToCart($event)"></ecommerce-buy-form>
 
     <img src="../../../../../../../assets/img/buy_placeholder.png" alt="Add to cart image">
 </section>

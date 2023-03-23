@@ -8,4 +8,5 @@ export class Location {
     price!: number;
     deletionDate: Date | undefined;
     province!: Province;
+    peopleQuantity: number | undefined;
 }
