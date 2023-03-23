@@ -42,17 +42,29 @@
         },
         "LOCATION": {
             "BUY": {
-                "TITLE": "Let's fly!"
+                "TITLE": "Let's fly!",
+                "ADDED": "The location was successfully added to your cart!",
+                "GO_TO": "Go to cart",
+                "CONTINUE": "Continue buying"
             }
         },
         "ACTIVITY": {
             "BUY": {
-                "TITLE": "Let's have some fun!"
+                "TITLE": "Let's have some fun!",
+                "ADDED": "The activity was successfully added to your cart!",
+                "GO_TO": "Go to cart",
+                "CONTINUE": "Continue buying"
             }
         },
         "CART": {
-            "LOCATIONS": "You do not have any locations in your shopping cart",
-            "ACTIVITIES": "You do not have any activity in your shopping cart",
+            "LOCATIONS": {
+                "NO_LOCATIONS": "You do not have any location in your shopping cart",
+                "ALREADY_IN_CART": "The location is already in the cart"
+            },
+            "ACTIVITIES": {
+                "NO_ACTIVITIES": "You do not have any activity in your shopping cart",
+                "ALREADY_IN_CART": "The activity is already in the cart"
+            },
             "BUY_FORM": {
                 "BUY": "Buy",
                 "COUPON": "Redeem coupon",

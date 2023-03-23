@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Location } from '../models/location';
 import { CatchErrorService } from './catch-error.service';
 
@@ -13,7 +15,7 @@ export class LocationService {
   private cartLocations: Location[] = [];
 
   constructor(private router: Router, private http: HttpClient,
-    private catchErrorService: CatchErrorService) { }
+    private catchErrorService: CatchErrorService, private translate: TranslateService) { }
 
   public navigateToLocation(idLocation: number): void {
     this.router.navigate([`shop/locations/${idLocation}`]);
@@ -74,13 +76,26 @@ export class LocationService {
     );
   }
 
-  public addToCart(location: Location): void {
+  public addToCart(location: Location): boolean {
     //It is necessary to do it this way so that the position in memory of the objects
     //is not validated and the same location cannot be added twice by re-entering the
     //page of that location.
     let array = JSON.stringify(this.cartLocations);
-    if (!array.includes(JSON.stringify(location))) this.cartLocations.push(location);
-    else console.log("The location is already in the cart");
+    if (!array.includes(JSON.stringify(location))) {
+      this.cartLocations.push(location);
+      return true;
+    } else {
+      this.translate.get('ECOMMERCE.CART.LOCATIONS.ALREADY_IN_CART').subscribe(response => {
+        this.fireAlreadyInCartModal(response);
+      });
+      return false;
+    }
+    //The function returns "true" if the selected location is not in the cart and
+    //returns "false" if the location is in the cart.
+  }
+
+  private fireAlreadyInCartModal(title: string): void {
+    Swal.fire({icon: 'error', title: title, showConfirmButton: false, timer: 2000, timerProgressBar: true});
   }
 
   public deleteFromCart(idLocation: number): void {

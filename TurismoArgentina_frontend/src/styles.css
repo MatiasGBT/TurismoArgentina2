@@ -6,6 +6,11 @@
     padding: 0;
 }
 
+.swal2-popup {
+    font-family: 'Pangea' !important;
+    border-radius: 25px !important;
+}
+
 @font-face {
     font-family: 'Pangea';
     src: url('assets/fonts/PangeaAfrikanTrial-SemiBold.otf');

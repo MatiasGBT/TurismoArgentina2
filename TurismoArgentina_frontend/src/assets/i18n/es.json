@@ -42,17 +42,29 @@
         },
         "LOCATION": {
             "BUY": {
-                "TITLE": "¡Vamos a volar!"
+                "TITLE": "¡Vamos a volar!",
+                "ADDED": "¡La localidad se agregó al carrito correctamente!",
+                "GO_TO": "Ir al carrito",
+                "CONTINUE": "Continuar comprando"
             }
         },
         "ACTIVITY": {
             "BUY": {
-                "TITLE": "¡Vamos a divertirnos!"
+                "TITLE": "¡Vamos a divertirnos!",
+                "ADDED": "¡La actividad se agregó al carrito correctamente!",
+                "GO_TO": "Ir al carrito",
+                "CONTINUE": "Continuar comprando"
             }
         },
         "CART": {
-            "LOCATIONS": "No tienes ninguna localidad en el carrito",
-            "ACTIVITIES": "No tienes ninguna actividad en el carrito",
+            "LOCATIONS": {
+                "NO_LOCATIONS": "No tienes ninguna localidad en el carrito",
+                "ALREADY_IN_CART": "La localidad ya está en el carrito"
+            },
+            "ACTIVITIES": {
+                "NO_ACTIVITIES": "No tienes ninguna actividad en el carrito",
+                "ALREADY_IN_CART": "La actividad ya está en el carrito"
+            },
             "BUY_FORM": {
                 "BUY": "Comprar",
                 "COUPON": "Canjear cupón",

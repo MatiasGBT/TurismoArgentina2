@@ -1,6 +1,6 @@
 <section>
     <h2>{{'NAVBAR.ACTIVITIES' | translate}}</h2>
-    <p *ngIf="activities.length == 0">You have no activities on the cart</p>
+    <p *ngIf="activities.length == 0">{{'ECOMMERCE.CART.ACTIVITIES.NO_ACTIVITIES' | translate}}</p>
     <div id="activities">
         <div class="activity" *ngFor="let activity of activities">
             <button type="button" aria-label="Delete location from cart" (click)="deleteFromCart(activity)"><i class="fa-solid fa-xmark"></i></button>

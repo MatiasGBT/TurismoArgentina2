@@ -1,6 +1,6 @@
 <section>
     <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
-    <p *ngIf="locations.length == 0">You have no locations on the cart</p>
+    <p *ngIf="locations.length == 0">{{'ECOMMERCE.CART.LOCATIONS.NO_LOCATIONS' | translate}}</p>
     <div id="locations">
         <div class="location" *ngFor="let location of locations">
             <button type="button" aria-label="Delete location from cart" (click)="deleteFromCart(location)"><i class="fa-solid fa-xmark"></i></button>

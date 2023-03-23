@@ -34,6 +34,12 @@ section {
     background: linear-gradient(to right, #4bafd1, #286fca);
 }
 
+#buy-container button:disabled {
+    background: -webkit-linear-gradient(to right, #357c94, #1b4a88);
+    background: linear-gradient(to right, #357c94, #1b4a88);
+    cursor: default;
+}
+
 #coupon {
     display: flex;
     gap: 5px;

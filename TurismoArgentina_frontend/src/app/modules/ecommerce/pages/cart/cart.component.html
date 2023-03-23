@@ -6,7 +6,9 @@
     
     <div id="buy-container">
         <p>Total: ${{getTotalPrice()}} ARS</p>
-        <button type="button" aria-label="Buy cart button">{{'ECOMMERCE.CART.BUY_FORM.BUY' | translate}}</button>
+        <button type="button" aria-label="Buy cart button" [disabled]="getTotalPrice() == 0">
+            {{'ECOMMERCE.CART.BUY_FORM.BUY' | translate}}
+        </button>
         <div id="coupon">
             <input type="text" [placeholder]="buyFormPlaceholder" maxlength="30">
             <button type="button" aria-label="Apply coupon button">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
