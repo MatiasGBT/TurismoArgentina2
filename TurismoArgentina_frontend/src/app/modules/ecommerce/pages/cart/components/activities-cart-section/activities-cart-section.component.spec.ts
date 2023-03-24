@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ActivitiesCartSectionComponent } from './activities-cart-section.component';
 
@@ -8,6 +10,7 @@ describe('ActivitiesCartSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule],
       declarations: [ ActivitiesCartSectionComponent ]
     })
     .compileComponents();

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 
@@ -17,13 +16,10 @@ export class ActivitiesPageSectionComponent implements OnInit {
   private sortedByLocation: boolean = false;
   private locationName: string = 'all';
 
-  constructor(private activityService: ActivityService, private activatedRoute: ActivatedRoute) { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if (params['page']) this.page = params['page'];
-      this.getActivities();
-    });
+    this.getActivities();
   }
 
   public goToActivity(idActivity: number): void {

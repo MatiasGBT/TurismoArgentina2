@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Province } from 'src/app/models/province';
 import { ProvinceService } from 'src/app/services/province.service';
 
@@ -15,13 +14,10 @@ export class ProvincesSectionComponent implements OnInit {
   public isLastPage: boolean = false;
   public totalPages: number = 1;
 
-  constructor(private provinceService: ProvinceService, private activatedRoute: ActivatedRoute) { }
+  constructor(private provinceService: ProvinceService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if (params['page']) this.page = params['page'];
-      this.getProvinces();
-    });
+    this.getProvinces();
   }
 
   public goToProvince(idProvince: number): void {

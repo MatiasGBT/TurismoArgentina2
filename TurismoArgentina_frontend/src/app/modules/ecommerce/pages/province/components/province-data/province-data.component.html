@@ -1,4 +1,4 @@
 <section>
-    <h1>{{province.name}}</h1>
-    <p>{{province.description}}</p>
+    <h1 *ngIf="province?.name">{{province.name}}</h1>
+    <p *ngIf="province?.name">{{province.description}}</p>
 </section>

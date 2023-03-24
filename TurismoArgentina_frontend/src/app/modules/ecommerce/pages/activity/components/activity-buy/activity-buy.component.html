@@ -1,7 +1,7 @@
 <section>
     <h2>{{'ECOMMERCE.ACTIVITY.BUY.TITLE' | translate}}</h2>
 
-    <p><i class="fa-solid fa-tag"></i> ${{activity.price}} ARS <i class="fa-solid fa-xmark"></i><i class="fa-solid fa-person"></i></p>
+    <p *ngIf="activity?.price"><i class="fa-solid fa-tag"></i> ${{activity.price}} ARS <i class="fa-solid fa-xmark"></i><i class="fa-solid fa-person"></i></p>
     <ecommerce-buy-form (addToCartEvent)="addToCart($event)"></ecommerce-buy-form>
 
     <img src="../../../../../../../assets/img/buy_placeholder2.png" alt="Add to cart image">

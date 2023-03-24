@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { LocationActivitiesComponent } from './location-activities.component';
 
@@ -9,7 +10,10 @@ describe('LocationActivitiesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [
+        TranslateModule.forRoot(),
+        HttpClientTestingModule
+      ],
       declarations: [ LocationActivitiesComponent ]
     })
     .compileComponents();

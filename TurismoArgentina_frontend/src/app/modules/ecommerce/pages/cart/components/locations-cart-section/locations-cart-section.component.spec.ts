@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { LocationsCartSectionComponent } from './locations-cart-section.component';
 
@@ -8,6 +10,7 @@ describe('LocationsCartSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule],
       declarations: [ LocationsCartSectionComponent ]
     })
     .compileComponents();
