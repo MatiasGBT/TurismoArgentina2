@@ -1,5 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
+import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Purchase;
 import com.mgbt.turismoargentina_backend.model.repository.IPurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class PurchaseService implements IPurchaseService<Purchase> {
+public class PurchaseService implements IPurchaseService {
 
     @Autowired
     IPurchaseRepository repository;
@@ -34,6 +35,8 @@ public class PurchaseService implements IPurchaseService<Purchase> {
     @Override
     @Transactional(readOnly = true)
     public Purchase findById(Long id) {
-        return repository.findById(id).orElse(null);
+        Purchase purchase = repository.findById(id).orElse(null);
+        if (purchase == null) throw new EntityNotFoundException("purchase not found");
+        return purchase;
     }
 }

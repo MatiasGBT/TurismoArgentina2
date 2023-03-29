@@ -1,6 +1,8 @@
 {
     "GENERAL": {
-        "DETAILS": "Details"
+        "DETAILS": "Details",
+        "UNAUTHORISED_TITLE": "Unauthorised access",
+        "UNAUTHORISED_TEXT": "You are not authorised to enter this page"
     },
     "NAVBAR": {
         "HOME": "Home",

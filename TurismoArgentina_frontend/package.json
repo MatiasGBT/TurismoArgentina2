@@ -22,6 +22,8 @@
     "@fortawesome/fontawesome-free": "^6.3.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "keycloak-angular": "^13.0.0",
+    "keycloak-js": "^20.0.5",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",

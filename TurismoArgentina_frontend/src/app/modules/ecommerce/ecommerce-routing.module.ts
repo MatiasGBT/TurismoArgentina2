@@ -8,6 +8,7 @@ import { ProvinceComponent } from './pages/province/province.component';
 import { LocationComponent } from './pages/location/location.component';
 import { ActivityComponent } from './pages/activity/activity.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
   {path: 'activities/:id', component: ActivityComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'account', component: IndexComponent, canActivate: [AuthGuard], data: {role: 'user'}},
 ]
 
 @NgModule({

@@ -26,7 +26,7 @@ public class ExceptionService implements IExceptionService {
     public ResponseEntity<Map<String, Object>> throwEntityNotFoundException(EntityNotFoundException ex, Locale locale) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", messageSource.getMessage("error.entityNotFound", null, locale));
-        response.put("error", ex.getMessage() + ": " + ex.getMessage());
+        response.put("error", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
