@@ -1,0 +1,104 @@
+section {
+    width: 100%;
+    padding: 75px 15px 15px 15px;
+    background: white;
+}
+
+section h1 {
+    font-size: 3rem;
+    color: black;
+    font-family: 'Pangea';
+}
+
+#config-options {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.config-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Pangea';
+    gap: 5px;
+}
+
+.config-option p {
+    max-width: 50%;
+}
+
+.config-option button {
+    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Pangea';
+    color: white;
+    padding: 5px 10px;
+    max-width: 50%;
+}
+
+.config-option button:hover {
+    background: -webkit-linear-gradient(to right, #4bafd1, #286fca);
+    background: linear-gradient(to right, #4bafd1, #286fca);
+}
+
+.lang-select {
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-family: 'Pangea';
+    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
+    color: white;
+    border: none;
+    outline: none;
+    max-width: 50%;
+    background-color: #2F80ED;
+}
+
+img {
+    display: flex;
+    margin: 15px auto;
+    height: 200px;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 105px 25px 25px 25px;
+        min-height: 80vh;
+    }
+    
+    section h1 {
+        font-size: 4rem;
+    }
+
+    #config-options {
+        width: 50%;
+        position: absolute;
+    }
+
+    img {
+        margin: 0 0 0 auto;
+    }
+
+    .config-option {
+        justify-content: flex-start;
+    }
+
+    .config-option button, .config-option select {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1038px) {
+    section h1 {
+        font-size: 5rem;
+    }
+
+    img {
+        height: 300px;
+    }
+}

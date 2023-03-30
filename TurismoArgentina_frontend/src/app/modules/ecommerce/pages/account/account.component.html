@@ -1,0 +1,27 @@
+<section>
+    <h1>{{'NAVBAR.ACCOUNT' | translate}}</h1>
+
+    <div id="config-options">
+        <div class="config-option">
+            <p>{{'ECOMMERCE.ACCOUNT.ACCOUNT_INFO_TEXT' | translate}}</p>
+            <button (click)="goToAccountDashboard()">{{'ECOMMERCE.ACCOUNT.ACCOUNT_INFO_BUTTON' | translate}}</button>
+        </div>
+    
+        <div class="config-option">
+            <p>{{'ECOMMERCE.ACCOUNT.LANGUAGE' | translate}}</p>
+            <select [(ngModel)]="selectedLanguage" (change)="changeLanguage()" class="lang-select">
+                <option *ngFor="let lang of langs" [value]="lang"
+                    [selected]="lang === currentLang">
+                    {{ 'LANGUAGES.' + lang | translate }}
+                </option>
+            </select>
+        </div>
+    
+        <div class="config-option">
+            <p><i class="fa-solid fa-right-from-bracket"></i> {{'ECOMMERCE.ACCOUNT.LOGOUT' | translate}}</p>
+            <button (click)="logout()">{{'ECOMMERCE.ACCOUNT.LOGOUT' | translate}}</button>
+        </div>
+    </div>
+
+    <img src="../../../../../assets/img/account.svg" alt="">
+</section>

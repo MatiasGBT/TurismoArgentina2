@@ -9,6 +9,7 @@ import { LocationComponent } from './pages/location/location.component';
 import { ActivityComponent } from './pages/activity/activity.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AccountComponent } from './pages/account/account.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
   {path: 'activities/:id', component: ActivityComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'account', component: IndexComponent, canActivate: [AuthGuard], data: {role: 'user'}},
+  {path: 'login', component: AccountComponent, canActivate: [AuthGuard], data: {role: 'user'}},
+  {path: 'account', component: AccountComponent, canActivate: [AuthGuard], data: {role: 'user'}},
 ]
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
@@ -12,6 +12,7 @@ export class AuthService {
   private token = '';
   public keycloakUser!: User;
   private baseUrl = "http://localhost:8090/api/auth/";
+  @Output() userLoggedInEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private keycloakService: KeycloakService, private http: HttpClient,
     private catchErrorService: CatchErrorService) { }

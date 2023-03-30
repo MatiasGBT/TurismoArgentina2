@@ -52,7 +52,6 @@ nav ul li a p {
     display: flex !important;
     justify-content: center;
     align-content: center;
-    gap: 15px;
     flex-direction: column;
     position: absolute;
     top: 60px;
@@ -74,6 +73,7 @@ nav ul li a p {
     text-decoration: none;
     color: white;
     text-align: center;
+    margin-bottom: 15px;
 }
 
 .menu-opened li a i {
@@ -134,10 +134,10 @@ nav ul li a p {
 
     nav ul {
         display: flex;
-        gap: 15px;
     }
 
     nav ul li a {
+        margin-left: 15px;
         text-decoration: none;
         color: white;
         font-size: 1.25rem;

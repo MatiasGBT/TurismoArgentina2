@@ -30,6 +30,7 @@ export class AuthGuard extends KeycloakAuthGuard {
       this.authService.login().subscribe(response => {
         this.authService.setKeycloakUser(response.user);
         console.log(response.message);
+        this.authService.userLoggedInEvent.emit();
       });
     }
   }

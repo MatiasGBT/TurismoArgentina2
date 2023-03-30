@@ -4,6 +4,11 @@
         "UNAUTHORISED_TITLE": "Unauthorised access",
         "UNAUTHORISED_TEXT": "You are not authorised to enter this page"
     },
+    "LANGUAGES": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português (BR)"
+    },
     "NAVBAR": {
         "HOME": "Home",
         "PROVINCES": "Provinces",
@@ -11,6 +16,7 @@
         "ACTIVITIES": "Activities",
         "CART": "Cart",
         "ACCOUNT": "Account",
+        "LOGIN": "Login",
         "ADMIN": "Admin panel"
     },
     "SPINNER": {
@@ -72,6 +78,12 @@
                 "COUPON": "Redeem coupon",
                 "APPLY_COUPON": "Apply"
             }
+        },
+        "ACCOUNT": {
+            "ACCOUNT_INFO_TEXT": "Change account information",
+            "ACCOUNT_INFO_BUTTON": "Account panel",
+            "LANGUAGE": "Language",
+            "LOGOUT": "Logout"
         }
     }
 }

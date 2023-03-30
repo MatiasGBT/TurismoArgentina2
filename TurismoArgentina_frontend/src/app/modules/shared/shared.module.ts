@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TranslateLoader, TranslateModule, TranslateStore } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../app.module';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 
@@ -10,14 +8,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
     SpinnerComponent
   ],
   imports: [
-    TranslateModule.forChild({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule
   ],
   exports: [
     TranslateModule,

@@ -8,6 +8,7 @@ section {
 section h1 {
     font-size: 3rem;
     font-family: 'Pangea';
+    word-wrap: break-word;
 }
 
 section p {

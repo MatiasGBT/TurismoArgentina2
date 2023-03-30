@@ -4,6 +4,11 @@
         "UNAUTHORISED_TITLE": "Acesso não autorizado",
         "UNAUTHORISED_TEXT": "Você não está autorizado a entrar nesta página"
     },
+    "LANGUAGES": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português (BR)"
+    },
     "NAVBAR": {
         "HOME": "Início",
         "PROVINCES": "Províncias",
@@ -11,6 +16,7 @@
         "ACTIVITIES": "Atividades",
         "CART": "Carrinho",
         "ACCOUNT": "Conta",
+        "LOGIN": "Iniciar sessão",
         "ADMIN": "Painel de administração"
     },
     "SPINNER": {
@@ -72,6 +78,12 @@
                 "COUPON": "Resgatar cupom",
                 "APPLY_COUPON": "Aplicar"
             }
+        },
+        "ACCOUNT": {
+            "ACCOUNT_INFO_TEXT": "Alterar informação de conta",
+            "ACCOUNT_INFO_BUTTON": "Painel de conta",
+            "LANGUAGE": "Linguagem",
+            "LOGOUT": "Sair da sessão"
         }
     }
 }
