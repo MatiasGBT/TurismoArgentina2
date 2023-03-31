@@ -47,4 +47,13 @@ public class Purchase implements Serializable {
             joinColumns = @JoinColumn(name = "id_purchase"),
             inverseJoinColumns = @JoinColumn(name = "id_activity"))
     List<Activity> activities;
+
+    @Column(name="refunded", columnDefinition = "BOOLEAN", nullable = false)
+    Boolean isRefunded;
+
+    @PrePersist
+    public void setUp() {
+        this.date = new Date();
+        this.isRefunded = false;
+    }
 }

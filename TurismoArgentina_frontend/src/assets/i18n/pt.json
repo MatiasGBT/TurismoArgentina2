@@ -17,7 +17,9 @@
         "CART": "Carrinho",
         "ACCOUNT": "Conta",
         "LOGIN": "Iniciar sessão",
-        "ADMIN": "Painel de administração"
+        "ADMIN": "Painel de administração",
+        "DASHBOARD": "Painel de controle",
+        "SHOP": "Loja"
     },
     "SPINNER": {
         "LOADING": "Carregando..."
@@ -84,6 +86,34 @@
             "ACCOUNT_INFO_BUTTON": "Painel de conta",
             "LANGUAGE": "Linguagem",
             "LOGOUT": "Sair da sessão"
+        }
+    },
+    "ADMIN_PANEL": {
+        "DASHBOARD": {
+            "PURCHASES": {
+                "QUANTITY": "Número de compras feitas este mês",
+                "PROFIT": "Lucro"
+            },
+            "REFUNDS": {
+                "QUANTITY": "Número de reembolsos feitos este mês",
+                "MONEY": "Dinheiro devolvido"
+            },
+            "USERS": {
+                "QUANTITY": "Número de usuários registrados",
+                "CLARIFICATION": "Número de usuários registrados no banco de dados"
+            },
+            "PROVINCES": {
+                "QUANTITY": "Número de províncias registradas",
+                "CLARIFICATION": "Número de províncias registradas no banco de dados"
+            },
+            "LOCATIONS": {
+                "QUANTITY": "Número de localidades registradas",
+                "CLARIFICATION": "Número de localidades registradas no banco de dados"
+            },
+            "ACTIVITIES": {
+                "QUANTITY": "Número de atividades registradas",
+                "CLARIFICATION": "Número de atividades registradas no banco de dados"
+            }
         }
     }
 }

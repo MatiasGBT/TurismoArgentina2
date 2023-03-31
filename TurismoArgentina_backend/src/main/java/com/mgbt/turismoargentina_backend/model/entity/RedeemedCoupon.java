@@ -38,6 +38,7 @@ public class RedeemedCoupon implements Serializable {
 
     @PrePersist
     public void setUp() {
+        this.date = new Date();
         this.isUsed = false;
     }
 }

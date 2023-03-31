@@ -39,4 +39,28 @@ public class PurchaseService implements IPurchaseService {
         if (purchase == null) throw new EntityNotFoundException("purchase not found");
         return purchase;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCountIsNotRefunded() {
+        return repository.findCountIsNotRefunded();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCountIsRefunded() {
+        return repository.findCountIsRefunded();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double getMoneyNotRefunded() {
+        return repository.findMoneyNotRefunded();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double getMoneyRefunded() {
+        return repository.findMoneyRefunded();
+    }
 }

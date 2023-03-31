@@ -44,6 +44,7 @@ public class AuthController {
             response.put("user", userFound);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (EntityNotFoundException ex) {
+            this.userService.save(user);
             Map<String, Object> response = new HashMap<>();
             response.put("message", messageSource.getMessage("authController.userCreated", null, locale));
             response.put("user", user);

@@ -17,7 +17,9 @@
         "CART": "Cart",
         "ACCOUNT": "Account",
         "LOGIN": "Login",
-        "ADMIN": "Admin panel"
+        "ADMIN": "Admin panel",
+        "DASHBOARD": "Dashboard",
+        "SHOP": "Shop"
     },
     "SPINNER": {
         "LOADING": "Loading..."
@@ -84,6 +86,34 @@
             "ACCOUNT_INFO_BUTTON": "Account panel",
             "LANGUAGE": "Language",
             "LOGOUT": "Logout"
+        }
+    },
+    "ADMIN_PANEL": {
+        "DASHBOARD": {
+            "PURCHASES": {
+                "QUANTITY": "Number of purchases made this month",
+                "PROFIT": "Profit"
+            },
+            "REFUNDS": {
+                "QUANTITY": "Number of refunds made this month",
+                "MONEY": "Money returned"
+            },
+            "USERS": {
+                "QUANTITY": "Number of registered users",
+                "CLARIFICATION": "Number of registered users in the database"
+            },
+            "PROVINCES": {
+                "QUANTITY": "Number of registered provinces",
+                "CLARIFICATION": "Number of registered provinces in the database"
+            },
+            "LOCATIONS": {
+                "QUANTITY": "Number of registered locations",
+                "CLARIFICATION": "Number of registered locations in the database"
+            },
+            "ACTIVITIES": {
+                "QUANTITY": "Number of registered activities",
+                "CLARIFICATION": "Number of registered activities in the database"
+            }
         }
     }
 }

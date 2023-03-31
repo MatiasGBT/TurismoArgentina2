@@ -54,4 +54,10 @@ export class ProvinceService {
       })
     );
   }
+
+  public getCount(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
+      catchError(ex => throwError(() => ex))
+    );
+  }
 }

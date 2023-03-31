@@ -108,4 +108,17 @@ public class ActivityController {
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
         return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
     }
+
+    @GetMapping("/admin/count")
+    @Operation(summary = "Gets number of registered activities.")
+    @ApiResponse(responseCode = "200", description = "Registered activities",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
+    public ResponseEntity<?> getCount(Locale locale) {
+        try {
+            Long count = this.activityService.getCount();
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
 }

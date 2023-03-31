@@ -62,4 +62,10 @@ public class LocationService implements ILocationService {
     public List<Location> getByProvinceId(Long idProvince) {
         return repository.findByProvinceIdProvince(idProvince);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCount() {
+        return repository.findCount();
+    }
 }

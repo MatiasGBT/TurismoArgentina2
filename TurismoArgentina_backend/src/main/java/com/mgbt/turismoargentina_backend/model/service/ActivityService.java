@@ -55,4 +55,10 @@ public class ActivityService implements IActivityService {
     public List<Activity> getByLocationId(Long idLocation) {
         return repository.findByLocationIdLocation(idLocation);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCount() {
+        return repository.findCount();
+    }
 }

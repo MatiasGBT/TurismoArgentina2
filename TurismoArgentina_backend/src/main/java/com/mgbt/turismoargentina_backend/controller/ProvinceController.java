@@ -95,4 +95,17 @@ public class ProvinceController {
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
         return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
     }
+
+    @GetMapping("/admin/count")
+    @Operation(summary = "Gets number of registered provinces.")
+    @ApiResponse(responseCode = "200", description = "Registered provinces",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
+    public ResponseEntity<?> getCount(Locale locale) {
+        try {
+            Long count = this.provinceService.getCount();
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
 }

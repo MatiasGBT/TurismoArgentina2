@@ -18,4 +18,8 @@ public interface IActivityRepository extends JpaRepository<Activity, Long> {
     Page<Activity> findByLocationName(Pageable pageable, String locationName);
 
     List<Activity> findByLocationIdLocation(Long idLocation);
+
+    @Query(value = "SELECT COUNT(*) FROM turismo_argentina.activities a " +
+            "WHERE a.deletion_date IS NULL", nativeQuery = true)
+    Long findCount();
 }

@@ -60,4 +60,10 @@ public class UserService implements IUserService {
         }
         return userFound;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCount() {
+        return repository.findCount();
+    }
 }

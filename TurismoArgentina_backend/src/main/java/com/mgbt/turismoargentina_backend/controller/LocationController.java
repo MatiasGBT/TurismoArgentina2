@@ -121,4 +121,17 @@ public class LocationController {
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
         return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
     }
+
+    @GetMapping("/admin/count")
+    @Operation(summary = "Gets number of registered locaitons.")
+    @ApiResponse(responseCode = "200", description = "Registered locaitons",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
+    public ResponseEntity<?> getCount(Locale locale) {
+        try {
+            Long count = this.locationService.getCount();
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
 }

@@ -7,7 +7,7 @@
         <img src="../../../assets/img/logo.png" alt="Turismo Argentina logo">
     </a>
     
-    <ul #navbarList>
+    <ul #navbarList *ngIf="!userIsOnAdminModule">
         <li>
             <a [routerLink]="['/shop/index']">
                 <i class="fa-solid fa-house"></i>
@@ -51,9 +51,24 @@
             </a>
         </li>
         <li>
-            <a href="" *ngIf="userIsAdmin">
+            <a [routerLink]="['/admin']" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
                 <p>{{'NAVBAR.ADMIN' | translate}}</p>
+            </a>
+        </li>
+    </ul>
+    
+    <ul #navbarList *ngIf="userIsOnAdminModule">
+        <li>
+            <a [routerLink]="['/dashboard']" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>{{'NAVBAR.DASHBOARD' | translate}}</p>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/shop']" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-shop"></i>
+                <p>{{'NAVBAR.SHOP' | translate}}</p>
             </a>
         </li>
     </ul>

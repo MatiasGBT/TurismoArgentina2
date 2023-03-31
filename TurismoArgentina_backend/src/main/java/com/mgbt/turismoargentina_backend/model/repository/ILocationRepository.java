@@ -22,4 +22,8 @@ public interface ILocationRepository extends JpaRepository<Location, Long> {
     Page<Location> findByProvinceName(Pageable pageable, String provinceName);
 
     List<Location> findByProvinceIdProvince(Long idProvince);
+
+    @Query(value = "SELECT COUNT(*) FROM turismo_argentina.locations l " +
+            "WHERE l.deletion_date IS NULL", nativeQuery = true)
+    Long findCount();
 }

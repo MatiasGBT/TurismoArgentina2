@@ -17,4 +17,8 @@ public interface IProvinceRepository extends JpaRepository<Province, Long> {
     @Query(value = "SELECT p.name FROM turismo_argentina.provinces p " +
             "WHERE p.deletion_date IS NULL", nativeQuery = true)
     List<String> findAllProvinceNames();
+
+    @Query(value = "SELECT COUNT(*) FROM turismo_argentina.provinces p " +
+            "WHERE p.deletion_date IS NULL", nativeQuery = true)
+    Long findCount();
 }

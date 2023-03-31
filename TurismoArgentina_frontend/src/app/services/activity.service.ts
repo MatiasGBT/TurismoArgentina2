@@ -96,4 +96,10 @@ export class ActivityService {
   public getCartActivities(): Activity[] {
     return this.cartActivities;
   }
+
+  public getCount(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
+      catchError(ex => throwError(() => ex))
+    );
+  }
 }

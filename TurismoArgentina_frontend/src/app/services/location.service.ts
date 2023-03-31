@@ -105,4 +105,10 @@ export class LocationService {
   public getCartLocations(): Location[] {
     return this.cartLocations;
   }
+
+  public getCount(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
+      catchError(ex => throwError(() => ex))
+    );
+  }
 }

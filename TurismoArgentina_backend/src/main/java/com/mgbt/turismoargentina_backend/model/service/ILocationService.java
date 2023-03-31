@@ -15,4 +15,5 @@ public interface ILocationService {
     List<String> getAllLocationNames();
     Page<Location> getByProvinceName(Pageable pageable, String provinceName);
     List<Location> getByProvinceId(Long idProvince);
+    Long getCount();
 }

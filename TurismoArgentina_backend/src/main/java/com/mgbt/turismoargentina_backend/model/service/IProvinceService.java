@@ -13,4 +13,5 @@ public interface IProvinceService {
     Province findById(Long id);
     List<Province> getThreeRandom();
     List<String> getAllProvinceNames();
+    Long getCount();
 }

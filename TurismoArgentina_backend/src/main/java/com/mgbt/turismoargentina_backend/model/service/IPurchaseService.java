@@ -10,4 +10,8 @@ public interface IPurchaseService {
     Purchase save(Purchase entity);
     void delete(Purchase entity);
     Purchase findById(Long id);
+    Long getCountIsNotRefunded();
+    Long getCountIsRefunded();
+    Double getMoneyNotRefunded();
+    Double getMoneyRefunded();
 }

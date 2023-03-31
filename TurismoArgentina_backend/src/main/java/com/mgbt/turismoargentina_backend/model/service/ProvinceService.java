@@ -50,4 +50,10 @@ public class ProvinceService implements IProvinceService {
     @Override
     @Transactional(readOnly = true)
     public List<String> getAllProvinceNames() { return repository.findAllProvinceNames(); }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCount() {
+        return repository.findCount();
+    }
 }

@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,13 +13,22 @@ export class NavbarComponent implements OnInit {
   @ViewChild("menuButton") menuButton!: ElementRef;
   public userIsLoggedIn: boolean = false;
   public userIsAdmin: boolean = false;
+  public userIsOnAdminModule: boolean = false;
 
-  constructor(private renderer2: Renderer2, private authService: AuthService) { }
+  constructor(private renderer2: Renderer2, private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.authService.userLoggedInEvent.subscribe(() => {
       this.userIsLoggedIn = true;
       this.userIsAdmin = this.authService.hasRole('admin');
+    });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (this.router.url.includes('shop')) this.userIsOnAdminModule = false;
+        if (this.router.url.includes('admin')) this.userIsOnAdminModule = true;
+      }
     });
   }
 

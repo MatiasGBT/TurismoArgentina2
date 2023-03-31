@@ -34,4 +34,9 @@ public class User implements Serializable {
     @Column(name = "deletion_date")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date deletionDate;
+
+    @PrePersist
+    public void setUp() {
+        this.creationDate = new Date();
+    }
 }

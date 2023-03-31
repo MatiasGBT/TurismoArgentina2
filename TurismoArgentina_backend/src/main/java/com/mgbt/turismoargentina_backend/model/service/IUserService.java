@@ -12,4 +12,5 @@ public interface IUserService {
     User findById(Long id);
     User findByUsername(String username);
     User checkIfUserIsPersisted(User userFound, User userFromToken);
+    Long getCount();
 }

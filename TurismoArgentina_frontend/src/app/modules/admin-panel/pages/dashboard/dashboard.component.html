@@ -1,0 +1,51 @@
+<section>
+    <h1>{{'NAVBAR.DASHBOARD' | translate}}</h1>
+
+    <div id="info-boxes">
+        <div class="info-box blue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.PURCHASES.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="nonRefundedPurchasesCount === undefined"/>
+            <strong *ngIf="nonRefundedPurchasesCount || nonRefundedPurchasesCount == 0">{{nonRefundedPurchasesCount}}</strong>
+            <h3>{{'ADMIN_PANEL.DASHBOARD.PURCHASES.PROFIT' | translate}}:</h3>
+            <app-spinner *ngIf="nonRefundedMoney === undefined"/>
+            <strong *ngIf="nonRefundedMoney || nonRefundedMoney == 0">{{nonRefundedMoney | currency}}ARS</strong>
+        </div>
+
+        <div class="info-box darkblue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.REFUNDS.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="refundedPurchasesCount === undefined"/>
+            <strong *ngIf="refundedPurchasesCount || refundedPurchasesCount == 0">{{refundedPurchasesCount}}</strong>
+            <h3>{{'ADMIN_PANEL.DASHBOARD.REFUNDS.MONEY' | translate}}:</h3>
+            <app-spinner *ngIf="refundedMoney === undefined"/>
+            <strong *ngIf="refundedMoney || refundedMoney == 0">{{refundedMoney| currency}}ARS</strong>
+        </div>
+
+        <div class="info-box blue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.USERS.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="!usersCount"/>
+            <strong *ngIf="usersCount">{{usersCount}}</strong>
+            <p>{{'ADMIN_PANEL.DASHBOARD.USERS.CLARIFICATION' | translate}}</p>
+        </div>
+
+        <div class="info-box darkblue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.PROVINCES.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="!provincesCount"/>
+            <strong *ngIf="provincesCount">{{provincesCount}}</strong>
+            <p>{{'ADMIN_PANEL.DASHBOARD.PROVINCES.CLARIFICATION' | translate}}</p>
+        </div>
+
+        <div class="info-box blue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.LOCATIONS.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="!locationsCount"/>
+            <strong *ngIf="locationsCount">{{locationsCount}}</strong>
+            <p>{{'ADMIN_PANEL.DASHBOARD.LOCATIONS.CLARIFICATION' | translate}}</p>
+        </div>
+
+        <div class="info-box darkblue">
+            <h3>{{'ADMIN_PANEL.DASHBOARD.ACTIVITIES.QUANTITY' | translate}}:</h3>
+            <app-spinner *ngIf="!activitiesCount"/>
+            <strong *ngIf="activitiesCount">{{activitiesCount}}</strong>
+            <p>{{'ADMIN_PANEL.DASHBOARD.ACTIVITIES.CLARIFICATION' | translate}}</p>
+        </div>
+    </div>
+</section>
