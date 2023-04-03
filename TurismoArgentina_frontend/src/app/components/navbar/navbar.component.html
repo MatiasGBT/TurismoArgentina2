@@ -9,49 +9,49 @@
     
     <ul #navbarList *ngIf="!userIsOnAdminModule">
         <li>
-            <a [routerLink]="['/shop/index']">
+            <a [routerLink]="['/shop/index']" (click)="toggleMenu()">
                 <i class="fa-solid fa-house"></i>
                 <p>{{'NAVBAR.HOME' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/provinces']">
+            <a [routerLink]="['/shop/provinces']" (click)="toggleMenu()">
                 <i class="fa-solid fa-location-dot"></i>
                 <p>{{'NAVBAR.PROVINCES' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/locations']"> 
+            <a [routerLink]="['/shop/locations']" (click)="toggleMenu()">
                 <i class="fa-solid fa-mountain-sun"></i>
                 <p>{{'NAVBAR.LOCATIONS' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/activities']">
+            <a [routerLink]="['/shop/activities']" (click)="toggleMenu()">
                 <i class="fa-solid fa-person-snowboarding"></i>
                 <p>{{'NAVBAR.ACTIVITIES' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/cart']">
+            <a [routerLink]="['/shop/cart']" (click)="toggleMenu()">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p>{{'NAVBAR.CART' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/login']" *ngIf="!userIsLoggedIn">
+            <a [routerLink]="['/shop/login']" (click)="toggleMenu()" *ngIf="!userIsLoggedIn">
                 <i class="fa-solid fa-right-to-bracket"></i>
                 <p>{{'NAVBAR.LOGIN' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/account']" *ngIf="userIsLoggedIn">
+            <a [routerLink]="['/shop/account']" (click)="toggleMenu()" *ngIf="userIsLoggedIn">
                 <i class="fa-solid fa-user"></i>
                 <p>{{'NAVBAR.ACCOUNT' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/admin']" *ngIf="userIsAdmin">
+            <a [routerLink]="['/admin']" (click)="toggleMenu()" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
                 <p>{{'NAVBAR.ADMIN' | translate}}</p>
             </a>
@@ -60,13 +60,19 @@
     
     <ul #navbarList *ngIf="userIsOnAdminModule">
         <li>
-            <a [routerLink]="['/dashboard']" *ngIf="userIsAdmin">
+            <a [routerLink]="['/admin/dashboard']" (click)="toggleMenu()" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-chart-line"></i>
                 <p>{{'NAVBAR.DASHBOARD' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop']" *ngIf="userIsAdmin">
+            <a [routerLink]="['/admin/provinces']" (click)="toggleMenu()" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>{{'NAVBAR.PROVINCES' | translate}}</p>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/shop']" (click)="toggleMenu()" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-shop"></i>
                 <p>{{'NAVBAR.SHOP' | translate}}</p>
             </a>

@@ -18,7 +18,13 @@ public class ProvinceService implements IProvinceService {
     @Override
     @Transactional(readOnly = true)
     public Page<Province> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return repository.findAllNonDeleted(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Province> getAllDeleted(Pageable pageable) {
+        return repository.findAllDeleted(pageable);
     }
 
     @Override
@@ -37,7 +43,7 @@ public class ProvinceService implements IProvinceService {
     @Transactional(readOnly = true)
     public Province findById(Long id) {
         Province province = repository.findById(id).orElse(null);
-        if (province == null) throw new EntityNotFoundException("Province not found");
+        if (province == null || province.getDeletionDate() != null) throw new EntityNotFoundException("Province not found");
         return province;
     }
 

@@ -44,10 +44,11 @@ export class AuthGuard extends KeycloakAuthGuard {
     }
   }
 
-  private fireModal(): void {
+  private async fireModal(): Promise<void> {
+    const title: string = await this.translateTextService.getTranslatedStringByUrl('GENERAL.UNAUTHORISED_TITLE');
+    const text: string = await this.translateTextService.getTranslatedStringByUrl('GENERAL.UNAUTHORISED_TEXT');
     Swal.fire({
-      title: this.translateTextService.getTranslatedStringByUrl('GENERAL.UNAUTHORISED_TITLE'),
-      text: this.translateTextService.getTranslatedStringByUrl('GENERAL.UNAUTHORISED_TEXT'),
+      title: title, text: text,
       icon: 'error', showConfirmButton: false, timer: 3000, timerProgressBar: true
     });
   }

@@ -9,6 +9,6 @@ export class CatchErrorService {
   constructor() { }
 
   public showError(ex: any): void {
-    Swal.fire({title: ex.error.message, text: ex.error.error, timer: 3000, timerProgressBar: true, showConfirmButton: false});
+    Swal.fire({title: ex.error.message, html: ex.error.error, timer: 3000, timerProgressBar: true, showConfirmButton: false});
   }
 }

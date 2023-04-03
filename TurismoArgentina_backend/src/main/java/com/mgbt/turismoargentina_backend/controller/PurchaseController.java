@@ -53,6 +53,7 @@ public class PurchaseController {
             } else {
                 money = this.purchaseService.getMoneyNotRefunded();
             }
+            if (money == null) { money = 0.0; }
             return new ResponseEntity<>(money, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

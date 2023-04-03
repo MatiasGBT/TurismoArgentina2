@@ -1,5 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
+import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Activity;
 import com.mgbt.turismoargentina_backend.model.repository.IActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class ActivityService implements IActivityService {
     @Override
     @Transactional(readOnly = true)
     public Activity findById(Long id) {
-        return repository.findById(id).orElse(null);
+        Activity activity = repository.findById(id).orElse(null);
+        if (activity == null || activity.getDeletionDate() != null) throw new EntityNotFoundException("Activity not found");
+        return activity;
     }
 
     @Override

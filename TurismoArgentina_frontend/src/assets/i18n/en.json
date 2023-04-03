@@ -114,6 +114,24 @@
                 "QUANTITY": "Number of registered activities",
                 "CLARIFICATION": "Number of registered activities in the database"
             }
+        },
+        "PROVINCES": {
+            "NAME": "Name",
+            "ACTIONS": "Actions",
+            "DELETE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of deleted provinces",
+                "CONFIRM_BTN": "Delete",
+                "CANCEL_BTN": "Cancel"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of provinces",
+                "CONFIRM_BTN": "Restore",
+                "CANCEL_BTN": "Cancel"
+            },
+            "NO_PROVINCES": "No provinces in the database",
+            "NO_DELETED_PROVINCES": "No deleted provinces in the database"
         }
     }
 }

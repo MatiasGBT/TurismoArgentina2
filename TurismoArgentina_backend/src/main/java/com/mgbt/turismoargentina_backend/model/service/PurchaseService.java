@@ -36,7 +36,7 @@ public class PurchaseService implements IPurchaseService {
     @Transactional(readOnly = true)
     public Purchase findById(Long id) {
         Purchase purchase = repository.findById(id).orElse(null);
-        if (purchase == null) throw new EntityNotFoundException("purchase not found");
+        if (purchase == null) throw new EntityNotFoundException("Purchase not found");
         return purchase;
     }
 

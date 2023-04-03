@@ -3,15 +3,18 @@ package com.mgbt.turismoargentina_backend.controller;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Province;
 import com.mgbt.turismoargentina_backend.model.service.*;
-import com.mgbt.turismoargentina_backend.utility_classes.InternalServerError;
+import com.mgbt.turismoargentina_backend.utility_classes.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -30,21 +33,26 @@ public class ProvinceController {
     @Autowired
     IExceptionService exceptionService;
 
-    @GetMapping("/{page}")
-    @Operation(summary = "Gets all provinces paginated.")
+    @Autowired
+    MessageSource messageSource;
+
+    @GetMapping("/list/{page}&{deleted}")
+    @Operation(summary = "Gets all provinces paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of provinces",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Integer page, Locale locale) {
+    public ResponseEntity<?> getAll(@PathVariable Integer page, @PathVariable Boolean deleted, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
-            Page<Province> provinces = this.provinceService.getAll(pageable);
+            Page<Province> provinces;
+            if (!deleted) provinces = this.provinceService.getAll(pageable);
+            else provinces = this.provinceService.getAllDeleted(pageable);
             return new ResponseEntity<>(provinces, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         }
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Gets a province by id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Province object",
@@ -104,6 +112,26 @@ public class ProvinceController {
         try {
             Long count = this.provinceService.getCount();
             return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PutMapping("/admin")
+    @Operation(summary = "Modify a province with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "String message",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Province is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> modify(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            provinceService.save(province);
+            response.put("message", messageSource.getMessage("provinceController.edited", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         }

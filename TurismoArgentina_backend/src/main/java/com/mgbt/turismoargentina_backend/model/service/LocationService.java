@@ -37,7 +37,7 @@ public class LocationService implements ILocationService {
     @Transactional(readOnly = true)
     public Location findById(Long id) {
         Location location = repository.findById(id).orElse(null);
-        if (location == null) throw new EntityNotFoundException("Location not found");
+        if (location == null || location.getDeletionDate() != null) throw new EntityNotFoundException("Location not found");
         return location;
     }
 

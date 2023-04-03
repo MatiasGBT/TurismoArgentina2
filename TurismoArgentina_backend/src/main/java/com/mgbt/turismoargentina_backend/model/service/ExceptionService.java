@@ -6,7 +6,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ExceptionService implements IExceptionService {
@@ -28,5 +31,21 @@ public class ExceptionService implements IExceptionService {
         response.put("message", messageSource.getMessage("error.entityNotFound", null, locale));
         response.put("error", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwValidationErrorsException(BindingResult result, Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        List<String> errors = result.getFieldErrors()
+                .stream()
+                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+                .collect(Collectors.toList());
+        String error = errors.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(",", "<br>");
+        response.put("message", messageSource.getMessage("error.validationError", null, locale));
+        response.put("error", error);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

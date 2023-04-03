@@ -25,11 +25,12 @@ export class LocationBuyComponent implements OnInit {
     if (noError) this.fireNoErrorModal();
   }
 
-  private fireNoErrorModal(): void {
+  private async fireNoErrorModal(): Promise<void> {
+    const title: string = await this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.ADDED');
+    const confirmBtnText: string = await this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.GO_TO');
+    const cancelBtnText: string = await this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.CONTINUE');
     Swal.fire({
-      title: this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.ADDED'),
-      confirmButtonText: this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.GO_TO'),
-      cancelButtonText: this.translateTextService.getTranslatedStringByUrl('ECOMMERCE.LOCATION.BUY.CONTINUE'),
+      title: title, confirmButtonText: confirmBtnText, cancelButtonText: cancelBtnText,
       confirmButtonColor: '#2F80ED', cancelButtonColor: '#56CCF2', showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) this.router.navigate(['/shop/cart']);

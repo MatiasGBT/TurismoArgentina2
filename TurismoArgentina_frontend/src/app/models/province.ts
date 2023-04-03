@@ -3,5 +3,5 @@ export interface Province {
     name: string;
     description: string;
     image: string;
-    deletionDate: Date;
+    deletionDate: Date | null;
 }

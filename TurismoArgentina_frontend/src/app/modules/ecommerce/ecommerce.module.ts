@@ -12,7 +12,6 @@ import { ParallaxDirective } from './directives/parallax.directive';
 import { ProvincesHeaderComponent } from './pages/provinces/components/provinces-header/provinces-header.component';
 import { ProvincesSectionComponent } from './pages/provinces/components/provinces-section/provinces-section.component';
 import { ProvinceSelectorComponent } from './components/province-selector/province-selector.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
 import { LocationsComponent } from './pages/locations/locations.component';
 import { LocationsHeaderComponent } from './pages/locations/components/locations-header/locations-header.component';
 import { LocationsPageLocationsSectionComponent } from './pages/locations/components/locations-section/locations-section.component';
@@ -52,7 +51,6 @@ import { AccountComponent } from './pages/account/account.component';
     ProvincesHeaderComponent,
     ProvincesSectionComponent,
     ProvinceSelectorComponent,
-    PaginatorComponent,
     LocationsComponent,
     LocationsHeaderComponent,
     LocationsPageLocationsSectionComponent,

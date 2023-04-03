@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -33,8 +33,11 @@ export class NavbarComponent implements OnInit {
   }
 
   public toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-    this.isMenuOpen ? this.openMenu() : this.closeMenu();
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 1038) {
+      this.isMenuOpen = !this.isMenuOpen;
+      this.isMenuOpen ? this.openMenu() : this.closeMenu();
+    }
   }
 
   private openMenu(): void {
@@ -47,5 +50,14 @@ export class NavbarComponent implements OnInit {
     this.renderer2.removeClass(this.navbarList.nativeElement, "menu-opened");
     this.renderer2.removeClass(this.menuButton.nativeElement, "fa-xmark");
     this.renderer2.addClass(this.menuButton.nativeElement, "fa-bars");
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 1038) {
+      this.isMenuOpen = false;
+      this.closeMenu();
+    }
   }
 }

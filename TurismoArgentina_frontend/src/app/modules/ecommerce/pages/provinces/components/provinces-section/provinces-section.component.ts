@@ -31,7 +31,7 @@ export class ProvincesSectionComponent implements OnInit {
   }
 
   private getProvinces() {
-    this.provinceService.getAll(this.page).subscribe(response => {
+    this.provinceService.getAll(this.page, false).subscribe(response => {
       this.provinces = response.content;
       this.isFirstPage = response.first;
       this.isLastPage = response.last;

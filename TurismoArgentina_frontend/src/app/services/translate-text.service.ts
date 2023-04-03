@@ -8,9 +8,9 @@ export class TranslateTextService {
 
   constructor(private translate: TranslateService) { }
 
-  public getTranslatedStringByUrl(url: string): string {
-    let text: string = '';
-    this.translate.get(url).subscribe((responseText) => text = responseText);
-    return text;
+  public async getTranslatedStringByUrl(url: string): Promise<string> {
+    return new Promise<string>((resolve) => {
+      this.translate.get(url).subscribe((responseText) => resolve(responseText));
+    });
   }
 }

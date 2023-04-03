@@ -18,8 +18,8 @@ export class ProvinceService {
     this.router.navigate([`shop/provinces/${idProvince}`]);
   }
 
-  public getAll(page: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${page}`).pipe(
+  public getAll(page: number, deleted: boolean): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${page}&${deleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -46,7 +46,7 @@ export class ProvinceService {
   }
 
   public getById(idProvince: number): Observable<Province> {
-    return this.http.get<Province>(`${this.baseUrl}/id/${idProvince}`).pipe(
+    return this.http.get<Province>(`${this.baseUrl}/${idProvince}`).pipe(
       catchError(ex => {
         this.router.navigate(['/shop/provinces']);
         this.catchErrorService.showError(ex);
@@ -58,6 +58,15 @@ export class ProvinceService {
   public getCount(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
       catchError(ex => throwError(() => ex))
+    );
+  }
+
+  public modify(province: Province): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/admin`, province).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
     );
   }
 }

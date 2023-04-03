@@ -114,6 +114,24 @@
                 "QUANTITY": "Cantidad de actividades registradas",
                 "CLARIFICATION": "Cantidad de actividades registradas en la base de datos"
             }
+        },
+        "PROVINCES": {
+            "NAME": "Nombre",
+            "ACTIONS": "Acciones",
+            "DELETE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de provincias eliminadas",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de provincias",
+                "CONFIRM_BTN": "Restaurar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_PROVINCES": "No hay provincias en la base de datos",
+            "NO_DELETED_PROVINCES": "No hay provincias eliminadas en la base de datos"
         }
     }
 }

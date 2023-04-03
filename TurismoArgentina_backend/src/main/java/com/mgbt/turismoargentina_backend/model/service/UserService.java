@@ -37,7 +37,7 @@ public class UserService implements IUserService {
     @Transactional(readOnly = true)
     public User findById(Long id) {
         User user = this.repository.findById(id).orElse(null);
-        if (user == null) throw new EntityNotFoundException("User not found");
+        if (user == null || user.getDeletionDate() != null) throw new EntityNotFoundException("User not found");
         return user;
     }
 
@@ -45,7 +45,7 @@ public class UserService implements IUserService {
     @Transactional(readOnly = true)
     public User findByUsername(String username) {
         User user = this.repository.findByUsername(username);
-        if (user == null) throw new EntityNotFoundException("User not found");
+        if (user == null || user.getDeletionDate() != null) throw new EntityNotFoundException("User not found");
         return user;
     }
 

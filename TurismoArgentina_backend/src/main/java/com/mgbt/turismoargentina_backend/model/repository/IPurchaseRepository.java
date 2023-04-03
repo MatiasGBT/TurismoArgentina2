@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 public interface IPurchaseRepository extends JpaRepository<Purchase, Long> {
 
     @Query(value = "SELECT COUNT(*) FROM turismo_argentina.purchases p " +
-            "WHERE p.refunded = false", nativeQuery = true)
+            "WHERE p.refunded = false AND date_trunc('month', p.date) = date_trunc('month', now())", nativeQuery = true)
     Long findCountIsNotRefunded();
 
     @Query(value = "SELECT COUNT(*) FROM turismo_argentina.purchases p " +
-            "WHERE p.refunded = true", nativeQuery = true)
+            "WHERE p.refunded = true AND date_trunc('month', p.date) = date_trunc('month', now())", nativeQuery = true)
     Long findCountIsRefunded();
 
     @Query(value = "SELECT p.price FROM turismo_argentina.purchases p " +

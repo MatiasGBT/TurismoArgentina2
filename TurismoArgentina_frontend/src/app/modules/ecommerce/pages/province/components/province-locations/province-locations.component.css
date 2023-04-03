@@ -43,6 +43,7 @@ section h2 {
     background: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 15px 15px 0 0;
+    max-width: 80%;
 }
 
 @media (min-width: 768px) {
