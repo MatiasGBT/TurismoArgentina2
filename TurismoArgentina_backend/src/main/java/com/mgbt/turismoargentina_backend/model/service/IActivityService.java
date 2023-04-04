@@ -7,7 +7,8 @@ import java.util.List;
 
 @Service
 public interface IActivityService {
-    Page<Activity> getAll(Pageable pageable);
+    Page<Activity> getAllNonDeleted(Pageable pageable);
+    Page<Activity> getAllDeleted(Pageable pageable);
     Activity save(Activity entity);
     void delete(Activity entity);
     Activity findById(Long id);

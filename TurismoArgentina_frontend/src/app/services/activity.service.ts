@@ -21,8 +21,8 @@ export class ActivityService {
     this.router.navigate([`shop/activities/${idActivity}`]);
   }
 
-  public getAll(page: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${page}`).pipe(
+  public getAll(page: number, areDeleted: boolean): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${page}&${areDeleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -40,7 +40,7 @@ export class ActivityService {
   }
 
   public getById(idActivity: number): Observable<Activity> {
-    return this.http.get<Activity>(`${this.baseUrl}/id/${idActivity}`).pipe(
+    return this.http.get<Activity>(`${this.baseUrl}/${idActivity}`).pipe(
       catchError(ex => {
         this.router.navigate(['/shop/activities']);
         this.catchErrorService.showError(ex);
@@ -100,6 +100,15 @@ export class ActivityService {
   public getCount(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
       catchError(ex => throwError(() => ex))
+    );
+  }
+
+  public modify(activity: Activity): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/admin`, activity).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
     );
   }
 }

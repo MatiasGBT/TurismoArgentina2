@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface IProvinceService {
-    Page<Province> getAll(Pageable pageable);
+    Page<Province> getAllNonDeleted(Pageable pageable);
     Page<Province> getAllDeleted(Pageable pageable);
     Province save(Province entity);
     void delete(Province entity);

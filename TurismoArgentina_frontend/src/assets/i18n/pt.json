@@ -132,6 +132,42 @@
             },
             "NO_PROVINCES": "Não há províncias no banco de dado",
             "NO_DELETED_PROVINCES": "Não há províncias excluídas no banco de dados"
+        },
+        "LOCATIONS": {
+            "NAME": "Nome",
+            "ACTIONS": "Ações",
+            "DELETE_MODAL": {
+                "TITLE": "Tem certeza?",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de localidades eliminadas",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "Tem certeza?",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de localidades",
+                "CONFIRM_BTN": "Restaurar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_LOCATIONS": "Não há localidades no banco de dado",
+            "NO_DELETED_LOCATIONS": "Não há localidades excluídas no banco de dados"
+        },
+        "ACTIVITIES": {
+            "NAME": "Nome",
+            "ACTIONS": "Ações",
+            "DELETE_MODAL": {
+                "TITLE": "Tem certeza?",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de atividades eliminadas",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "Tem certeza?",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de atividades",
+                "CONFIRM_BTN": "Restaurar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_ACTIVITIES": "Não há atividades no banco de dado",
+            "NO_DELETED_ACTIVITIES": "Não há atividades excluídas no banco de dados"
         }
     }
 }

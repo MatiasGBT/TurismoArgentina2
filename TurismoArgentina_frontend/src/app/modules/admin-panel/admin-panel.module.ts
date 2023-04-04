@@ -6,6 +6,12 @@ import { AdminPanelRoutingModule } from './admin-panel-routing.module';
 import { ProvincesComponent } from './pages/provinces/provinces.component';
 import { NonDeletedProvincesTableComponent } from './pages/provinces/components/non-deleted-provinces-table/non-deleted-provinces-table.component';
 import { DeletedProvincesTableComponent } from './pages/provinces/components/deleted-provinces-table/deleted-provinces-table.component';
+import { LocationsComponent } from './pages/locations/locations.component';
+import { NonDeletedLocationsTableComponent } from './pages/locations/components/non-deleted-locations-table/non-deleted-locations-table.component';
+import { DeletedLocationsTableComponent } from './pages/locations/components/deleted-locations-table/deleted-locations-table.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { NonDeletedActivitiesTableComponent } from './pages/activities/components/non-deleted-activities-table/non-deleted-activities-table.component';
+import { DeletedActivitiesTableComponent } from './pages/activities/components/deleted-activities-table/deleted-activities-table.component';
 
 
 
@@ -14,7 +20,13 @@ import { DeletedProvincesTableComponent } from './pages/provinces/components/del
     DashboardComponent,
     ProvincesComponent,
     NonDeletedProvincesTableComponent,
-    DeletedProvincesTableComponent
+    DeletedProvincesTableComponent,
+    LocationsComponent,
+    NonDeletedLocationsTableComponent,
+    DeletedLocationsTableComponent,
+    ActivitiesComponent,
+    NonDeletedActivitiesTableComponent,
+    DeletedActivitiesTableComponent
   ],
   imports: [
     CommonModule,

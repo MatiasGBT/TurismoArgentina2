@@ -9,6 +9,16 @@ import java.util.List;
 @Repository
 public interface ILocationRepository extends JpaRepository<Location, Long> {
 
+    @Query(value = "SELECT * FROM turismo_argentina.locations l WHERE l.deletion_date IS NULL ORDER BY l.name",
+            countQuery = "SELECT count(*) FROM turismo_argentina.locations l WHERE l.deletion_date IS NULL",
+            nativeQuery = true)
+    Page<Location> findAllNonDeleted(Pageable pageable);
+
+    @Query(value = "SELECT * FROM turismo_argentina.locations l WHERE l.deletion_date IS NOT NULL ORDER BY l.name",
+            countQuery = "SELECT count(*) FROM turismo_argentina.locations l WHERE l.deletion_date IS NOT NULL",
+            nativeQuery = true)
+    Page<Location> findAllDeleted(Pageable pageable);
+
     @Query(value = "SELECT * FROM turismo_argentina.locations l " +
             "WHERE l.deletion_date IS NULL " +
             "ORDER BY RANDOM() LIMIT 4",

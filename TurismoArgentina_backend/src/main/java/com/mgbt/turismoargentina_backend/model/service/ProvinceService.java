@@ -17,7 +17,7 @@ public class ProvinceService implements IProvinceService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Province> getAll(Pageable pageable) {
+    public Page<Province> getAllNonDeleted(Pageable pageable) {
         return repository.findAllNonDeleted(pageable);
     }
 

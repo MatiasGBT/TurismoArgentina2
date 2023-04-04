@@ -9,7 +9,7 @@ export interface Activity {
     image3: string;
     price: number;
     duration: number;
-    deletionDate: Date;
+    deletionDate: Date | null;
     location: Location;
     peopleQuantity: number;
 }

@@ -32,7 +32,7 @@ public class Province implements Serializable {
 
     @Column(name = "image")
     @NotBlank(message = "Image is mandatory")
-    @Size(max = 80, message = "Image cannot exceed 80 characters")
+    @Size(max = 80, message = "Image name cannot exceed 80 characters")
     private String image;
 
     @Column(name = "deletion_date")

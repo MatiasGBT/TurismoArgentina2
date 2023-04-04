@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.io.*;
 import java.util.Date;
@@ -20,15 +21,22 @@ public class Location implements Serializable {
     private Long idLocation;
 
     @Column(name = "name")
+    @NotBlank(message = "Name is mandatory")
+    @Size(max = 45, message = "Name cannot exceed 45 characters")
     private String name;
 
     @Column(name = "description")
+    @NotBlank(message = "Description is mandatory")
+    @Size(max = 600, message = "Description cannot exceed 600 characters")
     private String description;
 
     @Column(name = "image")
+    @NotBlank(message = "Image is mandatory")
+    @Size(max = 80, message = "Image name cannot exceed 80 characters")
     private String image;
 
     @Column(name = "price")
+    @DecimalMin(value = "1.0", message = "Price is mandatory")
     private Double price;
 
     @Column(name = "deletion_date")

@@ -6,7 +6,7 @@ export interface Location {
     description: string;
     image: string;
     price: number;
-    deletionDate: Date;
+    deletionDate: Date | null;
     province: Province;
     peopleQuantity: number;
 }

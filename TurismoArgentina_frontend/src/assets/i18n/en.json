@@ -132,6 +132,42 @@
             },
             "NO_PROVINCES": "No provinces in the database",
             "NO_DELETED_PROVINCES": "No deleted provinces in the database"
+        },
+        "LOCATIONS": {
+            "NAME": "Name",
+            "ACTIONS": "Actions",
+            "DELETE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of deleted locations",
+                "CONFIRM_BTN": "Delete",
+                "CANCEL_BTN": "Cancel"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of locations",
+                "CONFIRM_BTN": "Restore",
+                "CANCEL_BTN": "Cancel"
+            },
+            "NO_LOCATIONS": "No locations in the database",
+            "NO_DELETED_LOCATIONS": "No deleted locations in the database"
+        },
+        "ACTIVITIES": {
+            "NAME": "Name",
+            "ACTIONS": "Actions",
+            "DELETE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of deleted activities",
+                "CONFIRM_BTN": "Delete",
+                "CANCEL_BTN": "Cancel"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action can be undone from the table of activities",
+                "CONFIRM_BTN": "Restore",
+                "CANCEL_BTN": "Cancel"
+            },
+            "NO_ACTIVITIES": "No activities in the database",
+            "NO_DELETED_ACTIVITIES": "No deleted activities in the database"
         }
     }
 }

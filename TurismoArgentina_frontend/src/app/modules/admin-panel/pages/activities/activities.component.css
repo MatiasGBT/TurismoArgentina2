@@ -1,0 +1,46 @@
+section {
+    width: 100%;
+    min-height: 80vh;
+    padding: 75px 15px 15px 15px;
+    background: white;
+}
+
+section h1 {
+    font-size: 3rem;
+    color: black;
+    font-family: 'Pangea';
+}
+
+#tables {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+adminpage-activities-nondeletedtable,
+adminpage-activities-deletedtable {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 105px 25px 25px 25px;
+    }
+    
+    section h1 {
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 1038px) {
+    section h1 {
+        font-size: 5rem;
+    }
+
+    #tables {
+        flex-direction: row;
+        gap: 15px;
+    }
+}

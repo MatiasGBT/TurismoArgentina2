@@ -44,7 +44,7 @@ public class ProvinceController {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Province> provinces;
-            if (!deleted) provinces = this.provinceService.getAll(pageable);
+            if (!deleted) provinces = this.provinceService.getAllNonDeleted(pageable);
             else provinces = this.provinceService.getAllDeleted(pageable);
             return new ResponseEntity<>(provinces, HttpStatus.OK);
         } catch (DataAccessException ex) {

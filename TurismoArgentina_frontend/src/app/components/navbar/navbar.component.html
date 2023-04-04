@@ -72,6 +72,18 @@
             </a>
         </li>
         <li>
+            <a [routerLink]="['/admin/locations']" (click)="toggleMenu()" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-mountain-sun"></i>
+                <p>{{'NAVBAR.LOCATIONS' | translate}}</p>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/admin/activities']" (click)="toggleMenu()" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-person-snowboarding"></i>
+                <p>{{'NAVBAR.ACTIVITIES' | translate}}</p>
+            </a>
+        </li>
+        <li>
             <a [routerLink]="['/shop']" (click)="toggleMenu()" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-shop"></i>
                 <p>{{'NAVBAR.SHOP' | translate}}</p>

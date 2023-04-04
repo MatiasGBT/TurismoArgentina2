@@ -1,0 +1,28 @@
+<app-spinner *ngIf="!locationsAreLoaded"></app-spinner>
+
+<p class="no-locations" *ngIf="locationsAreLoaded && locations.length == 0">
+    {{'ADMIN_PANEL.LOCATIONS.NO_DELETED_LOCATIONS' | translate}}
+</p>
+
+<div class="table-container" *ngIf="locationsAreLoaded && locations.length > 0">
+    <table>
+        <thead>
+            <tr>
+                <th>{{'ADMIN_PANEL.LOCATIONS.NAME' | translate}}</th>
+                <th>{{'ADMIN_PANEL.LOCATIONS.ACTIONS' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let location of locations">
+                <td>{{location.name}}</td>
+                <td class="table-btns">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <hr>
+                    <i (click)="showRestoreModal(location)" class="fa-solid fa-trash-can-arrow-up"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+</div>

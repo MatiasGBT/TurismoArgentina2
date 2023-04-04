@@ -1,0 +1,30 @@
+<app-spinner *ngIf="!activitiesAreLoaded"></app-spinner>
+
+<p class="no-activities" *ngIf="activitiesAreLoaded && activities.length == 0">
+    {{'ADMIN_PANEL.ACTIVITIES.NO_ACTIVITIES' | translate}}
+</p>
+
+<div class="table-container" *ngIf="activitiesAreLoaded && activities.length > 0">
+    <table>
+        <thead>
+            <tr>
+                <th>{{'ADMIN_PANEL.ACTIVITIES.NAME' | translate}}</th>
+                <th>{{'ADMIN_PANEL.ACTIVITIES.ACTIONS' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let activity of activities">
+                <td>{{activity.name}}</td>
+                <td class="table-btns">
+                    <a [routerLink]="['/shop/activities', activity.idActivity]"><i class="fa-solid fa-eye"></i></a>
+                    <hr>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <hr>
+                    <i class="fa-solid fa-trash" (click)="showDeleteModal(activity)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+</div>

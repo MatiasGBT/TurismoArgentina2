@@ -2,10 +2,9 @@ package com.mgbt.turismoargentina_backend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
-
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Date;
 
 @Data
@@ -22,21 +21,30 @@ public class Activity implements Serializable {
     private Long idActivity;
 
     @Column(name = "name")
+    @NotBlank(message = "Name is mandatory")
+    @Size(max = 45, message = "Name cannot exceed 65 characters")
     private String name;
 
     @Column(name = "description")
+    @NotBlank(message = "Description is mandatory")
+    @Size(max = 600, message = "Description cannot exceed 600 characters")
     private String description;
 
     @Column(name = "image1")
+    @NotBlank(message = "Image1 is mandatory")
+    @Size(max = 80, message = "Image1 name cannot exceed 80 characters")
     private String image1;
 
     @Column(name = "image2")
+    @Size(max = 80, message = "Image2 name cannot exceed 80 characters")
     private String image2;
 
     @Column(name = "image3")
+    @Size(max = 80, message = "Image3 name cannot exceed 80 characters")
     private String image3;
 
     @Column(name = "price")
+    @DecimalMin(value = "1.0", message = "Price is mandatory")
     private Double price;
 
     @Column(name = "duration")

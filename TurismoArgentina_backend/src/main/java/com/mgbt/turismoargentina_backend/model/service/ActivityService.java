@@ -17,8 +17,14 @@ public class ActivityService implements IActivityService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Activity> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Activity> getAllNonDeleted(Pageable pageable) {
+        return repository.findAllNonDeleted(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Activity> getAllDeleted(Pageable pageable) {
+        return repository.findAllDeleted(pageable);
     }
 
     @Override

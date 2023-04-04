@@ -38,7 +38,7 @@ export class ActivitiesPageSectionComponent implements OnInit {
   }
 
   private getAllActivities(): void {
-    this.activityService.getAll(this.page).subscribe(response => {
+    this.activityService.getAll(this.page, false).subscribe(response => {
       this.setPublicVariables(response);
     });
   }

@@ -18,8 +18,8 @@ export class ProvinceService {
     this.router.navigate([`shop/provinces/${idProvince}`]);
   }
 
-  public getAll(page: number, deleted: boolean): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}&${deleted}`).pipe(
+  public getAll(page: number, areDeleted: boolean): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${page}&${areDeleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

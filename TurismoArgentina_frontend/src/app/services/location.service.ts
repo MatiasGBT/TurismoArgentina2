@@ -21,8 +21,8 @@ export class LocationService {
     this.router.navigate([`shop/locations/${idLocation}`]);
   }
 
-  public getAll(page: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${page}`).pipe(
+  public getAll(page: number, areDeleted: boolean): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${page}&${areDeleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -49,7 +49,7 @@ export class LocationService {
   }
 
   public getById(idLocation: number): Observable<Location> {
-    return this.http.get<Location>(`${this.baseUrl}/id/${idLocation}`).pipe(
+    return this.http.get<Location>(`${this.baseUrl}/${idLocation}`).pipe(
       catchError(ex => {
         this.router.navigate(['/shop/locations']);
         this.catchErrorService.showError(ex);
@@ -109,6 +109,15 @@ export class LocationService {
   public getCount(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
       catchError(ex => throwError(() => ex))
+    );
+  }
+
+  public modify(location: Location): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/admin`, location).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
     );
   }
 }

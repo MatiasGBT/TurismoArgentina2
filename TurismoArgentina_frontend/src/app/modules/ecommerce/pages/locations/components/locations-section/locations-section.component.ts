@@ -38,7 +38,7 @@ export class LocationsPageLocationsSectionComponent implements OnInit {
   }
 
   private getAllLocations(): void {
-    this.locationService.getAll(this.page).subscribe(response => {
+    this.locationService.getAll(this.page, false).subscribe(response => {
       this.setPublicVariables(response);
     });
   }

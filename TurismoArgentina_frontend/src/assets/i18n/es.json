@@ -132,6 +132,42 @@
             },
             "NO_PROVINCES": "No hay provincias en la base de datos",
             "NO_DELETED_PROVINCES": "No hay provincias eliminadas en la base de datos"
+        },
+        "LOCATIONS": {
+            "NAME": "Nombre",
+            "ACTIONS": "Acciones",
+            "DELETE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de localidades eliminadas",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de localidades",
+                "CONFIRM_BTN": "Restaurar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_LOCATIONS": "No hay localidades en la base de datos",
+            "NO_DELETED_LOCATIONS": "No hay localidades eliminadas en la base de datos"
+        },
+        "ACTIVITIES": {
+            "NAME": "Nombre",
+            "ACTIONS": "Acciones",
+            "DELETE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de actividades eliminadas",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "RESTORE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Está acción se puede deshacer desde la tabla de actividades",
+                "CONFIRM_BTN": "Restaurar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_ACTIVITIES": "No hay actividades en la base de datos",
+            "NO_DELETED_ACTIVITIES": "No hay actividades eliminadas en la base de datos"
         }
     }
 }
