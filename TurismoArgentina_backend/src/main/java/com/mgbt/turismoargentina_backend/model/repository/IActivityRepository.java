@@ -9,15 +9,13 @@ import java.util.List;
 @Repository
 public interface IActivityRepository extends JpaRepository<Activity, Long> {
 
-    @Query(value = "SELECT * FROM turismo_argentina.activities a WHERE a.deletion_date IS NULL ORDER BY a.name",
-            countQuery = "SELECT count(*) FROM turismo_argentina.activities a WHERE a.deletion_date IS NULL",
-            nativeQuery = true)
-    Page<Activity> findAllNonDeleted(Pageable pageable);
+    Page<Activity> findByDeletionDateIsNull(Pageable pageable);
 
-    @Query(value = "SELECT * FROM turismo_argentina.activities a WHERE a.deletion_date IS NOT NULL ORDER BY a.name",
-            countQuery = "SELECT count(*) FROM turismo_argentina.activities a WHERE a.deletion_date IS NOT NULL",
-            nativeQuery = true)
-    Page<Activity> findAllDeleted(Pageable pageable);
+    Page<Activity> findByDeletionDateIsNotNull(Pageable pageable);
+
+    Page<Activity> findByDeletionDateIsNullAndNameContaining(String name, Pageable pageable);
+
+    Page<Activity> findByDeletionDateIsNotNullAndNameContaining(String name, Pageable pageable);
 
     @Query(value = "SELECT * FROM turismo_argentina.activities a " +
             "WHERE a.deletion_date IS NULL " +

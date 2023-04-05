@@ -1,0 +1,5 @@
+<div class="search-bar">
+    <input [(ngModel)]="name" (keypress)="detectEnter($event)" type="text" maxlength="45" [placeholder]="'ADMIN_PANEL.PROVINCES.NAME' | translate">
+    <button type="button" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button type="button" (click)="reset()"><i class="fa-solid fa-rotate-right"></i></button>
+</div>

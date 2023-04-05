@@ -9,6 +9,8 @@ import java.util.List;
 public interface ILocationService {
     Page<Location> getAllNonDeleted(Pageable pageable);
     Page<Location> getAllDeleted(Pageable pageable);
+    Page<Location> getAllNonDeletedByName(Pageable pageable, String name);
+    Page<Location> getAllDeletedByName(Pageable pageable, String name);
     Location save(Location entity);
     void delete(Location entity);
     Location findById(Long id);

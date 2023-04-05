@@ -22,7 +22,16 @@ export class ActivityService {
   }
 
   public getAll(page: number, areDeleted: boolean): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}&${areDeleted}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getAllByName(page: number, areDeleted: boolean, name: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}/${name}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

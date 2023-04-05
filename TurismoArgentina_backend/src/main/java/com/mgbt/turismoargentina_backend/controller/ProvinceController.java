@@ -36,7 +36,7 @@ public class ProvinceController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{page}&{deleted}")
+    @GetMapping("/list/{page}/{deleted}")
     @Operation(summary = "Gets all provinces paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of provinces",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
@@ -46,6 +46,23 @@ public class ProvinceController {
             Page<Province> provinces;
             if (!deleted) provinces = this.provinceService.getAllNonDeleted(pageable);
             else provinces = this.provinceService.getAllDeleted(pageable);
+            return new ResponseEntity<>(provinces, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/list/{page}/{deleted}/{name}")
+    @Operation(summary = "Gets all provinces paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null and name like inserted name.")
+    @ApiResponse(responseCode = "200", description = "Array of provinces",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
+    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable Boolean deleted,
+                                    @PathVariable String name, Locale locale) {
+        try {
+            Pageable pageable = PageRequest.of(page, 9);
+            Page<Province> provinces;
+            if (!deleted) provinces = this.provinceService.getAllNonDeletedByName(pageable, name);
+            else provinces = this.provinceService.getAllDeletedByName(pageable, name);
             return new ResponseEntity<>(provinces, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

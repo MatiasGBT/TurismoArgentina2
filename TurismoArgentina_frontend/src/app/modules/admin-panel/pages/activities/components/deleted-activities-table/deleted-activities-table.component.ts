@@ -16,6 +16,8 @@ export class DeletedActivitiesTableComponent implements OnInit {
   public isLastPage: boolean = false;
   public totalPages: number = 1;
   public activitiesAreLoaded: boolean = false;
+  private filteredByName: boolean = false;
+  private activityName: string = "";
 
   constructor(private activityService: ActivityService,
     private translateTextService: TranslateTextService) { }
@@ -26,18 +28,43 @@ export class DeletedActivitiesTableComponent implements OnInit {
 
   public changePage(pageToGo: number) {
     this.page = pageToGo;
+    this.activitiesAreLoaded = false;
     this.activities = [];
-    this.getActivities();
+    this.filteredByName ? this.getActivitiesByName() : this.getActivities();
   }
 
   private getActivities() {
     this.activityService.getAll(this.page, true).subscribe(response => {
-      this.activities = response.content;
-      this.isFirstPage = response.first;
-      this.isLastPage = response.last;
-      this.totalPages = response.totalPages;
-      this.activitiesAreLoaded = true;
+      this.setPropertiesWithResponse(response);
     });
+  }
+
+  private getActivitiesByName() {
+    this.activityService.getAllByName(this.page, true, this.activityName).subscribe(response => {
+      this.setPropertiesWithResponse(response);
+    });
+  }
+
+  private setPropertiesWithResponse(response: any): void {
+    this.activities = response.content;
+    this.isFirstPage = response.first;
+    this.isLastPage = response.last;
+    this.totalPages = response.totalPages;
+    this.activitiesAreLoaded = true;
+  }
+
+  public search(name: string): void {
+    if (name.length <= 45) {
+      this.activityName = name;
+      this.filteredByName = true;
+    }
+    this.changePage(0);
+  }
+
+  public resetSearch(): void {
+    this.activityName = "";
+    this.filteredByName = false;
+    this.changePage(0);
   }
 
   public async showRestoreModal(activity: Activity): Promise<void> {

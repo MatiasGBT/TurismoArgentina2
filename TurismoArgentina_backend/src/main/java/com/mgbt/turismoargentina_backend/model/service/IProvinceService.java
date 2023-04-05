@@ -9,6 +9,8 @@ import java.util.List;
 public interface IProvinceService {
     Page<Province> getAllNonDeleted(Pageable pageable);
     Page<Province> getAllDeleted(Pageable pageable);
+    Page<Province> getAllNonDeletedByName(Pageable pageable, String name);
+    Page<Province> getAllDeletedByName(Pageable pageable, String name);
     Province save(Province entity);
     void delete(Province entity);
     Province findById(Long id);

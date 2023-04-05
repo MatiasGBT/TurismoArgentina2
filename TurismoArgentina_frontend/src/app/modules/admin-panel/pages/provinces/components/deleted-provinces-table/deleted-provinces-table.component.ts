@@ -16,6 +16,8 @@ export class DeletedProvincesTableComponent implements OnInit {
   public isLastPage: boolean = false;
   public totalPages: number = 1;
   public provincesAreLoaded: boolean = false;
+  private filteredByName: boolean = false;
+  private provinceName: string = "";
 
   constructor(private provinceService: ProvinceService,
     private translateTextService: TranslateTextService) { }
@@ -26,18 +28,43 @@ export class DeletedProvincesTableComponent implements OnInit {
 
   public changePage(pageToGo: number) {
     this.page = pageToGo;
+    this.provincesAreLoaded = false;
     this.provinces = [];
-    this.getProvinces();
+    this.filteredByName ? this.getProvincesByName() : this.getProvinces();
   }
 
   private getProvinces() {
     this.provinceService.getAll(this.page, true).subscribe(response => {
-      this.provinces = response.content;
-      this.isFirstPage = response.first;
-      this.isLastPage = response.last;
-      this.totalPages = response.totalPages;
-      this.provincesAreLoaded = true;
+      this.setPropertiesWithResponse(response);
     });
+  }
+
+  private getProvincesByName(): void {
+    this.provinceService.getAllByName(this.page, true, this.provinceName).subscribe(response => {
+      this.setPropertiesWithResponse(response);
+    });
+  }
+
+  private setPropertiesWithResponse(response: any): void {
+    this.provinces = response.content;
+    this.isFirstPage = response.first;
+    this.isLastPage = response.last;
+    this.totalPages = response.totalPages;
+    this.provincesAreLoaded = true;
+  }
+
+  public search(name: string): void {
+    if (name.length <= 20) {
+      this.provinceName = name;
+      this.filteredByName = true;
+    }
+    this.changePage(0);
+  }
+
+  public resetSearch(): void {
+    this.provinceName = "";
+    this.filteredByName = false;
+    this.changePage(0);
   }
 
   public async showRestoreModal(province: Province): Promise<void> {

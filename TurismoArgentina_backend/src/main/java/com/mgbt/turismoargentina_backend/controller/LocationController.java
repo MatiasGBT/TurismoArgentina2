@@ -3,8 +3,7 @@ package com.mgbt.turismoargentina_backend.controller;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Location;
 import com.mgbt.turismoargentina_backend.model.service.*;
-import com.mgbt.turismoargentina_backend.utility_classes.InternalServerError;
-import com.mgbt.turismoargentina_backend.utility_classes.JsonMessage;
+import com.mgbt.turismoargentina_backend.utility_classes.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.*;
@@ -36,7 +35,7 @@ public class LocationController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{page}&{deleted}")
+    @GetMapping("/list/{page}/{deleted}")
     @Operation(summary = "Gets all locations paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
@@ -46,6 +45,23 @@ public class LocationController {
             Page<Location> locations;
             if (!deleted) locations = this.locationService.getAllNonDeleted(pageable);
             else locations = this.locationService.getAllDeleted(pageable);
+            return new ResponseEntity<>(locations, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/list/{page}/{deleted}/{name}")
+    @Operation(summary = "Gets all locations paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null and name like inserted name.")
+    @ApiResponse(responseCode = "200", description = "Array of locations",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
+    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable Boolean deleted,
+                                    @PathVariable String name, Locale locale) {
+        try {
+            Pageable pageable = PageRequest.of(page, 9);
+            Page<Location> locations;
+            if (!deleted) locations = this.locationService.getAllNonDeletedByName(pageable, name);
+            else locations = this.locationService.getAllDeletedByName(pageable, name);
             return new ResponseEntity<>(locations, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

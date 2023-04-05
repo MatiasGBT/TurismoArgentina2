@@ -9,6 +9,8 @@ import java.util.List;
 public interface IActivityService {
     Page<Activity> getAllNonDeleted(Pageable pageable);
     Page<Activity> getAllDeleted(Pageable pageable);
+    Page<Activity> getAllNonDeletedByName(Pageable pageable, String name);
+    Page<Activity> getAllDeletedByName(Pageable pageable, String name);
     Activity save(Activity entity);
     void delete(Activity entity);
     Activity findById(Long id);

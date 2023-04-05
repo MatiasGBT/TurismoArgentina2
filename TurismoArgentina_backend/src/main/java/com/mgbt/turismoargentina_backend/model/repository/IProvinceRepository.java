@@ -9,15 +9,13 @@ import java.util.List;
 @Repository
 public interface IProvinceRepository extends JpaRepository<Province, Long> {
 
-    @Query(value = "SELECT * FROM turismo_argentina.provinces p WHERE p.deletion_date IS NULL ORDER BY p.name",
-            countQuery = "SELECT count(*) FROM turismo_argentina.provinces p WHERE p.deletion_date IS NULL",
-            nativeQuery = true)
-    Page<Province> findAllNonDeleted(Pageable pageable);
+    Page<Province> findByDeletionDateIsNull(Pageable pageable);
 
-    @Query(value = "SELECT * FROM turismo_argentina.provinces p WHERE p.deletion_date IS NOT NULL ORDER BY p.name",
-            countQuery = "SELECT count(*) FROM turismo_argentina.provinces p WHERE p.deletion_date IS NOT NULL",
-            nativeQuery = true)
-    Page<Province> findAllDeleted(Pageable pageable);
+    Page<Province> findByDeletionDateIsNotNull(Pageable pageable);
+
+    Page<Province> findByDeletionDateIsNullAndNameContaining(String name, Pageable pageable);
+
+    Page<Province> findByDeletionDateIsNotNullAndNameContaining(String name, Pageable pageable);
 
     @Query(value = "SELECT * FROM turismo_argentina.provinces p " +
             "WHERE p.deletion_date IS NULL " +

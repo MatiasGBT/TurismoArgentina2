@@ -12,6 +12,7 @@ import { DeletedLocationsTableComponent } from './pages/locations/components/del
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { NonDeletedActivitiesTableComponent } from './pages/activities/components/non-deleted-activities-table/non-deleted-activities-table.component';
 import { DeletedActivitiesTableComponent } from './pages/activities/components/deleted-activities-table/deleted-activities-table.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 
 
@@ -26,7 +27,8 @@ import { DeletedActivitiesTableComponent } from './pages/activities/components/d
     DeletedLocationsTableComponent,
     ActivitiesComponent,
     NonDeletedActivitiesTableComponent,
-    DeletedActivitiesTableComponent
+    DeletedActivitiesTableComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,

@@ -83,7 +83,7 @@ table tbody tr td {
 
 @media (min-width: 1038px) {
     .table-container {
-        min-height: 510px;
+        min-height: 570px;
     }
 
     app-paginator {

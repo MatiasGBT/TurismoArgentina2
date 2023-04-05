@@ -1,6 +1,6 @@
 nav {
     height: 60px;
-    width: 100%;
+    width: 100vw;
     padding: 0 10px;
     background: #2F80ED;
     display: flex;

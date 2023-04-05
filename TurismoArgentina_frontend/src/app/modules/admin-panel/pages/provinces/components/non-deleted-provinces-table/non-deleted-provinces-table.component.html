@@ -5,6 +5,8 @@
 </p>
 
 <div class="table-container" *ngIf="provincesAreLoaded && provinces.length > 0">
+    <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+
     <table>
         <thead>
             <tr>

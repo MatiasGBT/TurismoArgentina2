@@ -16,6 +16,8 @@ export class NonDeletedLocationsTableComponent  implements OnInit {
   public isLastPage: boolean = false;
   public totalPages: number = 1;
   public locationsAreLoaded: boolean = false;
+  private filteredByName: boolean = false;
+  private locationName: string = "";
 
   constructor(private locationService: LocationService,
     private translateTextService: TranslateTextService) { }
@@ -26,18 +28,43 @@ export class NonDeletedLocationsTableComponent  implements OnInit {
 
   public changePage(pageToGo: number) {
     this.page = pageToGo;
+    this.locationsAreLoaded = false;
     this.locations = [];
-    this.getLocations();
+    this.filteredByName ? this.getLocationsByName() : this.getLocations();
   }
 
   private getLocations() {
     this.locationService.getAll(this.page, false).subscribe(response => {
-      this.locations = response.content;
-      this.isFirstPage = response.first;
-      this.isLastPage = response.last;
-      this.totalPages = response.totalPages;
-      this.locationsAreLoaded = true;
+      this.setPropertiesWithResponse(response);
     });
+  }
+
+  private getLocationsByName() {
+    this.locationService.getAllByName(this.page, false, this.locationName).subscribe(response => {
+      this.setPropertiesWithResponse(response);
+    });
+  }
+
+  private setPropertiesWithResponse(response: any): void {
+    this.locations = response.content;
+    this.isFirstPage = response.first;
+    this.isLastPage = response.last;
+    this.totalPages = response.totalPages;
+    this.locationsAreLoaded = true;
+  }
+
+  public search(name: string): void {
+    if (name.length <= 45) {
+      this.locationName = name;
+      this.filteredByName = true;
+    }
+    this.changePage(0);
+  }
+
+  public resetSearch(): void {
+    this.locationName = "";
+    this.filteredByName = false;
+    this.changePage(0);
   }
 
   public async showDeleteModal(location: Location): Promise<void> {

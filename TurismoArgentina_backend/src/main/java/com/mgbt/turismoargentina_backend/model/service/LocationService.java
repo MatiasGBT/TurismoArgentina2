@@ -18,13 +18,25 @@ public class LocationService implements ILocationService {
     @Override
     @Transactional(readOnly = true)
     public Page<Location> getAllNonDeleted(Pageable pageable) {
-        return repository.findAllNonDeleted(pageable);
+        return repository.findByDeletionDateIsNull(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<Location> getAllDeleted(Pageable pageable) {
-        return repository.findAllDeleted(pageable);
+        return repository.findByDeletionDateIsNotNull(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Location> getAllNonDeletedByName(Pageable pageable, String name) {
+        return repository.findByDeletionDateIsNullAndNameContaining(name, pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Location> getAllDeletedByName(Pageable pageable, String name) {
+        return repository.findByDeletionDateIsNotNullAndNameContaining(name, pageable);
     }
 
     @Override
