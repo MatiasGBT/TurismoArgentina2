@@ -39,6 +39,7 @@ section h1 {
     color: white;
     padding: 5px 10px;
     max-width: 50%;
+    cursor: pointer;
 }
 
 .config-option button:hover {
@@ -57,6 +58,7 @@ section h1 {
     outline: none;
     max-width: 50%;
     background-color: #2F80ED;
+    cursor: pointer;
 }
 
 img {
