@@ -70,8 +70,29 @@ export class ProvinceService {
     );
   }
 
-  public modify(province: Province): Observable<any> {
+  public update(province: Province): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/admin`, province).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public create(province: Province): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/admin`, province).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public uploadPhoto(image: File, idProvince: number): Observable<any> {
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append("id", idProvince.toString());
+    return this.http.post(`${this.baseUrl}/admin/img`, formData).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

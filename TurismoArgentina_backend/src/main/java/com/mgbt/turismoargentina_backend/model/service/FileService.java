@@ -56,13 +56,12 @@ public class FileService implements IFileService {
     }
 
     @Override
-    public Boolean delete(String fileName, String directory) {
-        if(fileName != null && fileName.length() > 0) {
-            Path lastFilePath = Paths.get("uploads" + directory).resolve(fileName).toAbsolutePath();
+    public Boolean delete(String fileName, String finalDirectory) {
+        if (fileName != null && fileName.length() > 0) {
+            Path lastFilePath = getPath(fileName, finalDirectory);
             File lastFile = lastFilePath.toFile();
-            if(lastFile.exists() && lastFile.canRead()) {
-                lastFile.delete();
-                return true;
+            if (lastFile.exists() && lastFile.canRead()) {
+                return lastFile.delete();
             }
         }
         return false;

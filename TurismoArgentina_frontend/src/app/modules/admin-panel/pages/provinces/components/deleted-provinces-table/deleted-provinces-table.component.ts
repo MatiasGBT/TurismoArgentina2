@@ -84,7 +84,7 @@ export class DeletedProvincesTableComponent implements OnInit {
   }
 
   private restoreProvince(province: Province): void {
-    this.provinceService.modify(province).subscribe(response => this.showConfirmationModal(response.message));
+    this.provinceService.update(province).subscribe(response => this.showConfirmationModal(response.message));
   }
 
   private showConfirmationModal(message: string): void {

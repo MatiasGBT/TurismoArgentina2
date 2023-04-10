@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,5 +47,21 @@ public class ExceptionService implements IExceptionService {
         response.put("message", messageSource.getMessage("error.validationError", null, locale));
         response.put("error", error);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwIOException(IOException ex, Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", messageSource.getMessage("error.file", null, locale));
+        response.put("error", ex.getMessage() + ": " + ex.getCause().getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwNormalException(Exception ex, Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", messageSource.getMessage("error.file", null, locale));
+        response.put("error", ex.getMessage() + ": " + ex.getCause().getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

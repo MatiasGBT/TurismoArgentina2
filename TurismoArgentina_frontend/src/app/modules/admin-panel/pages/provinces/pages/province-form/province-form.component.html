@@ -1,0 +1,33 @@
+<section>
+    <h1 *ngIf="!province.idProvince">{{'ADMIN_PANEL.PROVINCES.ADD' | translate}}</h1>
+    <h1 *ngIf="province.idProvince">{{'ADMIN_PANEL.PROVINCES.EDIT' | translate}}</h1>
+
+    <form (submit)="saveProvince()">
+        <label for="name">{{'ADMIN_PANEL.PROVINCES.FORM.NAME' | translate}}: <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required maxlength="20"
+            [(ngModel)]="province.name" #name="ngModel">
+        <ul *ngIf="name.invalid && (name.dirty || name.touched)">
+            <li *ngIf="name.errors?.['required']">{{'ADMIN_PANEL.PROVINCES.FORM.NAME_REQUIRED' | translate}}.</li>
+            <li *ngIf="name.errors?.['maxlength']">{{'ADMIN_PANEL.PROVINCES.FORM.NAME_MAXLENGTH' | translate}}.</li>
+        </ul>
+
+        <label for="description">{{'ADMIN_PANEL.PROVINCES.FORM.DESCRIPTION' | translate}}: <span class="required">*</span></label>
+        <textarea type="text" id="description" name="description" required maxlength="600"
+            [(ngModel)]="province.description" #description="ngModel"></textarea>
+        <ul *ngIf="description.invalid && (description.dirty || description.touched)">
+            <li *ngIf="description.errors?.['required']">{{'ADMIN_PANEL.PROVINCES.FORM.DESCRIPTION_REQUIRED' | translate}}.</li>
+            <li *ngIf="description.errors?.['maxlength']">{{'ADMIN_PANEL.PROVINCES.FORM.DESCRIPTION_MAXLENGTH' | translate}}.</li>
+        </ul>
+
+        <label for="image">{{'ADMIN_PANEL.PROVINCES.FORM.IMAGE' | translate}}: <span class="required">*</span></label>
+        <input type="file" id="image" name="image" required accept="image/png, image/jpeg"
+            (change)="selectImage($event)">
+        <img *ngIf="province.image && !image" [src]="'http://localhost:8090/api/provinces/img/' + province.image" [alt]="province.name + ' image'">
+        <img *ngIf="image" [src]="imageSrc" [alt]="province.name + ' image'">
+        <ul *ngIf="imageTypeError">
+            <li *ngIf="imageTypeError">{{'ADMIN_PANEL.PROVINCES.FORM.IMAGE_TYPEOF' | translate}}.</li>
+        </ul>
+
+        <input type="submit" [value]="'GENERAL.SUBMIT' | translate" id="submit-btn">
+    </form>
+</section>

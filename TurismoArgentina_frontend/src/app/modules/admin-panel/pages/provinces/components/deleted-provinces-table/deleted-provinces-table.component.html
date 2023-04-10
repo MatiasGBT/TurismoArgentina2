@@ -18,7 +18,7 @@
             <tr *ngFor="let province of provinces">
                 <td>{{province.name}}</td>
                 <td class="table-btns">
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <a [routerLink]="['/admin/provinces', province.idProvince]"><i class="fa-solid fa-pen-to-square"></i></a>
                     <hr>
                     <i (click)="showRestoreModal(province)" class="fa-solid fa-trash-can-arrow-up"></i>
                 </td>

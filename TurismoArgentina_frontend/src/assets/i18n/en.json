@@ -2,7 +2,8 @@
     "GENERAL": {
         "DETAILS": "Details",
         "UNAUTHORISED_TITLE": "Unauthorised access",
-        "UNAUTHORISED_TEXT": "You are not authorised to enter this page"
+        "UNAUTHORISED_TEXT": "You are not authorised to enter this page",
+        "SUBMIT": "Submit"
     },
     "LANGUAGES": {
         "en": "English",
@@ -131,7 +132,19 @@
                 "CANCEL_BTN": "Cancel"
             },
             "NO_PROVINCES": "No provinces in the database",
-            "NO_DELETED_PROVINCES": "No deleted provinces in the database"
+            "NO_DELETED_PROVINCES": "No deleted provinces in the database",
+            "ADD": "Add province",
+            "EDIT": "Edit province",
+            "FORM": {
+                "NAME": "Name",
+                "NAME_REQUIRED": "Name is required",
+                "NAME_MAXLENGTH": "Name cannot exceed 20 characters",
+                "DESCRIPTION": "Description",
+                "DESCRIPTION_REQUIRED": "Description is required",
+                "DESCRIPTION_MAXLENGTH": "Description cannot exceed 20 characters",
+                "IMAGE": "Image",
+                "IMAGE_TYPEOF": "Image must be an image"
+            }
         },
         "LOCATIONS": {
             "NAME": "Name",

@@ -2,7 +2,8 @@
     "GENERAL": {
         "DETAILS": "Detalhes",
         "UNAUTHORISED_TITLE": "Acesso não autorizado",
-        "UNAUTHORISED_TEXT": "Você não está autorizado a entrar nesta página"
+        "UNAUTHORISED_TEXT": "Você não está autorizado a entrar nesta página",
+        "SUBMIT": "Enviar"
     },
     "LANGUAGES": {
         "en": "English",
@@ -131,7 +132,19 @@
                 "CANCEL_BTN": "Cancelar"
             },
             "NO_PROVINCES": "Não há províncias no banco de dado",
-            "NO_DELETED_PROVINCES": "Não há províncias excluídas no banco de dados"
+            "NO_DELETED_PROVINCES": "Não há províncias excluídas no banco de dados",
+            "ADD": "Adicionar província",
+            "EDIT": "Editar província",
+            "FORM": {
+                "NAME": "Nome",
+                "NAME_REQUIRED": "O nome é obrigatório",
+                "NAME_MAXLENGTH": "O nome não pode exceder 20 caracteres",
+                "DESCRIPTION": "Descrição",
+                "DESCRIPTION_REQUIRED": "A descrição é obrigatória",
+                "DESCRIPTION_MAXLENGTH": "A descrição não pode exceder 600 caracteres",
+                "IMAGE": "Imagem",
+                "IMAGE_TYPEOF": "A imagem deve estar em formato de imagem"
+            }
         },
         "LOCATIONS": {
             "NAME": "Nome",

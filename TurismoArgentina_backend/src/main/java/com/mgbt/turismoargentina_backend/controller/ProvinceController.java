@@ -16,6 +16,8 @@ import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -135,20 +137,69 @@ public class ProvinceController {
     }
 
     @PutMapping("/admin")
-    @Operation(summary = "Modify a province with the request body.")
+    @Operation(summary = "Update a province with the request body.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "String message",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Province is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
-    public ResponseEntity<?> modify(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
+    public ResponseEntity<?> update(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
         try {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             provinceService.save(province);
             response.put("message", messageSource.getMessage("provinceController.edited", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin")
+    @Operation(summary = "Creates a province with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Province created",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ProvinceWithMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Province is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> create(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            province = provinceService.save(province);
+            response.put("province", province);
+            response.put("message", messageSource.getMessage("provinceController.created", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (Exception ex) {
+            return this.exceptionService.throwNormalException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin/img")
+    @Operation(summary = "Upload an image of a province and removes the previous one if it had one.")
+    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
+    public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
+                                         @RequestParam("id") Long idProvince,
+                                         Locale locale) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            Province province = provinceService.findById(idProvince);
+            String fileName = fileService.save(image, FINAL_DIRECTORY);
+            String previousImage = province.getImage();
+            if (previousImage != null) {
+                fileService.delete(previousImage, FINAL_DIRECTORY);
+            }
+            province.setImage(fileName);
+            provinceService.save(province);
+            response.put("message", messageSource.getMessage("image.upload", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IOException ex) {
+            return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         }

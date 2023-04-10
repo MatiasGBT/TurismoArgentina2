@@ -5,8 +5,13 @@
 </p>
 
 <div class="table-container" *ngIf="provincesAreLoaded && provinces.length > 0">
-    <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
-
+    <div id="table-edit-container">
+        <a [routerLink]="['/admin/provinces/add']">
+            <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.PROVINCES.ADD' | translate}}
+        </a>
+        <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+    </div>
+    
     <table>
         <thead>
             <tr>
@@ -20,7 +25,7 @@
                 <td class="table-btns">
                     <a [routerLink]="['/shop/provinces', province.idProvince]"><i class="fa-solid fa-eye"></i></a>
                     <hr>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <a [routerLink]="['/admin/provinces', province.idProvince]"><i class="fa-solid fa-pen-to-square"></i></a>
                     <hr>
                     <i class="fa-solid fa-trash" (click)="showDeleteModal(province)"></i>
                 </td>
