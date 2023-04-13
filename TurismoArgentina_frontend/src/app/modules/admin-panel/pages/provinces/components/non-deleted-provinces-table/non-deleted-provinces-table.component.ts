@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from 'src/app/models/location';
 import { Province } from 'src/app/models/province';
+import { LocationService } from 'src/app/services/location.service';
 import { ProvinceService } from 'src/app/services/province.service';
 import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
@@ -20,7 +22,8 @@ export class NonDeletedProvincesTableComponent implements OnInit {
   private provinceName: string = "";
 
   constructor(private provinceService: ProvinceService,
-    private translateTextService: TranslateTextService) { }
+    private translateTextService: TranslateTextService,
+    private locationService: LocationService,) { }
 
   ngOnInit(): void {
     this.getProvinces();
@@ -84,7 +87,10 @@ export class NonDeletedProvincesTableComponent implements OnInit {
   }
 
   private deleteProvince(province: Province): void {
-    this.provinceService.update(province).subscribe(response => this.showConfirmationModal(response.message));
+    this.provinceService.update(province).subscribe(response => {
+      this.showConfirmationModal(response.message);
+      this.deleteLocationsByProvince(province);
+    });
   }
 
   private showConfirmationModal(message: string): void {
@@ -92,5 +98,16 @@ export class NonDeletedProvincesTableComponent implements OnInit {
       title: message, showConfirmButton: false,
       timer: 1500, timerProgressBar: true
     }).then(() => window.location.reload());
+  }
+
+  private deleteLocationsByProvince(province: Province): void {
+    this.locationService.getByProvinceId(province.idProvince).subscribe(locations => {
+      locations.forEach(location =>  this.deleteLocation(location));
+    });
+  }
+
+  private deleteLocation(location: Location): void {
+    location.deletionDate = new Date();
+    this.locationService.update(location).subscribe();
   }
 }

@@ -14,6 +14,8 @@ import { NonDeletedActivitiesTableComponent } from './pages/activities/component
 import { DeletedActivitiesTableComponent } from './pages/activities/components/deleted-activities-table/deleted-activities-table.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ProvinceFormComponent } from './pages/provinces/pages/province-form/province-form.component';
+import { LocationFormComponent } from './pages/locations/pages/location-form/location-form.component';
+import { ActivityFormComponent } from './pages/activities/pages/activity-form/activity-form.component';
 
 
 
@@ -30,7 +32,9 @@ import { ProvinceFormComponent } from './pages/provinces/pages/province-form/pro
     NonDeletedActivitiesTableComponent,
     DeletedActivitiesTableComponent,
     SearchBarComponent,
-    ProvinceFormComponent
+    ProvinceFormComponent,
+    LocationFormComponent,
+    ActivityFormComponent
   ],
   imports: [
     CommonModule,

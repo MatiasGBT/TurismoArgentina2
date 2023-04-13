@@ -44,7 +44,8 @@ public class Activity implements Serializable {
     private String image3;
 
     @Column(name = "price")
-    @DecimalMin(value = "1.0", message = "Price is mandatory")
+    @NotNull(message = "Price is mandatory")
+    @DecimalMin(value = "1.0", message = "Price must be greater than 0")
     private Double price;
 
     @Column(name = "duration")

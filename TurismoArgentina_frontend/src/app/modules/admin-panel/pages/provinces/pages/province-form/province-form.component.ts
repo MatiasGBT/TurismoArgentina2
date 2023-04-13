@@ -29,7 +29,7 @@ export class ProvinceFormComponent implements OnInit {
     this.provinceService.getById(id).subscribe(province => this.province = province);
   }
 
-  selectImage(event: any) {
+  public selectImage(event: any) {
     let inputImage = event.target.files[0];
     if (inputImage.type.indexOf('image') < 0) {
       this.imageTypeError = true;

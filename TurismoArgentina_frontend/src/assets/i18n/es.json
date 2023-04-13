@@ -121,7 +121,7 @@
             "ACTIONS": "Acciones",
             "DELETE_MODAL": {
                 "TITLE": "¿Está seguro?",
-                "TEXT": "Está acción se puede deshacer desde la tabla de provincias eliminadas",
+                "TEXT": "Está acción se puede deshacer desde la tabla de provincias eliminadas (ten en cuenta que también eliminara las localidades vinculadas a esta provincia)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -151,7 +151,7 @@
             "ACTIONS": "Acciones",
             "DELETE_MODAL": {
                 "TITLE": "¿Está seguro?",
-                "TEXT": "Está acción se puede deshacer desde la tabla de localidades eliminadas",
+                "TEXT": "Está acción se puede deshacer desde la tabla de localidades eliminadas (ten en cuenta que también eliminara las actividades vinculadas a esta localidad)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -162,7 +162,22 @@
                 "CANCEL_BTN": "Cancelar"
             },
             "NO_LOCATIONS": "No hay localidades en la base de datos",
-            "NO_DELETED_LOCATIONS": "No hay localidades eliminadas en la base de datos"
+            "NO_DELETED_LOCATIONS": "No hay localidades eliminadas en la base de datos",
+            "ADD": "Añadir localidad",
+            "EDIT": "Editar localidad",
+            "FORM": {
+                "NAME": "Nombre",
+                "NAME_REQUIRED": "El nombre es requerido",
+                "NAME_MAXLENGTH": "El nombre no puede exceder los 20 caracteres",
+                "DESCRIPTION": "Descripción",
+                "DESCRIPTION_REQUIRED": "La descripción es requerida",
+                "DESCRIPTION_MAXLENGTH": "La descripción no puede exceder los 600 caracteres",
+                "IMAGE": "Imagen",
+                "IMAGE_TYPEOF": "La imagen debe ser del formato imagen",
+                "PRICE": "Precio",
+                "PRICE_REQUIRED": "El precio es requerido",
+                "PROVINCE": "Provincia"
+            }
         },
         "ACTIVITIES": {
             "NAME": "Nombre",
@@ -180,7 +195,9 @@
                 "CANCEL_BTN": "Cancelar"
             },
             "NO_ACTIVITIES": "No hay actividades en la base de datos",
-            "NO_DELETED_ACTIVITIES": "No hay actividades eliminadas en la base de datos"
+            "NO_DELETED_ACTIVITIES": "No hay actividades eliminadas en la base de datos",
+            "ADD": "Añadir actividad",
+            "EDIT": "Editar actividad"
         }
     }
 }

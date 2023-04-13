@@ -61,6 +61,14 @@ public class LocationService implements ILocationService {
 
     @Override
     @Transactional(readOnly = true)
+    public Location findByName(String name) {
+        Location location = repository.findByName(name);
+        if (location == null || location.getDeletionDate() != null) throw new EntityNotFoundException("Location not found");
+        return location;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Location> getFourRandom() {
         return repository.findFourRandom();
     }

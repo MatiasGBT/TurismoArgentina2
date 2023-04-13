@@ -14,6 +14,7 @@ public interface IProvinceService {
     Province save(Province entity);
     void delete(Province entity);
     Province findById(Long id);
+    Province findByName(String name);
     List<Province> getThreeRandom();
     List<String> getAllProvinceNames();
     Long getCount();

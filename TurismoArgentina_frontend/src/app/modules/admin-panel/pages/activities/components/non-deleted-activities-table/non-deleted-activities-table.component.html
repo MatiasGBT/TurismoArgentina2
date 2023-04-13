@@ -5,7 +5,12 @@
 </p>
 
 <div class="table-container" *ngIf="activitiesAreLoaded && activities.length > 0">
-    <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+    <div id="table-edit-container">
+        <a [routerLink]="['/admin/activities/add']">
+            <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.ACTIVITIES.ADD' | translate}}
+        </a>
+        <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+    </div>
 
     <table>
         <thead>
@@ -20,13 +25,14 @@
                 <td class="table-btns">
                     <a [routerLink]="['/shop/activities', activity.idActivity]"><i class="fa-solid fa-eye"></i></a>
                     <hr>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <a [routerLink]="['/admin/activities', activity.idActivity]"><i class="fa-solid fa-pen-to-square"></i></a>
                     <hr>
                     <i class="fa-solid fa-trash" (click)="showDeleteModal(activity)"></i>
                 </td>
             </tr>
         </tbody>
     </table>
-    
-    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+
+    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage"
+        [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
 </div>

@@ -64,6 +64,16 @@ export class ProvinceService {
     );
   }
 
+  public getByName(name: string): Observable<Province> {
+    return this.http.get<Province>(`${this.baseUrl}?name=${name}`).pipe(
+      catchError(ex => {
+        this.router.navigate(['/shop/provinces']);
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public getCount(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/admin/count`).pipe(
       catchError(ex => throwError(() => ex))

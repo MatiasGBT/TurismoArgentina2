@@ -75,9 +75,54 @@ table tbody tr td {
     border-radius: 15px;
 }
 
+#table-edit-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#table-edit-container a {
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Pangea';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+#table-edit-container a:hover {
+    background: -webkit-linear-gradient(to right, #0c746b, #2cbb63);
+    background: linear-gradient(to right, #0c746b, #2cbb63);
+}
+
+#table-edit-container adminpanel-searchbar {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .table-btns {
         gap: 15px;
+    }
+
+    #table-edit-container {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    #table-edit-container a {
+        width: auto;
+        text-align: start;
+    }
+
+    #table-edit-container adminpanel-searchbar {
+        width: auto;
     }
 }
 

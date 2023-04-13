@@ -16,10 +16,13 @@ import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.*;
 
 @RestController
-@RequestMapping("api/activities/")
+@RequestMapping("api/activities")
 public class ActivityController {
     private final static String FINAL_DIRECTORY = "/activities";
 
@@ -148,20 +151,81 @@ public class ActivityController {
     }
 
     @PutMapping("/admin")
-    @Operation(summary = "Modify an activity with the request body.")
+    @Operation(summary = "Update an activity with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "String message",
+            @ApiResponse(responseCode = "200", description = "Activity updated",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Activity is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
-    public ResponseEntity<?> modify(@Valid @RequestBody Activity activity, BindingResult result, Locale locale) {
+    public ResponseEntity<?> update(@Valid @RequestBody Activity activity, BindingResult result, Locale locale) {
         try {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             activityService.save(activity);
             response.put("message", messageSource.getMessage("activityController.edited", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin")
+    @Operation(summary = "Creates an activity with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Activity created",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Activity is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> create(@Valid @RequestBody Activity activity, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            activity = activityService.save(activity);
+            response.put("activity", activity);
+            response.put("message", messageSource.getMessage("activityController.created", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin/img")
+    @Operation(summary = "Upload an image of an activity and removes the previous one if it had one.")
+    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
+    public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
+                                         @RequestParam("id") Long idActivity,
+                                         @RequestParam("imageNumber") Integer imageNumber,
+                                         Locale locale) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            Activity activity = activityService.findById(idActivity);
+            String fileName = fileService.save(image, FINAL_DIRECTORY);
+            String previousImage;
+            if (imageNumber == 1) {
+                previousImage = activity.getImage1();
+                activity.setImage1(fileName);
+            } else if (imageNumber == 2) {
+                previousImage = activity.getImage2();
+                activity.setImage2(fileName);
+            } else if (imageNumber == 3) {
+                previousImage = activity.getImage3();
+                activity.setImage3(fileName);
+            } else {
+                response.put("message", messageSource.getMessage("error.imageNumber.message", null, locale));
+                response.put("error", messageSource.getMessage("error.imageNumber.error", null, locale));
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+            if (previousImage != null && !previousImage.isBlank()) {
+                fileService.delete(previousImage, FINAL_DIRECTORY);
+            }
+            activityService.save(activity);
+            response.put("message", messageSource.getMessage("image.upload", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IOException ex) {
+            return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         }

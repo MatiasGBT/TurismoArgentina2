@@ -112,8 +112,30 @@ export class ActivityService {
     );
   }
 
-  public modify(activity: Activity): Observable<any> {
+  public update(activity: Activity): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/admin`, activity).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public create(activity: Activity): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/admin`, activity).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public uploadPhoto(image: File, idActivity: number, imageNumber: number): Observable<any> {
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append("id", idActivity.toString());
+    formData.append("imageNumber", imageNumber.toString());
+    return this.http.post(`${this.baseUrl}/admin/img`, formData).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

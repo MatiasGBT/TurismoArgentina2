@@ -22,7 +22,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("api/provinces/")
+@RequestMapping("api/provinces")
 public class ProvinceController {
     private final static String FINAL_DIRECTORY = "/provinces";
 
@@ -90,6 +90,25 @@ public class ProvinceController {
         }
     }
 
+    @GetMapping("")
+    @Operation(summary = "Gets a province by name.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Province object",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Province.class)) }),
+            @ApiResponse(responseCode = "404", description = "Province not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> getByName(@RequestParam String name, Locale locale) {
+        try {
+            Province province = this.provinceService.findByName(name);
+            return new ResponseEntity<>(province, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
+        }
+    }
+
     @GetMapping("/random")
     @Operation(summary = "Gets three random provinces.")
     @ApiResponse(responseCode = "200", description = "Array of provinces",
@@ -139,7 +158,7 @@ public class ProvinceController {
     @PutMapping("/admin")
     @Operation(summary = "Update a province with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "String message",
+            @ApiResponse(responseCode = "200", description = "Province updated",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Province is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })

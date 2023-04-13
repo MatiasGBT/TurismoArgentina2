@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface ILocationRepository extends JpaRepository<Location, Long> {
 
+    Location findByName(String name);
+
     Page<Location> findByDeletionDateIsNull(Pageable pageable);
 
     Page<Location> findByDeletionDateIsNotNull(Pageable pageable);

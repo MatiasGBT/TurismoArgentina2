@@ -2,8 +2,7 @@ package com.mgbt.turismoargentina_backend.controller;
 
 import com.mgbt.turismoargentina_backend.model.service.*;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Locale;
 
 @RestController
-@RequestMapping("api/purchases/")
+@RequestMapping("api/purchases")
 public class PurchaseController {
 
     @Autowired

@@ -5,7 +5,12 @@
 </p>
 
 <div class="table-container" *ngIf="locationsAreLoaded && locations.length > 0">
-    <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+    <div id="table-edit-container">
+        <a [routerLink]="['/admin/locations/add']">
+            <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.LOCATIONS.ADD' | translate}}
+        </a>
+        <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+    </div>
 
     <table>
         <thead>
@@ -20,7 +25,7 @@
                 <td class="table-btns">
                     <a [routerLink]="['/shop/locations', location.idLocation]"><i class="fa-solid fa-eye"></i></a>
                     <hr>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <a [routerLink]="['/admin/locations', location.idLocation]"><i class="fa-solid fa-pen-to-square"></i></a>
                     <hr>
                     <i class="fa-solid fa-trash" (click)="showDeleteModal(location)"></i>
                 </td>

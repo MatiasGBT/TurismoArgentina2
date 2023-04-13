@@ -84,7 +84,7 @@ export class DeletedActivitiesTableComponent implements OnInit {
   }
 
   private restoreActivity(activity: Activity): void {
-    this.activityService.modify(activity).subscribe(response => this.showConfirmationModal(response.message));
+    this.activityService.update(activity).subscribe(response => this.showConfirmationModal(response.message));
   }
 
   private showConfirmationModal(message: string): void {

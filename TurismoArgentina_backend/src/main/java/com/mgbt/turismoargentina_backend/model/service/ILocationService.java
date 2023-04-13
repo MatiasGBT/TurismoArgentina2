@@ -14,6 +14,7 @@ public interface ILocationService {
     Location save(Location entity);
     void delete(Location entity);
     Location findById(Long id);
+    Location findByName(String name);
     List<Location> getFourRandom();
     List<String> getAllLocationNames();
     Page<Location> getByProvinceName(Pageable pageable, String provinceName);

@@ -84,7 +84,7 @@ export class NonDeletedActivitiesTableComponent  implements OnInit {
   }
 
   private deleteActivity(activity: Activity): void {
-    this.activityService.modify(activity).subscribe(response => this.showConfirmationModal(response.message));
+    this.activityService.update(activity).subscribe(response => this.showConfirmationModal(response.message));
   }
 
   private showConfirmationModal(message: string): void {

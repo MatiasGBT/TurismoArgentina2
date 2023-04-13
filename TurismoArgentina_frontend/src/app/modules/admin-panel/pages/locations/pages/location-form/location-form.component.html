@@ -1,0 +1,47 @@
+<section>
+    <h1 *ngIf="!location.idLocation">{{'ADMIN_PANEL.LOCATIONS.ADD' | translate}}</h1>
+    <h1 *ngIf="location.idLocation">{{'ADMIN_PANEL.LOCATIONS.EDIT' | translate}}</h1>
+
+    <form (submit)="saveLocation()">
+        <label for="name">{{'ADMIN_PANEL.LOCATIONS.FORM.NAME' | translate}}: <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required maxlength="45"
+            [(ngModel)]="location.name" #name="ngModel">
+        <ul *ngIf="name.invalid && (name.dirty || name.touched)">
+            <li *ngIf="name.errors?.['required']">{{'ADMIN_PANEL.LOCATIONS.FORM.NAME_REQUIRED' | translate}}.</li>
+            <li *ngIf="name.errors?.['maxlength']">{{'ADMIN_PANEL.LOCATIONS.FORM.NAME_MAXLENGTH' | translate}}.</li>
+        </ul>
+
+        <label for="description">{{'ADMIN_PANEL.LOCATIONS.FORM.DESCRIPTION' | translate}}: <span class="required">*</span></label>
+        <textarea type="text" id="description" name="description" required maxlength="600"
+            [(ngModel)]="location.description" #description="ngModel"></textarea>
+        <ul *ngIf="description.invalid && (description.dirty || description.touched)">
+            <li *ngIf="description.errors?.['required']">{{'ADMIN_PANEL.LOCATIONS.FORM.DESCRIPTION_REQUIRED' | translate}}.</li>
+            <li *ngIf="description.errors?.['maxlength']">{{'ADMIN_PANEL.LOCATIONS.FORM.DESCRIPTION_MAXLENGTH' | translate}}.</li>
+        </ul>
+
+        <label for="image">{{'ADMIN_PANEL.LOCATIONS.FORM.IMAGE' | translate}}: <span class="required">*</span></label>
+        <input type="file" id="image" name="image" required accept="image/png, image/jpeg"
+            (change)="selectImage($event)">
+        <img *ngIf="location.image && !image" [src]="'http://localhost:8090/api/locations/img/' + location.image" [alt]="location.name + ' image'">
+        <img *ngIf="image" [src]="imageSrc" [alt]="location.name + ' image'">
+        <ul *ngIf="imageTypeError">
+            <li *ngIf="imageTypeError">{{'ADMIN_PANEL.LOCATIONS.FORM.IMAGE_TYPEOF' | translate}}.</li>
+        </ul>
+
+        <label for="price">{{'ADMIN_PANEL.LOCATIONS.FORM.PRICE' | translate}}: <span class="required">*</span></label>
+        <input type="number" id="price" name="price" required
+            [(ngModel)]="location.price" #price="ngModel">
+        <ul *ngIf="price.invalid && (price.dirty || price.touched)">
+            <li *ngIf="price.errors?.['required']">{{'ADMIN_PANEL.LOCATIONS.FORM.PRICE_REQUIRED' | translate}}.</li>
+        </ul>
+
+        <label for="province">{{'ADMIN_PANEL.LOCATIONS.FORM.PROVINCE' | translate}}: <span class="required">*</span></label>
+        <select name="province" id="province" [(ngModel)]="provinceSelected" (change)="selectProvince()">
+            <option *ngFor="let provinceName of provinceNames" [value]="provinceName">
+                {{provinceName}}
+            </option>
+        </select>
+
+        <input type="submit" [value]="'GENERAL.SUBMIT' | translate" id="submit-btn">
+    </form>
+</section>

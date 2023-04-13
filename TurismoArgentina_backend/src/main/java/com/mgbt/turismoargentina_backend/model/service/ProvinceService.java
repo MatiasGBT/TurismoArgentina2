@@ -61,6 +61,14 @@ public class ProvinceService implements IProvinceService {
 
     @Override
     @Transactional(readOnly = true)
+    public Province findByName(String name) {
+        Province province = repository.findByName(name);
+        if (province == null || province.getDeletionDate() != null) throw new EntityNotFoundException("Province not found");
+        return province;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Province> getThreeRandom() {
         return repository.findThreeRandom();
     }

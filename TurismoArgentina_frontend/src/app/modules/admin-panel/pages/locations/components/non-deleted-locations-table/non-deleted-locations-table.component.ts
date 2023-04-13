@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 import { Location } from 'src/app/models/location';
+import { ActivityService } from 'src/app/services/activity.service';
 import { LocationService } from 'src/app/services/location.service';
 import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
@@ -20,7 +22,8 @@ export class NonDeletedLocationsTableComponent  implements OnInit {
   private locationName: string = "";
 
   constructor(private locationService: LocationService,
-    private translateTextService: TranslateTextService) { }
+    private translateTextService: TranslateTextService,
+    private activityService: ActivityService) { }
 
   ngOnInit(): void {
     this.getLocations();
@@ -84,7 +87,10 @@ export class NonDeletedLocationsTableComponent  implements OnInit {
   }
 
   private deleteLocation(location: Location): void {
-    this.locationService.modify(location).subscribe(response => this.showConfirmationModal(response.message));
+    this.locationService.update(location).subscribe(response => {
+      this.showConfirmationModal(response.message);
+      this.deleteActivitiesByLocation(location);
+    });
   }
 
   private showConfirmationModal(message: string): void {
@@ -92,5 +98,16 @@ export class NonDeletedLocationsTableComponent  implements OnInit {
       title: message, showConfirmButton: false,
       timer: 1500, timerProgressBar: true
     }).then(() => window.location.reload());
+  }
+
+  private deleteActivitiesByLocation(location: Location): void {
+    this.activityService.getByLocationId(location.idLocation).subscribe(activities => {
+      activities.forEach(activity =>  this.deleteActivity(activity));
+    });
+  }
+
+  private deleteActivity(activity: Activity): void {
+    activity.deletionDate = new Date();
+    this.activityService.update(activity).subscribe();
   }
 }

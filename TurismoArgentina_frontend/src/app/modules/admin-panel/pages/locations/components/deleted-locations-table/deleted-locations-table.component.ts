@@ -84,7 +84,7 @@ export class DeletedLocationsTableComponent implements OnInit {
   }
 
   private restoreLocation(location: Location): void {
-    this.locationService.modify(location).subscribe(response => this.showConfirmationModal(response.message));
+    this.locationService.update(location).subscribe(response => this.showConfirmationModal(response.message));
   }
 
   private showConfirmationModal(message: string): void {

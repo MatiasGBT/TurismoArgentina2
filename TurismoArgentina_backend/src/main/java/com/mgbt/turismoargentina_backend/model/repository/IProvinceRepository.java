@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface IProvinceRepository extends JpaRepository<Province, Long> {
 
+    Province findByName(String name);
+
     Page<Province> findByDeletionDateIsNull(Pageable pageable);
 
     Page<Province> findByDeletionDateIsNotNull(Pageable pageable);

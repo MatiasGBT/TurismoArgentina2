@@ -16,10 +16,12 @@ import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.*;
 
 @RestController
-@RequestMapping("api/locations/")
+@RequestMapping("api/locations")
 public class LocationController {
     private final static String FINAL_DIRECTORY = "/locations";
 
@@ -87,6 +89,25 @@ public class LocationController {
         }
     }
 
+    @GetMapping("")
+    @Operation(summary = "Gets a location by name.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Location object",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Location.class)) }),
+            @ApiResponse(responseCode = "404", description = "Location not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> getById(@RequestParam String name, Locale locale) {
+        try {
+            Location location = this.locationService.findByName(name);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
+        }
+    }
+
     @GetMapping("/random")
     @Operation(summary = "Gets four random locations.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
@@ -140,9 +161,9 @@ public class LocationController {
         }
     }
 
+    @GetMapping("/img/{fileName:.+}")
     @Operation(summary = "Gets file from locations directory by filename")
     @ApiResponse(description = "Image file", content = { @Content(mediaType = "multipart/form-data") })
-    @GetMapping("/img/{fileName:.+}")
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
         return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
     }
@@ -163,18 +184,65 @@ public class LocationController {
     @PutMapping("/admin")
     @Operation(summary = "Modify a location with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "String message",
+            @ApiResponse(responseCode = "200", description = "Location updated",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Location is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
-    public ResponseEntity<?> modify(@Valid @RequestBody Location location, BindingResult result, Locale locale) {
+    public ResponseEntity<?> update(@Valid @RequestBody Location location, BindingResult result, Locale locale) {
         try {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             locationService.save(location);
             response.put("message", messageSource.getMessage("locationController.edited", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin")
+    @Operation(summary = "Creates a location with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Location created",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Location is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> create(@Valid @RequestBody Location location, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            location = locationService.save(location);
+            response.put("location", location);
+            response.put("message", messageSource.getMessage("locationController.created", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin/img")
+    @Operation(summary = "Upload an image of a location and removes the previous one if it had one.")
+    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
+    public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
+                                         @RequestParam("id") Long idLocation,
+                                         Locale locale) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            Location location = locationService.findById(idLocation);
+            String fileName = fileService.save(image, FINAL_DIRECTORY);
+            String previousImage = location.getImage();
+            if (previousImage != null) {
+                fileService.delete(previousImage, FINAL_DIRECTORY);
+            }
+            location.setImage(fileName);
+            locationService.save(location);
+            response.put("message", messageSource.getMessage("image.upload", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IOException ex) {
+            return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         }

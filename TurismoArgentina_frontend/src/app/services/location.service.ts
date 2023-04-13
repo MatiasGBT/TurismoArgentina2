@@ -67,6 +67,16 @@ export class LocationService {
     );
   }
 
+  public getByName(name: string): Observable<Location> {
+    return this.http.get<Location>(`${this.baseUrl}?name=${name}`).pipe(
+      catchError(ex => {
+        this.router.navigate(['/shop/locations']);
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public getByProvinceName(page: number, provinceName: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/province/${provinceName}/${page}`).pipe(
       catchError(ex => {
@@ -121,8 +131,29 @@ export class LocationService {
     );
   }
 
-  public modify(location: Location): Observable<any> {
+  public update(location: Location): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/admin`, location).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public create(location: Location): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/admin`, location).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public uploadPhoto(image: File, idLocation: number): Observable<any> {
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append("id", idLocation.toString());
+    return this.http.post(`${this.baseUrl}/admin/img`, formData).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

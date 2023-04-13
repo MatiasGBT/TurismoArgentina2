@@ -36,7 +36,8 @@ public class Location implements Serializable {
     private String image;
 
     @Column(name = "price")
-    @DecimalMin(value = "1.0", message = "Price is mandatory")
+    @NotNull(message = "Price is mandatory")
+    @DecimalMin(value = "1.0", message = "Price must be greater than 0")
     private Double price;
 
     @Column(name = "deletion_date")

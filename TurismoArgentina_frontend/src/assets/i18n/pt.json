@@ -121,7 +121,7 @@
             "ACTIONS": "Ações",
             "DELETE_MODAL": {
                 "TITLE": "Tem certeza?",
-                "TEXT": "Esta ação pode ser desfeita a partir da tabela de províncias eliminadas",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de províncias eliminadas (note que também removerá as localidades ligadas a esta província)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -151,7 +151,7 @@
             "ACTIONS": "Ações",
             "DELETE_MODAL": {
                 "TITLE": "Tem certeza?",
-                "TEXT": "Esta ação pode ser desfeita a partir da tabela de localidades eliminadas",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de localidades eliminadas (note que também removerá as atividades ligadas a esta localidade)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -162,7 +162,22 @@
                 "CANCEL_BTN": "Cancelar"
             },
             "NO_LOCATIONS": "Não há localidades no banco de dado",
-            "NO_DELETED_LOCATIONS": "Não há localidades excluídas no banco de dados"
+            "NO_DELETED_LOCATIONS": "Não há localidades excluídas no banco de dados",
+            "ADD": "Adicionar localidade",
+            "EDIT": "Editar localidade",
+            "FORM": {
+                "NAME": "Nome",
+                "NAME_REQUIRED": "O nome é obrigatório",
+                "NAME_MAXLENGTH": "O nome não pode exceder 20 caracteres",
+                "DESCRIPTION": "Descrição",
+                "DESCRIPTION_REQUIRED": "A descrição é obrigatória",
+                "DESCRIPTION_MAXLENGTH": "A descrição não pode exceder 600 caracteres",
+                "IMAGE": "Imagem",
+                "IMAGE_TYPEOF": "A imagem deve estar em formato de imagem",
+                "PRICE": "Preço",
+                "PRICE_REQUIRED": "O preço é obrigatório",
+                "PROVINCE": "Província"
+            }
         },
         "ACTIVITIES": {
             "NAME": "Nome",
@@ -180,7 +195,9 @@
                 "CANCEL_BTN": "Cancelar"
             },
             "NO_ACTIVITIES": "Não há atividades no banco de dado",
-            "NO_DELETED_ACTIVITIES": "Não há atividades excluídas no banco de dados"
+            "NO_DELETED_ACTIVITIES": "Não há atividades excluídas no banco de dados",
+            "ADD": "Adicionar atividade",
+            "EDIT": "Editar atividade"
         }
     }
 }
