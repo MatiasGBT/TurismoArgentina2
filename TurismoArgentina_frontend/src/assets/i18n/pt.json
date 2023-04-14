@@ -121,7 +121,7 @@
             "ACTIONS": "Ações",
             "DELETE_MODAL": {
                 "TITLE": "Tem certeza?",
-                "TEXT": "Esta ação pode ser desfeita a partir da tabela de províncias eliminadas (note que também removerá as localidades ligadas a esta província)",
+                "TEXT": "Esta ação pode ser desfeita a partir da tabela de províncias eliminadas (note que também removerá as localidades e as atividades ligadas a esta província)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -197,7 +197,22 @@
             "NO_ACTIVITIES": "Não há atividades no banco de dado",
             "NO_DELETED_ACTIVITIES": "Não há atividades excluídas no banco de dados",
             "ADD": "Adicionar atividade",
-            "EDIT": "Editar atividade"
+            "EDIT": "Editar atividade",
+            "FORM": {
+                "NAME": "Nome",
+                "NAME_REQUIRED": "O nome é obrigatório",
+                "NAME_MAXLENGTH": "O nome não pode exceder 20 caracteres",
+                "DESCRIPTION": "Descrição",
+                "DESCRIPTION_REQUIRED": "A descrição é obrigatória",
+                "DESCRIPTION_MAXLENGTH": "A descrição não pode exceder 600 caracteres",
+                "IMAGE1": "Imagem 1",
+                "IMAGE2": "Imagem 2",
+                "IMAGE3": "Imagem 3",
+                "IMAGE_TYPEOF": "A imagem deve estar em formato de imagem",
+                "PRICE": "Preço",
+                "PRICE_REQUIRED": "O preço é obrigatório",
+                "LOCATION": "Localidade"
+            }
         }
     }
 }

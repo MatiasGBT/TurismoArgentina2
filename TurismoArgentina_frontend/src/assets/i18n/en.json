@@ -121,7 +121,7 @@
             "ACTIONS": "Actions",
             "DELETE_MODAL": {
                 "TITLE": "Are you sure?",
-                "TEXT": "This action can be undone from the table of deleted provinces (please note that it will also remove the localities linked to this province)",
+                "TEXT": "This action can be undone from the table of deleted provinces (please note that it will also remove the locations and the activities linked to this province)",
                 "CONFIRM_BTN": "Delete",
                 "CANCEL_BTN": "Cancel"
             },
@@ -197,7 +197,22 @@
             "NO_ACTIVITIES": "No activities in the database",
             "NO_DELETED_ACTIVITIES": "No deleted activities in the database",
             "ADD": "Add activity",
-            "EDIT": "Edit activity"
+            "EDIT": "Edit activity",
+            "FORM": {
+                "NAME": "Name",
+                "NAME_REQUIRED": "Name is required",
+                "NAME_MAXLENGTH": "Name cannot exceed 65 characters",
+                "DESCRIPTION": "Description",
+                "DESCRIPTION_REQUIRED": "Description is required",
+                "DESCRIPTION_MAXLENGTH": "Description cannot exceed 600 characters",
+                "IMAGE1": "Image 1",
+                "IMAGE2": "Image 2",
+                "IMAGE3": "Image 3",
+                "IMAGE_TYPEOF": "Image must be an image",
+                "PRICE": "Price",
+                "PRICE_REQUIRED": "Price is required",
+                "LOCATION": "Location"
+            }
         }
     }
 }

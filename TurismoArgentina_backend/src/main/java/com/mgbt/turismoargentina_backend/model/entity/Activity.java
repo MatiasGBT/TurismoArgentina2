@@ -22,7 +22,7 @@ public class Activity implements Serializable {
 
     @Column(name = "name")
     @NotBlank(message = "Name is mandatory")
-    @Size(max = 45, message = "Name cannot exceed 65 characters")
+    @Size(max = 65, message = "Name cannot exceed 65 characters")
     private String name;
 
     @Column(name = "description")

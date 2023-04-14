@@ -121,7 +121,7 @@
             "ACTIONS": "Acciones",
             "DELETE_MODAL": {
                 "TITLE": "¿Está seguro?",
-                "TEXT": "Está acción se puede deshacer desde la tabla de provincias eliminadas (ten en cuenta que también eliminara las localidades vinculadas a esta provincia)",
+                "TEXT": "Está acción se puede deshacer desde la tabla de provincias eliminadas (ten en cuenta que también eliminara las localidades y las actividades vinculadas a esta provincia)",
                 "CONFIRM_BTN": "Eliminar",
                 "CANCEL_BTN": "Cancelar"
             },
@@ -197,7 +197,22 @@
             "NO_ACTIVITIES": "No hay actividades en la base de datos",
             "NO_DELETED_ACTIVITIES": "No hay actividades eliminadas en la base de datos",
             "ADD": "Añadir actividad",
-            "EDIT": "Editar actividad"
+            "EDIT": "Editar actividad",
+            "FORM": {
+                "NAME": "Nombre",
+                "NAME_REQUIRED": "El nombre es requerido",
+                "NAME_MAXLENGTH": "El nombre no puede exceder los 20 caracteres",
+                "DESCRIPTION": "Descripción",
+                "DESCRIPTION_REQUIRED": "La descripción es requerida",
+                "DESCRIPTION_MAXLENGTH": "La descripción no puede exceder los 600 caracteres",
+                "IMAGE1": "Imagen 1",
+                "IMAGE2": "Imagen 2",
+                "IMAGE3": "Imagen 3",
+                "IMAGE_TYPEOF": "La imagen debe ser del formato imagen",
+                "PRICE": "Precio",
+                "PRICE_REQUIRED": "El precio es requerido",
+                "LOCATION": "Localidad"
+            }
         }
     }
 }

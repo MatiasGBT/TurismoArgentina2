@@ -1,5 +1,6 @@
 section {
     width: 100%;
+    min-height: 80vh;
     padding: 75px 15px 15px 15px;
     background: white;
 }
@@ -70,7 +71,6 @@ img {
 @media (min-width: 768px) {
     section {
         padding: 105px 25px 25px 25px;
-        min-height: 80vh;
     }
     
     section h1 {

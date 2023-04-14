@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity';
 import { Location } from 'src/app/models/location';
 import { Province } from 'src/app/models/province';
+import { ActivityService } from 'src/app/services/activity.service';
 import { LocationService } from 'src/app/services/location.service';
 import { ProvinceService } from 'src/app/services/province.service';
 import { TranslateTextService } from 'src/app/services/translate-text.service';
@@ -23,7 +25,8 @@ export class NonDeletedProvincesTableComponent implements OnInit {
 
   constructor(private provinceService: ProvinceService,
     private translateTextService: TranslateTextService,
-    private locationService: LocationService,) { }
+    private locationService: LocationService,
+    private activityService: ActivityService) { }
 
   ngOnInit(): void {
     this.getProvinces();
@@ -109,5 +112,17 @@ export class NonDeletedProvincesTableComponent implements OnInit {
   private deleteLocation(location: Location): void {
     location.deletionDate = new Date();
     this.locationService.update(location).subscribe();
+    this.deleteActivitiesByLocation(location);
+  }
+
+  private deleteActivitiesByLocation(location: Location): void {
+    this.activityService.getByLocationId(location.idLocation).subscribe(activities => {
+      activities.forEach(activity => this.deleteActivity(activity));
+    });
+  }
+
+  private deleteActivity(activity: Activity): void {
+    activity.deletionDate = new Date();
+    this.activityService.update(activity).subscribe();
   }
 }
