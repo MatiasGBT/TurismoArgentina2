@@ -39,15 +39,15 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/login']" (click)="toggleMenu()" *ngIf="!userIsLoggedIn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                <p>{{'NAVBAR.LOGIN' | translate}}</p>
+            <a [routerLink]="['/shop/account']" (click)="toggleMenu()">
+                <i class="fa-solid fa-user"></i>
+                <p>{{'NAVBAR.ACCOUNT' | translate}}</p>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/shop/account']" (click)="toggleMenu()" *ngIf="userIsLoggedIn">
-                <i class="fa-solid fa-user"></i>
-                <p>{{'NAVBAR.ACCOUNT' | translate}}</p>
+            <a [routerLink]="['/shop/login']" (click)="toggleMenu()" *ngIf="!userIsLoggedIn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <p>{{'NAVBAR.LOGIN' | translate}}</p>
             </a>
         </li>
         <li>

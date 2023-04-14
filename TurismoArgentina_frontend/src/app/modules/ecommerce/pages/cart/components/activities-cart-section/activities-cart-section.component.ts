@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 
@@ -7,23 +7,12 @@ import { ActivityService } from 'src/app/services/activity.service';
   templateUrl: './activities-cart-section.component.html',
   styleUrls: ['./activities-cart-section.component.css']
 })
-export class ActivitiesCartSectionComponent implements OnInit {
-  public activities: Activity[] = [];
+export class ActivitiesCartSectionComponent {
+  @Input() public activities: Activity[] = [];
   @Output() totalActivitiesPrice = new EventEmitter<number>();
   @Output() removeActivityEvent = new EventEmitter<number>();
 
   constructor(private activityService: ActivityService) { }
-
-  ngOnInit(): void {
-    this.activities = this.activityService.getCartActivities();
-    this.emitTotalActivitiesPrice();
-  }
-
-  private emitTotalActivitiesPrice(): void {
-    let totalPrice: number = 0;
-    this.activities.forEach(activity => totalPrice += this.getTotalPrice(activity));
-    this.totalActivitiesPrice.emit(totalPrice);
-  }
 
   public getTotalPrice(activity: Activity): number {
     if (activity.peopleQuantity) return activity.price * activity.peopleQuantity;

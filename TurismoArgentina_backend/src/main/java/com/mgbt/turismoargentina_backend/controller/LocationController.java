@@ -205,7 +205,7 @@ public class LocationController {
     @Operation(summary = "Creates a location with the request body.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Location created",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LocationWithMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Location is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })

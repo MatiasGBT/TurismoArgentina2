@@ -174,7 +174,7 @@ public class ActivityController {
     @Operation(summary = "Creates an activity with the request body.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Activity created",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ActivityWithMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Activity is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })

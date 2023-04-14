@@ -21,8 +21,8 @@ const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
   {path: 'activities/:id', component: ActivityComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'account', component: AccountComponent},
   {path: 'login', component: AccountComponent, canActivate: [AuthGuard], data: {role: 'user'}},
-  {path: 'account', component: AccountComponent, canActivate: [AuthGuard], data: {role: 'user'}},
 ]
 
 @NgModule({

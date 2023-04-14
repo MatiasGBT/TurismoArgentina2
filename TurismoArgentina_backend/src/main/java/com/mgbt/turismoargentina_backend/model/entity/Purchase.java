@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import java.io.*;
 import java.util.*;
@@ -21,11 +22,13 @@ public class Purchase implements Serializable {
 
     @Column(name = "date")
     @Temporal(value = TemporalType.TIMESTAMP)
+    @NotNull(message = "Date is mandatory")
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","name","lastName","creationDate","deletionDate"})
     @JoinColumn(name = "id_user", nullable = false)
+    @NotNull(message = "User is mandatory")
     private User user;
 
     @ManyToMany
@@ -47,6 +50,10 @@ public class Purchase implements Serializable {
             joinColumns = @JoinColumn(name = "id_purchase"),
             inverseJoinColumns = @JoinColumn(name = "id_activity"))
     List<Activity> activities;
+
+    @Column(name = "price")
+    @NotNull(message = "Price is mandatory")
+    private Double price;
 
     @Column(name="refunded", columnDefinition = "BOOLEAN", nullable = false)
     Boolean isRefunded;

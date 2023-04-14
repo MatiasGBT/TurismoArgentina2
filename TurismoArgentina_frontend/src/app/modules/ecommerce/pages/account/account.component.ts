@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { KeycloakService } from 'keycloak-angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -11,10 +12,15 @@ export class AccountComponent implements OnInit {
   public selectedLanguage: string = this.translate.currentLang;
   public langs: string[] = this.translate.getLangs();
   public currentLang: string = this.translate.currentLang;
+  public userIsLoggedIn: boolean = false;
 
-  constructor(private keycloakService: KeycloakService, private translate: TranslateService) { }
+  constructor(private keycloakService: KeycloakService, private translate: TranslateService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.userLoggedInEvent.subscribe(() => {
+      this.userIsLoggedIn = true;
+    });
   }
 
   public goToAccountDashboard(): void {

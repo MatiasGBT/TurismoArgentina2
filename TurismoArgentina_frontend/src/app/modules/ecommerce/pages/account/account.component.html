@@ -2,7 +2,7 @@
     <h1>{{'NAVBAR.ACCOUNT' | translate}}</h1>
 
     <div id="config-options">
-        <div class="config-option">
+        <div class="config-option" *ngIf="userIsLoggedIn">
             <p>{{'ECOMMERCE.ACCOUNT.ACCOUNT_INFO_TEXT' | translate}}</p>
             <button (click)="goToAccountDashboard()">{{'ECOMMERCE.ACCOUNT.ACCOUNT_INFO_BUTTON' | translate}}</button>
         </div>
@@ -17,7 +17,7 @@
             </select>
         </div>
     
-        <div class="config-option">
+        <div class="config-option"  *ngIf="userIsLoggedIn">
             <p><i class="fa-solid fa-right-from-bracket"></i> {{'ECOMMERCE.ACCOUNT.LOGOUT' | translate}}</p>
             <button (click)="logout()">{{'ECOMMERCE.ACCOUNT.LOGOUT' | translate}}</button>
         </div>

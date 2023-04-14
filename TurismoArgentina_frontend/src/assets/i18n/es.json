@@ -3,7 +3,8 @@
         "DETAILS": "Detalles",
         "UNAUTHORISED_TITLE": "Acceso no autorizado",
         "UNAUTHORISED_TEXT": "No está autorizado a entrar en esta página",
-        "SUBMIT": "Enviar"
+        "SUBMIT": "Enviar",
+        "UNAUTHORISED_BUY": "Necesitas iniciar sesión para poder comprar"
     },
     "LANGUAGES": {
         "en": "English",
