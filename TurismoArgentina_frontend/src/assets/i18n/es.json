@@ -87,7 +87,18 @@
             "ACCOUNT_INFO_TEXT": "Cambiar información de la cuenta",
             "ACCOUNT_INFO_BUTTON": "Panel de cuenta",
             "LANGUAGE": "Idioma",
-            "LOGOUT": "Cerrar sesión"
+            "LOGOUT": "Cerrar sesión",
+            "NO_PURCHASES": "Aún no ha realizado ninguna compra",
+            "TABLE": {
+                "LOCATIONS": "Localidades",
+                "ACTIVITIES": "Actividades",
+                "DATE": "Fecha",
+                "PRICE": "Precio",
+                "REFUNDED": "Reembolsada",
+                "YES": "Sí",
+                "NO": "No",
+                "ACTIONS": "Acciones"
+            }
         }
     },
     "ADMIN_PANEL": {

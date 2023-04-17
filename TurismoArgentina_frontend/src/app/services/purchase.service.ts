@@ -12,6 +12,15 @@ export class PurchaseService {
 
   constructor(private http: HttpClient, private catchErrorService: CatchErrorService) { }
 
+  public getByUser(idUser: number, page: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/list/${idUser}/${page}`).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public create(purchase: Purchase): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/`, purchase).pipe(
       catchError(ex => {

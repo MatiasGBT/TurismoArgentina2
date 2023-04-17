@@ -38,6 +38,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { LocationsCartSectionComponent } from './pages/cart/components/locations-cart-section/locations-cart-section.component';
 import { ActivitiesCartSectionComponent } from './pages/cart/components/activities-cart-section/activities-cart-section.component';
 import { AccountComponent } from './pages/account/account.component';
+import { PurchasesComponent } from './pages/account/components/purchases/purchases.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AccountComponent } from './pages/account/account.component';
     CartComponent,
     LocationsCartSectionComponent,
     ActivitiesCartSectionComponent,
-    AccountComponent
+    AccountComponent,
+    PurchasesComponent
   ],
   imports: [
     CommonModule,

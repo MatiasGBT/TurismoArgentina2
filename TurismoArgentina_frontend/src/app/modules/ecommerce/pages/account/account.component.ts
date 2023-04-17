@@ -18,9 +18,7 @@ export class AccountComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.userLoggedInEvent.subscribe(() => {
-      this.userIsLoggedIn = true;
-    });
+    if (this.authService.keycloakUser) this.userIsLoggedIn = true;
   }
 
   public goToAccountDashboard(): void {

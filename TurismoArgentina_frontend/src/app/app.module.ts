@@ -62,7 +62,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     },
     {
       provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

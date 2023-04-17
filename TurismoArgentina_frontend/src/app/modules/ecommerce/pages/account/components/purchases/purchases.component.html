@@ -1,0 +1,53 @@
+<section>
+    <app-spinner *ngIf="!purchasesAreLoaded"></app-spinner>
+
+    <p *ngIf="userIsLoggedIn && purchases.length == 0 && purchasesAreLoaded" class="centered-text no-purchases">
+        {{'ECOMMERCE.ACCOUNT.NO_PURCHASES' | translate}}
+    </p>
+
+    <ng-container *ngIf="userIsLoggedIn && purchases.length > 0 && purchasesAreLoaded">
+        <table>
+            <thead>
+                <tr>
+                    <th class="no-mobile">{{'ECOMMERCE.ACCOUNT.TABLE.LOCATIONS' | translate}}</th>
+                    <th class="no-mobile">{{'ECOMMERCE.ACCOUNT.TABLE.ACTIVITIES' | translate}}</th>
+                    <th class="no-mobile">{{'ECOMMERCE.ACCOUNT.TABLE.DATE' | translate}}</th>
+                    <th>{{'ECOMMERCE.ACCOUNT.TABLE.PRICE' | translate}}</th>
+                    <th class="no-mobile">{{'ECOMMERCE.ACCOUNT.TABLE.REFUNDED' | translate}}</th>
+                    <th>{{'ECOMMERCE.ACCOUNT.TABLE.ACTIONS' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let purchase of purchases">
+                    <td *ngIf="purchase.locations.length == 0" class="no-mobile">-</td>
+                    <td *ngIf="purchase.locations.length > 0" class="no-mobile">
+                        {{purchase.locations[0].name}} 
+                        <span *ngIf="purchase.locations.length > 1">+ {{purchase.locations.length - 1}}</span>
+                    </td>
+
+                    <td *ngIf="purchase.activities.length == 0" class="no-mobile">-</td>
+                    <td *ngIf="purchase.activities.length > 0" class="no-mobile">
+                        {{purchase.activities[0].name}} 
+                        <span *ngIf="purchase.activities.length > 1">+ {{purchase.activities.length - 1}}</span>
+                    </td>
+
+                    <td class="no-mobile  centered-text">{{purchase.date | date:'short'}}</td>
+
+                    <td class="centered-text">{{purchase.price | currency}}ARS</td>
+
+                    <td *ngIf="purchase.isRefunded" class="no-mobile centered-text">
+                        {{'ECOMMERCE.ACCOUNT.TABLE.YES' | translate}}
+                    </td>
+                    <td *ngIf="!purchase.isRefunded" class="no-mobile centered-text">
+                        {{'ECOMMERCE.ACCOUNT.TABLE.NO' | translate}}
+                    </td>
+
+                    <td class="table-btns">
+                        <a [routerLink]="['/account/purchases', purchase.idPurchase]"><i class="fa-solid fa-eye"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+    </ng-container>
+</section>

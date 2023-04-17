@@ -4,6 +4,8 @@ import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Purchase;
 import com.mgbt.turismoargentina_backend.model.repository.IPurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -38,6 +40,12 @@ public class PurchaseService implements IPurchaseService {
         Purchase purchase = repository.findById(id).orElse(null);
         if (purchase == null) throw new EntityNotFoundException("Purchase not found");
         return purchase;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Purchase> getByUser(Long idUser, Pageable pageable) {
+        return repository.findByUserIdUserOrderByIdPurchaseDesc(idUser, pageable);
     }
 
     @Override

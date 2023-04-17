@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,20 @@ public class PurchaseController {
 
     @Autowired
     MessageSource messageSource;
+
+    @GetMapping("/list/{idUser}/{page}")
+    @Operation(summary = "Gets all purchases paginated and filtered by user.")
+    @ApiResponse(responseCode = "200", description = "Array of purchases",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
+    public ResponseEntity<?> getAll(@PathVariable Long idUser, @PathVariable Integer page, Locale locale) {
+        try {
+            Pageable pageable = PageRequest.of(page, 9);
+            Page<Purchase> purchases = this.purchaseService.getByUser(idUser, pageable);
+            return new ResponseEntity<>(purchases, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
 
     @PostMapping("/")
     @Operation(summary = "Creates a purchase with the request body.")

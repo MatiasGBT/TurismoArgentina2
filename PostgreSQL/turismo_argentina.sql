@@ -213,7 +213,7 @@ ALTER TABLE turismo_argentina.purchases_locations ALTER COLUMN id_puchase_locati
 
 CREATE TABLE turismo_argentina.purchases (
     id_purchase bigint NOT NULL,
-    date date NOT NULL,
+    date timestamp with time zone NOT NULL,
     id_user bigint NOT NULL
 );
 

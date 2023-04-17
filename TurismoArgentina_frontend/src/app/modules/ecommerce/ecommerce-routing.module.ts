@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'activities/:id', component: ActivityComponent},
   {path: 'cart', component: CartComponent},
   {path: 'account', component: AccountComponent},
-  {path: 'login', component: AccountComponent, canActivate: [AuthGuard], data: {role: 'user'}},
+  {path: 'login', component: IndexComponent, canActivate: [AuthGuard], data: {role: 'user'}},
 ]
 
 @NgModule({

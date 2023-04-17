@@ -87,7 +87,18 @@
             "ACCOUNT_INFO_TEXT": "Change account information",
             "ACCOUNT_INFO_BUTTON": "Account panel",
             "LANGUAGE": "Language",
-            "LOGOUT": "Logout"
+            "LOGOUT": "Logout",
+            "NO_PURCHASES": "You have not made any purchase yet",
+            "TABLE": {
+                "LOCATIONS": "Locations",
+                "ACTIVITIES": "Activities",
+                "DATE": "Date",
+                "PRICE": "Price",
+                "REFUNDED": "Refunded",
+                "YES": "Yes",
+                "NO": "No",
+                "ACTIONS": "Actions"
+            }
         }
     },
     "ADMIN_PANEL": {
