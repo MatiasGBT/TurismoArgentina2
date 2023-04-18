@@ -30,6 +30,15 @@ export class PurchaseService {
     );
   }
 
+  public update(purchase: Purchase): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/`, purchase).pipe(
+      catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
   public getCount(refunded: boolean): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/admin/count/${refunded}`).pipe(
       catchError(ex => throwError(() => ex))

@@ -1,6 +1,7 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.PurchaseIncompleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
@@ -30,7 +31,7 @@ public class ExceptionService implements IExceptionService {
         Map<String, Object> response = new HashMap<>();
         response.put("message", messageSource.getMessage("error.entityNotFound", null, locale));
         response.put("error", ex.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -63,5 +64,13 @@ public class ExceptionService implements IExceptionService {
         response.put("message", messageSource.getMessage("error.file", null, locale));
         response.put("error", ex.getMessage() + ": " + ex.getCause().getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwPurchaseIncompleteException(PurchaseIncompleteException ex, Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", messageSource.getMessage("error.purchaseIncomplete", null, locale));
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

@@ -44,6 +44,8 @@
 
                     <td class="table-btns">
                         <a [routerLink]="['/account/purchases', purchase.idPurchase]"><i class="fa-solid fa-eye"></i></a>
+                        <hr *ngIf="!purchase.isRefunded">
+                        <i (click)="askForRefund(purchase)" class="fa-solid fa-rotate-right" *ngIf="!purchase.isRefunded"></i>
                     </td>
                 </tr>
             </tbody>

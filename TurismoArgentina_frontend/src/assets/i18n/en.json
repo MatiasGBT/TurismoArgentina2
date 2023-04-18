@@ -98,6 +98,12 @@
                 "YES": "Yes",
                 "NO": "No",
                 "ACTIONS": "Actions"
+            },
+            "REFUND": {
+                "TITLE": "Are you sure you want to refund this purchase?",
+                "TEXT": "This action cannot be undone",
+                "CONFIRM_BTN": "Refund",
+                "CANCEL_BTN": "Cancel"
             }
         }
     },

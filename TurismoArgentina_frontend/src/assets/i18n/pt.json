@@ -98,6 +98,12 @@
                 "YES": "Sim",
                 "NO": "Não",
                 "ACTIONS": "Ações"
+            },
+            "REFUND": {
+                "TITLE": "Você tem certeza de que quer reembolsar esta compra?",
+                "TEXT": "Esta ação não pode ser desfeita",
+                "CONFIRM_BTN": "Reembolsar",
+                "CANCEL_BTN": "Cancelar"
             }
         }
     },

@@ -1,5 +1,6 @@
 package com.mgbt.turismoargentina_backend.controller;
 
+import com.mgbt.turismoargentina_backend.exceptions.PurchaseIncompleteException;
 import com.mgbt.turismoargentina_backend.model.entity.Purchase;
 import com.mgbt.turismoargentina_backend.model.service.*;
 import com.mgbt.turismoargentina_backend.utility_classes.*;
@@ -54,10 +55,40 @@ public class PurchaseController {
     public ResponseEntity<?> create(@Valid @RequestBody Purchase purchase, BindingResult result, Locale locale) {
         try {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            if (purchase.getLocations().isEmpty() && purchase.getActivities().isEmpty()) {
+                String exceptionMessage = messageSource.getMessage("error.purchaseIncompleteMessage", null, locale);
+                return exceptionService.throwPurchaseIncompleteException(new PurchaseIncompleteException(exceptionMessage), locale);
+            }
             Map<String, Object> response = new HashMap<>();
             purchase = purchaseService.save(purchase);
             response.put("purchase", purchase);
             response.put("message", messageSource.getMessage("purchaseController.created", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (Exception ex) {
+            return this.exceptionService.throwNormalException(ex, locale);
+        }
+    }
+
+    @PutMapping("/")
+    @Operation(summary = "Updates a purchase with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Purchase updated",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Purchase is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> update(@Valid @RequestBody Purchase purchase, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            if (purchase.getLocations().isEmpty() && purchase.getActivities().isEmpty()) {
+                String exceptionMessage = messageSource.getMessage("error.purchaseIncompleteMessage", null, locale);
+                return exceptionService.throwPurchaseIncompleteException(new PurchaseIncompleteException(exceptionMessage), locale);
+            }
+            Map<String, Object> response = new HashMap<>();
+            purchaseService.save(purchase);
+            response.put("message", messageSource.getMessage("purchaseController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
