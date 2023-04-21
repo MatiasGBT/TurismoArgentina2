@@ -104,6 +104,14 @@
                 "TEXT": "This action cannot be undone",
                 "CONFIRM_BTN": "Refund",
                 "CANCEL_BTN": "Cancel"
+            },
+            "PURCHASE": {
+                "INFORMATION": "Purchase information",
+                "DATE": "Date",
+                "PRICE": "Total price",
+                "REFUNDED": "Was it refunded?",
+                "YES": "Yes",
+                "NO": "No"
             }
         }
     },

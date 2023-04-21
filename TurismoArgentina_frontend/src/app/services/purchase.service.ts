@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Purchase } from '../models/purchase';
 import { CatchErrorService } from './catch-error.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,22 @@ import { CatchErrorService } from './catch-error.service';
 export class PurchaseService {
   private baseUrl = "http://localhost:8090/api/purchases";
 
-  constructor(private http: HttpClient, private catchErrorService: CatchErrorService) { }
+  constructor(private http: HttpClient, private catchErrorService: CatchErrorService,
+    private router: Router) { }
 
   public getByUser(idUser: number, page: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/list/${idUser}/${page}`).pipe(
       catchError(ex => {
+        this.catchErrorService.showError(ex);
+        return throwError(() => ex);
+      })
+    );
+  }
+
+  public getById(idPurchase: number): Observable<Purchase> {
+    return this.http.get<Purchase>(`${this.baseUrl}/${idPurchase}`).pipe(
+      catchError(ex => {
+        this.router.navigate(['/shop/account']);
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
       })

@@ -10,6 +10,7 @@ import { ActivityComponent } from './pages/activity/activity.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AccountComponent } from './pages/account/account.component';
+import { PurchaseComponent } from './pages/account/pages/purchase/purchase.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'activities/:id', component: ActivityComponent},
   {path: 'cart', component: CartComponent},
   {path: 'account', component: AccountComponent},
+  {path: 'account/purchases/:id', component: PurchaseComponent, canActivate: [AuthGuard], data: {role: 'user'}},
   {path: 'login', component: IndexComponent, canActivate: [AuthGuard], data: {role: 'user'}},
 ]
 

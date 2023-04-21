@@ -104,6 +104,14 @@
                 "TEXT": "Esta ação não pode ser desfeita",
                 "CONFIRM_BTN": "Reembolsar",
                 "CANCEL_BTN": "Cancelar"
+            },
+            "PURCHASE": {
+                "INFORMATION": "Informações sobre a compra",
+                "DATE": "Data",
+                "PRICE": "Preço total",
+                "REFUNDED": "Foi reembolsada?",
+                "YES": "Sim",
+                "NO": "Não"
             }
         }
     },

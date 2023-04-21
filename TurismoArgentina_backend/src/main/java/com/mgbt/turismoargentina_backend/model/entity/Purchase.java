@@ -32,7 +32,7 @@ public class Purchase implements Serializable {
     private User user;
 
     @ManyToMany
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","image","price",
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","price",
             "deletionDate","province"})
     @JoinTable(
             schema = "turismo_argentina",
@@ -42,7 +42,7 @@ public class Purchase implements Serializable {
     List<Location> locations;
 
     @ManyToMany
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","image1","image2",
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","image2",
             "image3","price","duration","deletionDate","location"})
     @JoinTable(
             schema = "turismo_argentina",

@@ -1,0 +1,32 @@
+<section>
+    <app-spinner *ngIf="!purchase"></app-spinner>
+    <div id="purchase" *ngIf="purchase">
+        <div *ngIf="purchase.locations.length > 0" id="locations">
+            <h2>{{'NAVBAR.LOCATIONS' | translate}}</h2>
+            <div id="locations-container">
+                <div class="location" *ngFor="let location of purchase.locations">
+                    <img [src]="'http://localhost:8090/api/locations/img/' + location.image" [alt]="location.name + ' image'">
+                    <p>{{location.name}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="purchase.activities.length > 0" id="activities">
+            <h2>{{'NAVBAR.ACTIVITIES' | translate}}</h2>
+            <div id="activities-container">
+                <div class="activity" *ngFor="let activity of purchase.activities">
+                    <img [src]="'http://localhost:8090/api/activities/img/' + activity.image1" [alt]="activity.name + ' image'">
+                    <p>{{activity.name}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="purchase-data">
+            <h2>{{'ECOMMERCE.ACCOUNT.PURCHASE.INFORMATION' | translate}}</h2>
+            <p>{{'ECOMMERCE.ACCOUNT.PURCHASE.DATE' | translate}}: <span>{{purchase.date | date:'short'}}</span></p>
+            <p>{{'ECOMMERCE.ACCOUNT.PURCHASE.PRICE' | translate}}: <span>{{purchase.price | currency}}ARS</span></p>
+            <p *ngIf="purchase.isRefunded">{{'ECOMMERCE.ACCOUNT.PURCHASE.REFUNDED' | translate}} <span>{{'ECOMMERCE.ACCOUNT.PURCHASE.YES' | translate}}</span></p>
+            <p *ngIf="!purchase.isRefunded">{{'ECOMMERCE.ACCOUNT.PURCHASE.REFUNDED' | translate}} <span>{{'ECOMMERCE.ACCOUNT.PURCHASE.NO' | translate}}</span></p>
+        </div>
+    </div>
+</section>

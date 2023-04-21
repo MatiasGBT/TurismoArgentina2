@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.controller;
 
-import com.mgbt.turismoargentina_backend.exceptions.PurchaseIncompleteException;
+import com.mgbt.turismoargentina_backend.exceptions.*;
 import com.mgbt.turismoargentina_backend.model.entity.Purchase;
 import com.mgbt.turismoargentina_backend.model.service.*;
 import com.mgbt.turismoargentina_backend.utility_classes.*;
@@ -41,6 +41,25 @@ public class PurchaseController {
             return new ResponseEntity<>(purchases, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Gets a purchase by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Purchase object",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Purchase.class)) }),
+            @ApiResponse(responseCode = "404", description = "Purchase not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> getById(@PathVariable Long id, Locale locale) {
+        try {
+            Purchase purchase = this.purchaseService.findById(id);
+            return new ResponseEntity<>(purchase, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
         }
     }
 
