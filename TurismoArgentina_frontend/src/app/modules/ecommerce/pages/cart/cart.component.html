@@ -5,13 +5,14 @@
     </div>
     
     <div id="buy-container">
-        <p>Total: ${{getTotalPrice()}} ARS</p>
-        <button (click)="buy()" type="button" aria-label="Buy cart button" [disabled]="getTotalPrice() == 0">
+        <p>Total: ${{totalPrice}} ARS</p>
+        <button (click)="buy()" type="button" aria-label="Buy cart button" [disabled]="totalPrice <= 0">
             {{'ECOMMERCE.CART.BUY_FORM.BUY' | translate}}
         </button>
         <div id="coupon">
-            <input type="text" [placeholder]="'ECOMMERCE.CART.BUY_FORM.COUPON' | translate" maxlength="30">
-            <button type="button" aria-label="Apply coupon button">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
+            <input type="text" [disabled]="totalPrice <= 0" [(ngModel)]="couponName" [placeholder]="'ECOMMERCE.CART.BUY_FORM.COUPON' | translate" maxlength="30">
+            <button type="button" [disabled]="totalPrice <= 0" aria-label="Apply coupon button" (click)="redeemCoupon()">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
         </div>
+        <p id="coupon-message">{{couponMessage}}</p>
     </div>
 </section>

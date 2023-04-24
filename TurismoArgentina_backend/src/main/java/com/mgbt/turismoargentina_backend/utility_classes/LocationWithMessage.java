@@ -10,15 +10,7 @@ public class LocationWithMessage {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

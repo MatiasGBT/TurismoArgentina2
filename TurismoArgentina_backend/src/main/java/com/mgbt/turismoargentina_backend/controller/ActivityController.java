@@ -163,7 +163,7 @@ public class ActivityController {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             activityService.save(activity);
-            response.put("message", messageSource.getMessage("activityController.edited", null, locale));
+            response.put("message", messageSource.getMessage("activityController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
@@ -173,7 +173,7 @@ public class ActivityController {
     @PostMapping("/admin")
     @Operation(summary = "Creates an activity with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Activity created",
+            @ApiResponse(responseCode = "201", description = "Activity created",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ActivityWithMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Activity is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })

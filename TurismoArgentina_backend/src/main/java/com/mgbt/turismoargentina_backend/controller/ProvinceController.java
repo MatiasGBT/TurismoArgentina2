@@ -168,7 +168,7 @@ public class ProvinceController {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             provinceService.save(province);
-            response.put("message", messageSource.getMessage("provinceController.edited", null, locale));
+            response.put("message", messageSource.getMessage("provinceController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

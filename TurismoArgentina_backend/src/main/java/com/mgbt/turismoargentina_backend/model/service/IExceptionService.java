@@ -1,7 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
-import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
-import com.mgbt.turismoargentina_backend.exceptions.PurchaseIncompleteException;
+import com.mgbt.turismoargentina_backend.exceptions.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

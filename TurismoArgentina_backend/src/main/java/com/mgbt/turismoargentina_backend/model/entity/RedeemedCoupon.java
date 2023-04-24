@@ -11,6 +11,15 @@ import java.util.Date;
 @Table(name = "redeemed_coupons", schema="turismo_argentina")
 public class RedeemedCoupon implements Serializable {
 
+    public RedeemedCoupon() {}
+
+    public RedeemedCoupon(User user, Coupon coupon) {
+        this.user = user;
+        this.coupon = coupon;
+        this.date = new Date();
+        this.isUsed = false;
+    }
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -35,10 +44,4 @@ public class RedeemedCoupon implements Serializable {
 
     @Column(name="used", columnDefinition = "BOOLEAN", nullable = false)
     private Boolean isUsed;
-
-    @PrePersist
-    public void setUp() {
-        this.date = new Date();
-        this.isUsed = false;
-    }
 }

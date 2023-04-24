@@ -10,15 +10,7 @@ public class PurchaseWithMessage {
         return purchase;
     }
 
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

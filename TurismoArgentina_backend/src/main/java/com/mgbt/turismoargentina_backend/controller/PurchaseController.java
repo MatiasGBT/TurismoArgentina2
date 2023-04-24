@@ -93,7 +93,7 @@ public class PurchaseController {
     @PutMapping("/")
     @Operation(summary = "Updates a purchase with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Purchase updated",
+            @ApiResponse(responseCode = "200", description = "Purchase updated",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Purchase is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })

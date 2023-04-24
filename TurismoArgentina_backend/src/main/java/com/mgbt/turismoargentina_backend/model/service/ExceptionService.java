@@ -1,7 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.service;
 
-import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
-import com.mgbt.turismoargentina_backend.exceptions.PurchaseIncompleteException;
+import com.mgbt.turismoargentina_backend.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ExceptionService implements IExceptionService {
@@ -39,8 +37,7 @@ public class ExceptionService implements IExceptionService {
         Map<String, Object> response = new HashMap<>();
         List<String> errors = result.getFieldErrors()
                 .stream()
-                .map(err -> err.getField() + ": " + err.getDefaultMessage())
-                .collect(Collectors.toList());
+                .map(err -> err.getField() + ": " + err.getDefaultMessage()).toList();
         String error = errors.toString()
                 .replace("[", "")
                 .replace("]", "")

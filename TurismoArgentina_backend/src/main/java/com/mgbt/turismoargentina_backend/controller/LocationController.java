@@ -194,7 +194,7 @@ public class LocationController {
             if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
             Map<String, Object> response = new HashMap<>();
             locationService.save(location);
-            response.put("message", messageSource.getMessage("locationController.edited", null, locale));
+            response.put("message", messageSource.getMessage("locationController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
@@ -204,7 +204,7 @@ public class LocationController {
     @PostMapping("/admin")
     @Operation(summary = "Creates a location with the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Location created",
+            @ApiResponse(responseCode = "201", description = "Location created",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LocationWithMessage.class))}),
             @ApiResponse(responseCode = "400", description = "Location is not valid",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })

@@ -61,6 +61,11 @@ section {
     width: 20%;
 }
 
+#coupon-message {
+    color: green;
+    margin-top: 8px;
+}
+
 @media (min-width: 768px) {
     section {
         padding: 105px 25px 25px 25px;

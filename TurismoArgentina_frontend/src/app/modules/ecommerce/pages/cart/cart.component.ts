@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { Purchase } from 'src/app/models/purchase';
 import { ActivityService } from 'src/app/services/activity.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CouponService } from 'src/app/services/coupon.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import { TranslateTextService } from 'src/app/services/translate-text.service';
@@ -19,24 +20,32 @@ export class CartComponent implements OnInit {
   public totalPrice: number = 0;
   public locations: Location[] = [];
   public activities: Activity[] = [];
+  public couponName: string = "";
+  private redeemedCoupon: any = {};
+  public couponMessage: string = "";
 
   constructor(private purchaseService: PurchaseService, 
     private locationService: LocationService,
     private activityService: ActivityService,
     private authService: AuthService,
     private translateTextService: TranslateTextService,
-    private router: Router) { }
+    private router: Router,
+    private couponService: CouponService) { }
 
   ngOnInit(): void {
     this.locations = this.locationService.getCartLocations();
     this.activities = this.activityService.getCartActivities();
     this.getTotalLocationsPrice();
     this.getTotalActivitiesPrice();
-    this.getTotalPrice();
+    this.setTotalPrice();
   }
 
-  public getTotalPrice(): number {
-    return Math.round(this.totalPrice);
+  public setTotalPrice(): void {
+    if (this.redeemedCoupon?.coupon?.discount > 0) {
+      let discount = this.totalPrice * (this.redeemedCoupon.coupon.discount/100);
+      this.totalPrice -= discount;
+    }
+    this.totalPrice = Math.round(this.totalPrice);
   }
 
   private getTotalLocationsPrice(): void {
@@ -73,7 +82,10 @@ export class CartComponent implements OnInit {
 
   public buy(): void {
     if (!this.authService.keycloakUser) this.showBuyErrorModal();
-    else this.createPurchase();
+    else {
+      this.createPurchase();
+      this.useCoupon();
+    }
   }
 
   private async showBuyErrorModal(): Promise<void> {
@@ -111,5 +123,23 @@ export class CartComponent implements OnInit {
     this.activityService.emptyCartActivities();
     this.locations = [];
     this.activities = [];
+  }
+
+  private useCoupon(): void {
+    if (this.redeemedCoupon?.coupon?.idCoupon) {
+      this.redeemedCoupon.isUsed = true;
+      this.couponService.updateRedeemedCoupon(this.redeemedCoupon).subscribe(message => console.log(message));
+    }
+  }
+
+  public redeemCoupon(): void {
+    if (!this.authService.keycloakUser) this.showBuyErrorModal();
+    else {
+      this.couponService.redeemCoupon(this.couponName).subscribe(response => {
+        this.redeemedCoupon = response.redeemedCoupon;
+        this.couponMessage = response.message;
+        this.setTotalPrice();
+      });
+    }
   }
 }
