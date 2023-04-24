@@ -23,6 +23,9 @@
         "DASHBOARD": "Painel de controle",
         "SHOP": "Loja"
     },
+    "PAGINATOR": {
+        "OF": "de"
+    },
     "SPINNER": {
         "LOADING": "Carregando..."
     },

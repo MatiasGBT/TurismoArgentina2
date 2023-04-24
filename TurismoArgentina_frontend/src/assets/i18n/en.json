@@ -23,6 +23,9 @@
         "DASHBOARD": "Dashboard",
         "SHOP": "Shop"
     },
+    "PAGINATOR": {
+        "OF": "of"
+    },
     "SPINNER": {
         "LOADING": "Loading..."
     },

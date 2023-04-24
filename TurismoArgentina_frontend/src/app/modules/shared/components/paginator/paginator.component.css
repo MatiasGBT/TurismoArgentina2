@@ -26,3 +26,24 @@
     background: #4f85cc;
     cursor: default;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#current-page {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    font-size: 1rem;
+    font-family: 'Pangea';
+    text-align: center;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgb(184, 184, 184);;
+    background: rgb(221, 221, 221);
+    border-radius: 5px;
+    outline: none;
+    padding-top: 4px;
+}

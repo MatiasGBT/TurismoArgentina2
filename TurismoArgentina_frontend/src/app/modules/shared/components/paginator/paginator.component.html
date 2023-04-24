@@ -5,7 +5,8 @@
     <button [disabled]="isFirstPage" aria-label="Previous page" (click)="goPreviousPage()">
         <i class="fa-solid fa-angle-left"></i>
     </button>
-    {{page + 1}}
+    <input #inputPage id="current-page" type="number" [value]="page + 1" min="1" [max]="totalPages"
+        (keypress)="goToSelectedPage($event)"> {{'PAGINATOR.OF' | translate}} {{totalPages}}
     <button [disabled]="isLastPage" aria-label="Next page" (click)="goNextPage()">
         <i class="fa-solid fa-angle-right"></i>
     </button>
