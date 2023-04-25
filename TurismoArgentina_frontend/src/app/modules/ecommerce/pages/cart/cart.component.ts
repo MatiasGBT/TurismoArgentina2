@@ -35,28 +35,16 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.locations = this.locationService.getCartLocations();
     this.activities = this.activityService.getCartActivities();
-    this.getTotalLocationsPrice();
-    this.getTotalActivitiesPrice();
     this.setTotalPrice();
   }
 
   public setTotalPrice(): void {
+    this.resetTotalPrice();
     if (this.redeemedCoupon?.coupon?.discount > 0) {
       let discount = this.totalPrice * (this.redeemedCoupon.coupon.discount/100);
       this.totalPrice -= discount;
     }
     this.totalPrice = Math.round(this.totalPrice);
-  }
-
-  private getTotalLocationsPrice(): void {
-    let totalPrice: number = 0;
-    this.locations.forEach(location => totalPrice += this.getLocationPrice(location));
-    this.totalPrice += totalPrice;
-  }
-
-  private getLocationPrice(location: Location): number {
-    if (location.peopleQuantity) return location.price * location.peopleQuantity;
-    else return location.price;
   }
 
   public removeLocation(totalLocationPrice: number): void {
@@ -68,6 +56,23 @@ export class CartComponent implements OnInit {
     let totalPrice: number = 0;
     this.activities.forEach(activity => totalPrice += this.getActivityPrice(activity));
     this.totalPrice += totalPrice;
+  }
+
+  private resetTotalPrice(): void {
+    this.totalPrice = 0;
+    this.getTotalLocationsPrice();
+    this.getTotalActivitiesPrice();
+  }
+
+  private getTotalLocationsPrice(): void {
+    let totalPrice: number = 0;
+    this.locations.forEach(location => totalPrice += this.getLocationPrice(location));
+    this.totalPrice += totalPrice;
+  }
+
+  private getLocationPrice(location: Location): number {
+    if (location.peopleQuantity) return location.price * location.peopleQuantity;
+    else return location.price;
   }
 
   private getActivityPrice(activity: Activity): number {
