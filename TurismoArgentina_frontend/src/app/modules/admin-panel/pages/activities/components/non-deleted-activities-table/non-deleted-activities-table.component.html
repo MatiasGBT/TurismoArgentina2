@@ -9,7 +9,7 @@
         <a [routerLink]="['/admin/activities/add']">
             <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.ACTIVITIES.ADD' | translate}}
         </a>
-        <adminpanel-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></adminpanel-searchbar>
+        <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
     </div>
 
     <table>

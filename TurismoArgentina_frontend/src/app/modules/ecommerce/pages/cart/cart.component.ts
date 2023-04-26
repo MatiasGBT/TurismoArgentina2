@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { Location } from 'src/app/models/location';
 import { Purchase } from 'src/app/models/purchase';
+import { RedeemedCoupon } from 'src/app/models/redeemed-coupon';
 import { ActivityService } from 'src/app/services/activity.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CouponService } from 'src/app/services/coupon.service';
@@ -21,7 +22,7 @@ export class CartComponent implements OnInit {
   public locations: Location[] = [];
   public activities: Activity[] = [];
   public couponName: string = "";
-  private redeemedCoupon: any = {};
+  private redeemedCoupon: RedeemedCoupon = {} as RedeemedCoupon;
   public couponMessage: string = "";
 
   constructor(private purchaseService: PurchaseService, 
@@ -135,6 +136,10 @@ export class CartComponent implements OnInit {
       this.redeemedCoupon.isUsed = true;
       this.couponService.updateRedeemedCoupon(this.redeemedCoupon).subscribe(message => console.log(message));
     }
+  }
+
+  public verifyInputEnter(event: any): void {
+    if (event.key === 'Enter' || event.keyCode == 13) this.redeemCoupon();
   }
 
   public redeemCoupon(): void {

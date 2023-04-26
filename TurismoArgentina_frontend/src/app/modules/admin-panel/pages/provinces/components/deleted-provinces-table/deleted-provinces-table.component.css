@@ -75,7 +75,7 @@ table tbody tr td {
     border-radius: 15px;
 }
 
-adminpanel-searchbar {
+admin-searchbar {
     width: 100%;
 }
 
@@ -84,7 +84,7 @@ adminpanel-searchbar {
         gap: 15px;
     }
 
-    adminpanel-searchbar {
+    admin-searchbar {
         width: auto;
     }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-locations',
+  selector: 'admin-locations',
   templateUrl: './locations.component.html',
   styleUrls: ['./locations.component.css']
 })

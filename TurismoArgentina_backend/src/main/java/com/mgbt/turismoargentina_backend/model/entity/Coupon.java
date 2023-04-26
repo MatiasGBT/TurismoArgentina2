@@ -1,9 +1,11 @@
 package com.mgbt.turismoargentina_backend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,4 +33,8 @@ public class Coupon implements Serializable {
     @Column(name = "finish_date")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date finishDate;
+
+    @OneToMany(mappedBy="coupon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RedeemedCoupon> redeemedCoupons;
 }

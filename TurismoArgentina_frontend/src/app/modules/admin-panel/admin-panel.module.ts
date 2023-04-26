@@ -16,6 +16,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ProvinceFormComponent } from './pages/provinces/pages/province-form/province-form.component';
 import { LocationFormComponent } from './pages/locations/pages/location-form/location-form.component';
 import { ActivityFormComponent } from './pages/activities/pages/activity-form/activity-form.component';
+import { CouponsComponent } from './pages/coupons/coupons.component';
 
 
 
@@ -34,7 +35,8 @@ import { ActivityFormComponent } from './pages/activities/pages/activity-form/ac
     SearchBarComponent,
     ProvinceFormComponent,
     LocationFormComponent,
-    ActivityFormComponent
+    ActivityFormComponent,
+    CouponsComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-provinces',
+  selector: 'admin-provinces',
   templateUrl: './provinces.component.html',
   styleUrls: ['./provinces.component.css']
 })

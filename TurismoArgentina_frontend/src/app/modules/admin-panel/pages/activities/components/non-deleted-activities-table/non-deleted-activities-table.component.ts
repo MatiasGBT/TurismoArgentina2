@@ -5,11 +5,11 @@ import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'adminpage-activities-nondeletedtable',
+  selector: 'admin-activities-nondeletedtable',
   templateUrl: './non-deleted-activities-table.component.html',
   styleUrls: ['./non-deleted-activities-table.component.css']
 })
-export class NonDeletedActivitiesTableComponent  implements OnInit {
+export class NonDeletedActivitiesTableComponent implements OnInit {
   public activities: Activity[] = [];
   public page: number = 0;
   public isFirstPage: boolean = true;

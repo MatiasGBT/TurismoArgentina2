@@ -24,8 +24,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/provinces/admin", "/api/provinces/admin/**").hasRole(ADMIN)
                 .requestMatchers("/api/locations/admin", "/api/locations/admin/**").hasRole(ADMIN)
                 .requestMatchers("/api/activities/admin", "/api/activities/admin/**").hasRole(ADMIN)
-                .requestMatchers("/api/users/admin", "/api/activities/admin/**").hasRole(ADMIN)
-                .requestMatchers("/api/purchases/admin", "/api/activities/admin/**").hasRole(ADMIN)
+                .requestMatchers("/api/users/admin", "/api/users/admin/**").hasRole(ADMIN)
+                .requestMatchers("/api/purchases/admin", "/api/purchases/admin/**").hasRole(ADMIN)
+                .requestMatchers("/api/coupons/admin", "/api/coupons/admin/**").hasRole(ADMIN)
                 .anyRequest().permitAll();
         http.oauth2ResourceServer()
                 .jwt()

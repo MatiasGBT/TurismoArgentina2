@@ -8,6 +8,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ProvinceFormComponent } from './pages/provinces/pages/province-form/province-form.component';
 import { LocationFormComponent } from './pages/locations/pages/location-form/location-form.component';
 import { ActivityFormComponent } from './pages/activities/pages/activity-form/activity-form.component';
+import { CouponsComponent } from './pages/coupons/coupons.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
   {path: 'activities/:id', component: ActivityFormComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
   {path: 'activities/add', component: ActivityFormComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
+  {path: 'coupons', component: CouponsComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
 ]
 
 @NgModule({

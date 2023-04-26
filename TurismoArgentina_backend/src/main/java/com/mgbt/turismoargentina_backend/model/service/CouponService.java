@@ -4,9 +4,9 @@ import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entity.Coupon;
 import com.mgbt.turismoargentina_backend.model.repository.ICouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @Service
 public class CouponService implements ICouponService{
@@ -16,8 +16,14 @@ public class CouponService implements ICouponService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Coupon> getAll() {
-        return repository.findAll();
+    public Page<Coupon> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coupon> getAllByName(String name, Pageable pageable) {
+        return repository.findByNameContaining(name, pageable);
     }
 
     @Override

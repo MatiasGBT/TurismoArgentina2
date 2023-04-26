@@ -1,0 +1,47 @@
+<section>
+    <h1>{{'NAVBAR.COUPONS' | translate}}</h1>
+
+    <app-spinner *ngIf="!couponsAreLoaded"></app-spinner>
+
+    <p class="no-coupons" *ngIf="couponsAreLoaded && coupons.length == 0">
+        {{'ADMIN_PANEL.COUPONS.NO_COUPONS' | translate}}
+    </p>
+
+    <div class="table-container" *ngIf="couponsAreLoaded && coupons.length > 0">
+        <div id="table-edit-container">
+            <a [routerLink]="['/admin/coupons/add']">
+                <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.COUPONS.ADD' | translate}}
+            </a>
+            <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>{{'ADMIN_PANEL.COUPONS.NAME' | translate}}</th>
+                    <th class="no-mobile">{{'ADMIN_PANEL.COUPONS.DISCOUNT' | translate}}</th>
+                    <th class="no-mobile">{{'ADMIN_PANEL.COUPONS.START_DATE' | translate}}</th>
+                    <th class="no-mobile">{{'ADMIN_PANEL.COUPONS.FINISH_DATE' | translate}}</th>
+                    <th>{{'ADMIN_PANEL.COUPONS.ACTIONS' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let coupon of coupons">
+                    <td>{{coupon.name}}</td>
+                    <td class="no-mobile">{{coupon.discount}}%</td>
+                    <td class="no-mobile">{{coupon.startDate | date:'short'}}</td>
+                    <td class="no-mobile">{{coupon.finishDate | date:'short'}}</td>
+                    <td class="table-btns">
+                        <a [routerLink]="['/admin/coupons', coupon.idCoupon]"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
+                        <hr>
+                        <i class="fa-solid fa-trash" (click)="showDeleteModal(coupon)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage"
+            [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+    </div>
+</section>

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -32,6 +33,34 @@ public class CouponController {
 
     @Autowired
     MessageSource messageSource;
+
+    @GetMapping("/admin/list/{page}")
+    @Operation(summary = "Gets all coupons paginated.")
+    @ApiResponse(responseCode = "200", description = "Array of coupons",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
+    public ResponseEntity<?> getAll(@PathVariable Integer page, Locale locale) {
+        try {
+            Pageable pageable = PageRequest.of(page, 9);
+            Page<Coupon> coupons = this.couponService.getAll(pageable);
+            return new ResponseEntity<>(coupons, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @GetMapping("/admin/list/{page}/{name}")
+    @Operation(summary = "Gets all coupons paginated and filtered by name.")
+    @ApiResponse(responseCode = "200", description = "Array of coupons",
+            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
+    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable String name, Locale locale) {
+        try {
+            Pageable pageable = PageRequest.of(page, 9);
+            Page<Coupon> coupons = this.couponService.getAllByName(name, pageable);
+            return new ResponseEntity<>(coupons, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
 
     @PostMapping("/{couponName}/{idUser}")
     @Operation(summary = "Redeems a coupon if it exists and if the user has not redeemed it previously")
@@ -90,6 +119,28 @@ public class CouponController {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @DeleteMapping("/admin/{id}")
+    @Operation(summary = "Delete a coupon from the database.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coupon deleted",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) }),
+            @ApiResponse(responseCode = "404", description = "Coupon not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> delete(@PathVariable Long id, Locale locale) {
+        try {
+            Coupon coupon = this.couponService.findById(id);
+            this.couponService.delete(coupon);
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", messageSource.getMessage("couponController.deleted", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
         }
     }
 }

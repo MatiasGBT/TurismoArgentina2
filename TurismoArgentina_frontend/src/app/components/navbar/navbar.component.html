@@ -84,6 +84,12 @@
             </a>
         </li>
         <li>
+            <a [routerLink]="['/admin/coupons']" (click)="toggleMenu()" *ngIf="userIsAdmin">
+                <i class="fa-solid fa-tag"></i>
+                <p>{{'NAVBAR.COUPONS' | translate}}</p>
+            </a>
+        </li>
+        <li>
             <a [routerLink]="['/shop']" (click)="toggleMenu()" *ngIf="userIsAdmin">
                 <i class="fa-solid fa-shop"></i>
                 <p>{{'NAVBAR.SHOP' | translate}}</p>

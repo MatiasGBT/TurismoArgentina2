@@ -21,6 +21,7 @@
         "LOGIN": "Iniciar sesión",
         "ADMIN": "Panel de administración",
         "DASHBOARD": "Panel de control",
+        "COUPONS": "Cupones",
         "SHOP": "Tienda"
     },
     "PAGINATOR": {
@@ -242,6 +243,22 @@
                 "PRICE_REQUIRED": "El precio es requerido",
                 "LOCATION": "Localidad"
             }
+        },
+        "COUPONS": {
+            "NAME": "Nombre",
+            "DISCOUNT": "Descuento",
+            "START_DATE": "Fecha de inicio",
+            "FINISH_DATE": "Fecha de finalización",
+            "ACTIONS": "Acciones",
+            "DELETE_MODAL": {
+                "TITLE": "¿Está seguro?",
+                "TEXT": "Esta acción no puede deshacerse",
+                "CONFIRM_BTN": "Eliminar",
+                "CANCEL_BTN": "Cancelar"
+            },
+            "NO_COUPONS": "No hay cupones en la base de datos",
+            "ADD": "Agregar cupón",
+            "EDIT": "Editar cupón"
         }
     }
 }

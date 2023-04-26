@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'adminpanel-searchbar',
+  selector: 'admin-searchbar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })

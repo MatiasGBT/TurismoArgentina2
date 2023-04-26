@@ -21,6 +21,7 @@
         "LOGIN": "Login",
         "ADMIN": "Admin panel",
         "DASHBOARD": "Dashboard",
+        "COUPONS": "Coupons",
         "SHOP": "Shop"
     },
     "PAGINATOR": {
@@ -242,6 +243,22 @@
                 "PRICE_REQUIRED": "Price is required",
                 "LOCATION": "Location"
             }
+        },
+        "COUPONS": {
+            "NAME": "Name",
+            "DISCOUNT": "Discount",
+            "START_DATE": "Start date",
+            "FINISH_DATE": "Finish date",
+            "ACTIONS": "Actions",
+            "DELETE_MODAL": {
+                "TITLE": "Are you sure?",
+                "TEXT": "This action cannot be undone",
+                "CONFIRM_BTN": "Delete",
+                "CANCEL_BTN": "Cancel"
+            },
+            "NO_COUPONS": "No coupons in the database",
+            "ADD": "Add coupon",
+            "EDIT": "Edit coupon"
         }
     }
 }

@@ -5,7 +5,7 @@ import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'adminpage-activities-deletedtable',
+  selector: 'admin-activities-deletedtable',
   templateUrl: './deleted-activities-table.component.html',
   styleUrls: ['./deleted-activities-table.component.css']
 })

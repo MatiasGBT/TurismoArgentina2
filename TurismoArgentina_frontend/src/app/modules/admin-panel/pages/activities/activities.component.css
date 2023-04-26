@@ -19,8 +19,8 @@ section h1 {
     flex-direction: column;
 }
 
-adminpage-activities-nondeletedtable,
-adminpage-activities-deletedtable {
+admin-activities-nondeletedtable,
+admin-activities-deletedtable {
     width: 100%;
 }
 

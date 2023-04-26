@@ -7,7 +7,7 @@ import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'adminpage-locations-nondeletedtable',
+  selector: 'admin-locations-nondeletedtable',
   templateUrl: './non-deleted-locations-table.component.html',
   styleUrls: ['./non-deleted-locations-table.component.css']
 })

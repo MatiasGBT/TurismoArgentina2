@@ -19,8 +19,8 @@ section h1 {
     flex-direction: column;
 }
 
-adminpage-provinces-nondeletedtable,
-adminpage-provinces-deletedtable {
+admin-provinces-nondeletedtable,
+admin-provinces-deletedtable {
     width: 100%;
 }
 

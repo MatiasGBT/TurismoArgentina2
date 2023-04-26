@@ -6,7 +6,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'admin-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

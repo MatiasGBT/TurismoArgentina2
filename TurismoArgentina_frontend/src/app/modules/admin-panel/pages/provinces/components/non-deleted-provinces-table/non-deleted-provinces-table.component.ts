@@ -9,7 +9,7 @@ import { TranslateTextService } from 'src/app/services/translate-text.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'adminpage-provinces-nondeletedtable',
+  selector: 'admin-provinces-nondeletedtable',
   templateUrl: './non-deleted-provinces-table.component.html',
   styleUrls: ['./non-deleted-provinces-table.component.css']
 })
