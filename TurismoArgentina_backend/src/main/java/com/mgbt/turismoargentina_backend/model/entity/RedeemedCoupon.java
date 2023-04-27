@@ -34,7 +34,7 @@ public class RedeemedCoupon implements Serializable {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","redeemedCoupons"})
     @JoinColumn(name = "id_coupon", nullable = false)
     private Coupon coupon;
 

@@ -258,7 +258,20 @@
             },
             "NO_COUPONS": "No coupons in the database",
             "ADD": "Add coupon",
-            "EDIT": "Edit coupon"
+            "EDIT": "Edit coupon",
+            "FORM": {
+                "NAME": "Name",
+                "NAME_REQUIRED": "Name is required",
+                "NAME_MAXLENGTH": "Name cannot exceed 30 characters",
+                "DISCOUNT": "Discount",
+                "DISCOUNT_REQUIRED": "Discount is required",
+                "DISCOUNT_MIN": "Discount must be greater than 0",
+                "DISCOUNT_MAX": "Discount cannot exceed 100%",
+                "START_DATE": "Start date",
+                "START_DATE_REQUIRED": "Start date is required",
+                "FINISH_DATE": "Finish date",
+                "FINISH_DATE_REQUIRED": "Finish date is required"
+            }
         }
     }
 }

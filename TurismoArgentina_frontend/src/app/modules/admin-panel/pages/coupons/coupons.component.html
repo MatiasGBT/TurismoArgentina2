@@ -29,8 +29,8 @@
                 <tr *ngFor="let coupon of coupons">
                     <td>{{coupon.name}}</td>
                     <td class="no-mobile">{{coupon.discount}}%</td>
-                    <td class="no-mobile">{{coupon.startDate | date:'short'}}</td>
-                    <td class="no-mobile">{{coupon.finishDate | date:'short'}}</td>
+                    <td class="no-mobile">{{coupon.startDate | date:'shortDate'}}</td>
+                    <td class="no-mobile">{{coupon.finishDate | date:'shortDate'}}</td>
                     <td class="table-btns">
                         <a [routerLink]="['/admin/coupons', coupon.idCoupon]"><i
                                 class="fa-solid fa-pen-to-square"></i></a>

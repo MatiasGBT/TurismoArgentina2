@@ -1,0 +1,99 @@
+section {
+    width: 100%;
+    min-height: 80vh;
+    padding: 75px 15px 15px 15px;
+    background: white;
+}
+
+section h1 {
+    font-size: 3rem;
+    color: black;
+    font-family: 'Pangea';
+}
+
+form {
+    font-family: 'Pangea';
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 5px;
+    background: rgb(221, 221, 221);
+    border: none;
+    border-bottom: 2px solid rgb(184, 184, 184);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+#submit-btn {
+    margin-top: 15px;
+    border-bottom: none;
+    background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);
+    background: linear-gradient(to right, #56CCF2, #2F80ED);
+    color: white;
+    cursor: pointer;
+}
+
+#submit-btn:hover {
+    background: -webkit-linear-gradient(to right, #4bafd1, #286fca);
+    background: linear-gradient(to right, #4bafd1, #286fca);
+}
+
+ul {
+    font-family: 'Pangea';
+    color: red;
+    padding-left: 15px;
+}
+
+ul li {
+    margin-bottom: 15px;
+}
+
+.required {
+    color: red;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 105px 25px 25px 25px;
+    }
+
+    section h1 {
+        font-size: 4rem;
+    }
+
+    form {
+        width: 65%;
+        margin: 0 auto;
+    }
+
+    ul {
+        padding-left: 25px;
+    }
+}
+
+@media (min-width: 1038px) {
+    section {
+        background-image: url("../../../../../../../assets/img/edit.svg");
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 25px);
+        background-position-y: center;
+        background-size: 30rem;
+    }
+
+    section h1 {
+        font-size: 5rem;
+    }
+
+    form {
+        width: 40%;
+        margin: 0;
+    }
+}

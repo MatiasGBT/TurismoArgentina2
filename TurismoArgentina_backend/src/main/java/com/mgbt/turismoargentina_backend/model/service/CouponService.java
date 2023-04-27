@@ -29,7 +29,7 @@ public class CouponService implements ICouponService{
     @Override
     @Transactional()
     public Coupon save(Coupon entity) {
-        return save(entity);
+        return repository.save(entity);
     }
 
     @Override

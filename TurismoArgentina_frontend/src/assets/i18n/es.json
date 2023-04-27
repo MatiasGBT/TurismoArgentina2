@@ -198,7 +198,7 @@
             "FORM": {
                 "NAME": "Nombre",
                 "NAME_REQUIRED": "El nombre es requerido",
-                "NAME_MAXLENGTH": "El nombre no puede exceder los 20 caracteres",
+                "NAME_MAXLENGTH": "El nombre no puede exceder los 45 caracteres",
                 "DESCRIPTION": "Descripción",
                 "DESCRIPTION_REQUIRED": "La descripción es requerida",
                 "DESCRIPTION_MAXLENGTH": "La descripción no puede exceder los 600 caracteres",
@@ -231,7 +231,7 @@
             "FORM": {
                 "NAME": "Nombre",
                 "NAME_REQUIRED": "El nombre es requerido",
-                "NAME_MAXLENGTH": "El nombre no puede exceder los 20 caracteres",
+                "NAME_MAXLENGTH": "El nombre no puede exceder los 65 caracteres",
                 "DESCRIPTION": "Descripción",
                 "DESCRIPTION_REQUIRED": "La descripción es requerida",
                 "DESCRIPTION_MAXLENGTH": "La descripción no puede exceder los 600 caracteres",
@@ -258,7 +258,20 @@
             },
             "NO_COUPONS": "No hay cupones en la base de datos",
             "ADD": "Agregar cupón",
-            "EDIT": "Editar cupón"
+            "EDIT": "Editar cupón",
+            "FORM": {
+                "NAME": "Nombre",
+                "NAME_REQUIRED": "El nombre es requerido",
+                "NAME_MAXLENGTH": "Name cannot exceed 30 characters",
+                "DISCOUNT": "Descuento",
+                "DISCOUNT_REQUIRED": "El descuento es requerido",
+                "DISCOUNT_MIN": "El descuento debe ser mayor a 0",
+                "DISCOUNT_MAX": "El descuento no puede exceder el 100%",
+                "START_DATE": "Fecha de inicio",
+                "START_DATE_REQUIRED": "La fecha de inicio es requerida",
+                "FINISH_DATE": "Fecha de finalización",
+                "FINISH_DATE_REQUIRED": "La fecha de finalización es requerida"
+            }
         }
     }
 }

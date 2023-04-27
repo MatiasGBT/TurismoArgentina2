@@ -7,11 +7,13 @@ import com.mgbt.turismoargentina_backend.utility_classes.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -33,6 +35,25 @@ public class CouponController {
 
     @Autowired
     MessageSource messageSource;
+
+    @GetMapping("/admin/{id}")
+    @Operation(summary = "Gets a coupon by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coupon object",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Coupon.class)) }),
+            @ApiResponse(responseCode = "404", description = "Coupon not found",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> getById(@PathVariable Long id, Locale locale) {
+        try {
+            Coupon coupon = this.couponService.findById(id);
+            return new ResponseEntity<>(coupon, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (EntityNotFoundException ex) {
+            return this.exceptionService.throwEntityNotFoundException(ex, locale);
+        }
+    }
 
     @GetMapping("/admin/list/{page}")
     @Operation(summary = "Gets all coupons paginated.")
@@ -115,10 +136,53 @@ public class CouponController {
         try {
             redeemedCouponService.save(redeemedCoupon);
             Map<String, Object> response = new HashMap<>();
+            response.put("message", messageSource.getMessage("couponController.redeemedUpdated", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PutMapping("/admin")
+    @Operation(summary = "Update a coupon with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coupon updated",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Coupon is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> update(@Valid @RequestBody Coupon coupon, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            couponService.save(coupon);
             response.put("message", messageSource.getMessage("couponController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
+        }
+    }
+
+    @PostMapping("/admin")
+    @Operation(summary = "Creates a coupon with the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Coupon created",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CouponWithMessage.class))}),
+            @ApiResponse(responseCode = "400", description = "Coupon is not valid",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
+    public ResponseEntity<?> create(@Valid @RequestBody Coupon coupon, BindingResult result, Locale locale) {
+        try {
+            if (result.hasErrors())  return exceptionService.throwValidationErrorsException(result, locale);
+            Map<String, Object> response = new HashMap<>();
+            coupon = couponService.save(coupon);
+            response.put("coupon", coupon);
+            response.put("message", messageSource.getMessage("couponController.created", null, locale));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (DataAccessException ex) {
+            return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (Exception ex) {
+            return this.exceptionService.throwNormalException(ex, locale);
         }
     }
 

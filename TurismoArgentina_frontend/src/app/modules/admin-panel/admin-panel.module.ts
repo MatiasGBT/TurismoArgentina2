@@ -17,6 +17,7 @@ import { ProvinceFormComponent } from './pages/provinces/pages/province-form/pro
 import { LocationFormComponent } from './pages/locations/pages/location-form/location-form.component';
 import { ActivityFormComponent } from './pages/activities/pages/activity-form/activity-form.component';
 import { CouponsComponent } from './pages/coupons/coupons.component';
+import { CouponFormComponent } from './pages/coupons/pages/coupon-form/coupon-form.component';
 
 
 
@@ -36,7 +37,8 @@ import { CouponsComponent } from './pages/coupons/coupons.component';
     ProvinceFormComponent,
     LocationFormComponent,
     ActivityFormComponent,
-    CouponsComponent
+    CouponsComponent,
+    CouponFormComponent
   ],
   imports: [
     CommonModule,
