@@ -31,6 +31,7 @@ export class AccountComponent implements OnInit {
   }
 
   public logout(): void {
+    sessionStorage.removeItem('user');
     this.keycloakService.getKeycloakInstance().logout();
   }
 }

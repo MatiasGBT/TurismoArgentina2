@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CouponsComponent } from './coupons.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { KeycloakAngularModule } from 'keycloak-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CouponsComponent', () => {
   let component: CouponsComponent;
@@ -8,6 +11,7 @@ describe('CouponsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, KeycloakAngularModule, TranslateModule.forRoot()],
       declarations: [ CouponsComponent ]
     })
     .compileComponents();
