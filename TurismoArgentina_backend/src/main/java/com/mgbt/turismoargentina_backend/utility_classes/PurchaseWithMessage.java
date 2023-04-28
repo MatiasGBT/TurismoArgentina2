@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.Purchase;
+import com.mgbt.turismoargentina_backend.model.entities.Purchase;
 
 public class PurchaseWithMessage {
     private Purchase purchase;

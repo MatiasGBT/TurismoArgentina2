@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.User;
+import com.mgbt.turismoargentina_backend.model.entities.User;
 
 public class JsonUserMessage {
     private String message;

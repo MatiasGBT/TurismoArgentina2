@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.Location;
+import com.mgbt.turismoargentina_backend.model.entities.Location;
 
 public class LocationWithMessage {
     private Location location;

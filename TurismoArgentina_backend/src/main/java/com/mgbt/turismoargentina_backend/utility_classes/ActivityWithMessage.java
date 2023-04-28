@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.Activity;
+import com.mgbt.turismoargentina_backend.model.entities.Activity;
 
 public class ActivityWithMessage {
     private Activity activity;

@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.RedeemedCoupon;
+import com.mgbt.turismoargentina_backend.model.entities.RedeemedCoupon;
 
 public class RedeemedCouponWithMessage {
     private RedeemedCoupon redeemedCoupon;

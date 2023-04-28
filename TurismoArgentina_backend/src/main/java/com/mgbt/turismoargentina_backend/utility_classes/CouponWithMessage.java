@@ -1,6 +1,6 @@
 package com.mgbt.turismoargentina_backend.utility_classes;
 
-import com.mgbt.turismoargentina_backend.model.entity.Coupon;
+import com.mgbt.turismoargentina_backend.model.entities.Coupon;
 
 public class CouponWithMessage {
     private Coupon coupon;
