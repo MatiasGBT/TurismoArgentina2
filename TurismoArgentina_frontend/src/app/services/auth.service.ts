@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -19,7 +19,7 @@ export class AuthService {
 
   public login(): Observable<any> {
     this.token = this.keycloakService.getKeycloakInstance().token || '';
-    let payload = this.obtainPayload(this.token);
+    let payload = this.getPayload();
     let user = this.createUserWithPayload(payload);
     return this.http.post<any>(this.baseUrl + "login", user).pipe(
       catchError(ex => {
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   public hasRole(role: string): boolean {
-    let payload = this.obtainPayload(this.token);
+    let payload = this.getPayload();
     return payload.resource_access.springbootbackend.roles.includes(role);
   }
 
@@ -42,8 +42,8 @@ export class AuthService {
     this.keycloakUser = user;
   }
 
-  private obtainPayload(access_token:string): any {
-    return JSON.parse(window.atob(access_token.split(".")[1]));
+  private getPayload(): any {
+    return JSON.parse(window.atob(this.token.split(".")[1]));
   }
 
   private createUserWithPayload(payload: any): User {

@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  frontend: 
+    build: /TurismoArgentina_frontend
+    ports:
+      - "4200:4200"
+
+  backend: 
+    build: /TurismoArgentina_backend
+    depends_on:
+      - postgresql
+      - keycloak
+    ports:
+      - "8090:8090"
+    links: 
+      - postgresql
+    volumes:
+      - ./TurismoArgentina_backend/images:/images
+
+  keycloak: 
+    build: /Keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+      KEYCLOAK_HOSTNAME: keycloak
+      KEYCLOAK_FRONTEND_URL: http://keycloak:8080/auth
+  
+  postgresql:
+    image: postgres:15.2
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 34Jq6H2DtNJ%
+      POSTGRES_DB: turismo_argentina
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+      - ./PostgreSQL:/docker-entrypoint-initdb.d
+
+volumes:
+  postgresql-data:

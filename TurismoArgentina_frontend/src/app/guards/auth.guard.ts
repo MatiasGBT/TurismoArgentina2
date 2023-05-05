@@ -32,7 +32,6 @@ export class AuthGuard extends KeycloakAuthGuard {
     if (this.authService.tokenIsEmpty()) {
       this.authService.login().subscribe(response => {
         this.authService.setKeycloakUser(response.user);
-        sessionStorage.setItem('user', JSON.stringify(response.user));
         console.log(response.message);
         this.authService.userLoggedInEvent.emit();
       });

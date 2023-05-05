@@ -164,20 +164,6 @@ ALTER TABLE turismo_argentina.provinces ALTER COLUMN id_province ADD GENERATED A
 
 
 --
--- TOC entry 232 (class 1259 OID 24912)
--- Name: puchases_locations; Type: TABLE; Schema: turismo_argentina; Owner: postgres
---
-
-CREATE TABLE turismo_argentina.puchases_locations (
-    id_puchase_location bigint NOT NULL,
-    id_purchase bigint NOT NULL,
-    id_location bigint NOT NULL
-);
-
-
-ALTER TABLE turismo_argentina.puchases_locations OWNER TO postgres;
-
---
 -- TOC entry 229 (class 1259 OID 24881)
 -- Name: purchases_locations; Type: TABLE; Schema: turismo_argentina; Owner: postgres
 --
@@ -193,11 +179,11 @@ ALTER TABLE turismo_argentina.purchases_locations OWNER TO postgres;
 
 --
 -- TOC entry 228 (class 1259 OID 24880)
--- Name: puchases_locations_id_puchase_location_seq; Type: SEQUENCE; Schema: turismo_argentina; Owner: postgres
+-- Name: purchases_locations_id_puchase_location_seq; Type: SEQUENCE; Schema: turismo_argentina; Owner: postgres
 --
 
 ALTER TABLE turismo_argentina.purchases_locations ALTER COLUMN id_puchase_location ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME turismo_argentina.puchases_locations_id_puchase_location_seq
+    SEQUENCE NAME turismo_argentina.purchases_locations_id_puchase_location_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -214,7 +200,9 @@ ALTER TABLE turismo_argentina.purchases_locations ALTER COLUMN id_puchase_locati
 CREATE TABLE turismo_argentina.purchases (
     id_purchase bigint NOT NULL,
     date timestamp with time zone NOT NULL,
-    id_user bigint NOT NULL
+    id_user bigint NOT NULL,
+    refunded boolean DEFAULT false NOT NULL,
+    price double precision NOT NULL
 );
 
 
@@ -439,62 +427,6 @@ INSERT INTO turismo_argentina.provinces (id_province, name, description, image, 
 INSERT INTO turismo_argentina.provinces (id_province, name, description, image, deletion_date) OVERRIDING SYSTEM VALUE VALUES (1, 'Buenos Aires', 'Buenos Aires es la gran capital cosmopolita de Argentina. Su centro es la Plaza de Mayo, rodeada de imponentes edificios del siglo XIX, incluida la Casa Rosada, el icónico palacio presidencial que tiene varios balcones. Entre otras atracciones importantes, se incluyen el Teatro Colón, un lujoso teatro de ópera de 1908 con cerca de 2,500 asientos, y el moderno museo MALBA, que exhibe arte latinoamericano.', 'bsas.jpg', NULL);
 INSERT INTO turismo_argentina.provinces (id_province, name, description, image, deletion_date) OVERRIDING SYSTEM VALUE VALUES (10, 'Entre Ríos', 'Entre Ríos es una provincia de la región de Mesopotamia en el noreste de Argentina, entre los ríos Paraná y Uruguay. Es conocida por sus fuentes termales, como las de Federación, y su tradición de cultivar la yerba mate y beber el mate. Alberga 2 parques nacionales: Predelta, abundante en especies de aves, y El Palmar, una de las reservas que quedan de la palma yatay que alguna vez cubrió la región.', 'entre_rios.jpg', NULL);
 
-
---
--- TOC entry 3407 (class 0 OID 24912)
--- Dependencies: 232
--- Data for Name: puchases_locations; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-
-
---
--- TOC entry 3402 (class 0 OID 24869)
--- Dependencies: 227
--- Data for Name: purchases; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-INSERT INTO turismo_argentina.purchases (id_purchase, date, id_user) OVERRIDING SYSTEM VALUE VALUES (1, '2023-03-13', 1);
-
-
---
--- TOC entry 3406 (class 0 OID 24897)
--- Dependencies: 231
--- Data for Name: purchases_activities; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-INSERT INTO turismo_argentina.purchases_activities (id_purchase_activity, id_purchase, id_activity) OVERRIDING SYSTEM VALUE VALUES (1, 1, 1);
-INSERT INTO turismo_argentina.purchases_activities (id_purchase_activity, id_purchase, id_activity) OVERRIDING SYSTEM VALUE VALUES (2, 1, 2);
-INSERT INTO turismo_argentina.purchases_activities (id_purchase_activity, id_purchase, id_activity) OVERRIDING SYSTEM VALUE VALUES (3, 1, 3);
-
-
---
--- TOC entry 3404 (class 0 OID 24881)
--- Dependencies: 229
--- Data for Name: purchases_locations; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-INSERT INTO turismo_argentina.purchases_locations (id_puchase_location, id_purchase, id_location) OVERRIDING SYSTEM VALUE VALUES (1, 1, 1);
-INSERT INTO turismo_argentina.purchases_locations (id_puchase_location, id_purchase, id_location) OVERRIDING SYSTEM VALUE VALUES (2, 1, 2);
-
-
---
--- TOC entry 3400 (class 0 OID 24852)
--- Dependencies: 225
--- Data for Name: redeemed_coupons; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-
-
---
--- TOC entry 3396 (class 0 OID 24840)
--- Dependencies: 221
--- Data for Name: users; Type: TABLE DATA; Schema: turismo_argentina; Owner: postgres
---
-
-INSERT INTO turismo_argentina.users (id_user, username, name, last_name, creation_date, deletion_date) OVERRIDING SYSTEM VALUE VALUES (1, 'user', 'pepe', 'test', '2023-03-13', NULL);
-
-
 --
 -- TOC entry 3413 (class 0 OID 0)
 -- Dependencies: 218
@@ -529,15 +461,6 @@ SELECT pg_catalog.setval('turismo_argentina.locations_id_location_seq', 1, false
 --
 
 SELECT pg_catalog.setval('turismo_argentina.provinces_id_province_seq', 10, true);
-
-
---
--- TOC entry 3417 (class 0 OID 0)
--- Dependencies: 228
--- Name: puchases_locations_id_puchase_location_seq; Type: SEQUENCE SET; Schema: turismo_argentina; Owner: postgres
---
-
-SELECT pg_catalog.setval('turismo_argentina.puchases_locations_id_puchase_location_seq', 1, false);
 
 
 --
@@ -610,15 +533,6 @@ ALTER TABLE ONLY turismo_argentina.locations
 
 ALTER TABLE ONLY turismo_argentina.provinces
     ADD CONSTRAINT provinces_pkey PRIMARY KEY (id_province);
-
-
---
--- TOC entry 3233 (class 2606 OID 24885)
--- Name: purchases_locations puchases_locations_pkey; Type: CONSTRAINT; Schema: turismo_argentina; Owner: postgres
---
-
-ALTER TABLE ONLY turismo_argentina.purchases_locations
-    ADD CONSTRAINT puchases_locations_pkey PRIMARY KEY (id_puchase_location);
 
 
 --
@@ -701,16 +615,6 @@ ALTER TABLE ONLY turismo_argentina.purchases_activities
 ALTER TABLE ONLY turismo_argentina.purchases_locations
     ADD CONSTRAINT fk_pl_location FOREIGN KEY (id_location) REFERENCES turismo_argentina.locations(id_location);
 
-
---
--- TOC entry 3245 (class 2606 OID 24915)
--- Name: puchases_locations fk_pl_location; Type: FK CONSTRAINT; Schema: turismo_argentina; Owner: postgres
---
-
-ALTER TABLE ONLY turismo_argentina.puchases_locations
-    ADD CONSTRAINT fk_pl_location FOREIGN KEY (id_location) REFERENCES turismo_argentina.locations(id_location);
-
-
 --
 -- TOC entry 3242 (class 2606 OID 24891)
 -- Name: purchases_locations fk_pl_purchase; Type: FK CONSTRAINT; Schema: turismo_argentina; Owner: postgres
@@ -718,16 +622,6 @@ ALTER TABLE ONLY turismo_argentina.puchases_locations
 
 ALTER TABLE ONLY turismo_argentina.purchases_locations
     ADD CONSTRAINT fk_pl_purchase FOREIGN KEY (id_purchase) REFERENCES turismo_argentina.purchases(id_purchase);
-
-
---
--- TOC entry 3246 (class 2606 OID 24920)
--- Name: puchases_locations fk_pl_purchase; Type: FK CONSTRAINT; Schema: turismo_argentina; Owner: postgres
---
-
-ALTER TABLE ONLY turismo_argentina.puchases_locations
-    ADD CONSTRAINT fk_pl_purchase FOREIGN KEY (id_purchase) REFERENCES turismo_argentina.purchases(id_purchase);
-
 
 --
 -- TOC entry 3240 (class 2606 OID 24874)
