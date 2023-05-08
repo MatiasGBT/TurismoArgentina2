@@ -3,11 +3,7 @@
 
     <app-spinner *ngIf="!couponsAreLoaded"></app-spinner>
 
-    <p class="no-coupons" *ngIf="couponsAreLoaded && coupons.length == 0">
-        {{'ADMIN_PANEL.COUPONS.NO_COUPONS' | translate}}
-    </p>
-
-    <div class="table-container" *ngIf="couponsAreLoaded && coupons.length > 0">
+    <div *ngIf="couponsAreLoaded" [ngClass]="coupons.length > 0 ? 'table-container-with-content' : 'table-container-without-content'">
         <div id="table-edit-container">
             <a [routerLink]="['/admin/coupons/add']">
                 <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.COUPONS.ADD' | translate}}
@@ -15,7 +11,7 @@
             <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
         </div>
 
-        <table>
+        <table *ngIf="coupons.length > 0">
             <thead>
                 <tr>
                     <th>{{'ADMIN_PANEL.COUPONS.NAME' | translate}}</th>
@@ -42,6 +38,10 @@
         </table>
 
         <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage"
-            [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+            [isLastPage]="isLastPage" [totalPages]="totalPages" *ngIf="coupons.length > 0"></app-paginator>
     </div>
+
+    <p class="no-coupons" *ngIf="couponsAreLoaded && coupons.length == 0">
+        {{'ADMIN_PANEL.COUPONS.NO_COUPONS' | translate}}
+    </p>
 </section>

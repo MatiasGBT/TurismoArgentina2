@@ -1,13 +1,9 @@
 <app-spinner *ngIf="!provincesAreLoaded"></app-spinner>
 
-<p class="no-provinces" *ngIf="provincesAreLoaded && provinces.length == 0">
-    {{'ADMIN_PANEL.PROVINCES.NO_DELETED_PROVINCES' | translate}}
-</p>
-
-<div class="table-container" *ngIf="provincesAreLoaded && provinces.length > 0">
+<div *ngIf="provincesAreLoaded" [ngClass]="provinces.length > 0 ? 'table-container-with-content' : 'table-container-without-content'">
     <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
     
-    <table>
+    <table *ngIf="provinces.length > 0">
         <thead>
             <tr>
                 <th>{{'ADMIN_PANEL.PROVINCES.NAME' | translate}}</th>
@@ -26,5 +22,9 @@
         </tbody>
     </table>
     
-    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages" *ngIf="provinces.length > 0"></app-paginator>
 </div>
+
+<p class="no-provinces" *ngIf="provincesAreLoaded && provinces.length == 0">
+    {{'ADMIN_PANEL.PROVINCES.NO_DELETED_PROVINCES' | translate}}
+</p>

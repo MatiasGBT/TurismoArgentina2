@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
   }
 
   private loginIfTokenIsNotEmpty(): void {
-    console.log(this.keycloakService.getKeycloakInstance().token)
     if (this.keycloakService.getKeycloakInstance().token) {
       this.authService.login().subscribe(response => {
         this.authService.setKeycloakUser(response.user);

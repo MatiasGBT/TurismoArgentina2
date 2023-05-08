@@ -1,10 +1,6 @@
 <app-spinner *ngIf="!activitiesAreLoaded"></app-spinner>
 
-<p class="no-activities" *ngIf="activitiesAreLoaded && activities.length == 0">
-    {{'ADMIN_PANEL.ACTIVITIES.NO_ACTIVITIES' | translate}}
-</p>
-
-<div class="table-container" *ngIf="activitiesAreLoaded && activities.length > 0">
+<div *ngIf="activitiesAreLoaded" [ngClass]="activities.length > 0 ? 'table-container-with-content' : 'table-container-without-content'">
     <div id="table-edit-container">
         <a [routerLink]="['/admin/activities/add']">
             <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.ACTIVITIES.ADD' | translate}}
@@ -12,7 +8,7 @@
         <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
     </div>
 
-    <table>
+    <table *ngIf="activities.length > 0">
         <thead>
             <tr>
                 <th>{{'ADMIN_PANEL.ACTIVITIES.NAME' | translate}}</th>
@@ -34,5 +30,9 @@
     </table>
 
     <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage"
-        [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+        [isLastPage]="isLastPage" [totalPages]="totalPages" *ngIf="activities.length > 0"></app-paginator>
 </div>
+
+<p class="no-activities" *ngIf="activitiesAreLoaded && activities.length == 0">
+    {{'ADMIN_PANEL.ACTIVITIES.NO_ACTIVITIES' | translate}}
+</p>

@@ -1,10 +1,6 @@
 <app-spinner *ngIf="!locationsAreLoaded"></app-spinner>
 
-<p class="no-locations" *ngIf="locationsAreLoaded && locations.length == 0">
-    {{'ADMIN_PANEL.LOCATIONS.NO_LOCATIONS' | translate}}
-</p>
-
-<div class="table-container" *ngIf="locationsAreLoaded && locations.length > 0">
+<div *ngIf="locationsAreLoaded" [ngClass]="locations.length > 0 ? 'table-container-with-content' : 'table-container-without-content'">
     <div id="table-edit-container">
         <a [routerLink]="['/admin/locations/add']">
             <i class="fa-solid fa-plus"></i> {{'ADMIN_PANEL.LOCATIONS.ADD' | translate}}
@@ -12,7 +8,7 @@
         <admin-searchbar (searchEvent)="search($event)" (resetEvent)="resetSearch()"></admin-searchbar>
     </div>
 
-    <table>
+    <table *ngIf="locations.length > 0">
         <thead>
             <tr>
                 <th>{{'ADMIN_PANEL.LOCATIONS.NAME' | translate}}</th>
@@ -33,5 +29,9 @@
         </tbody>
     </table>
     
-    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages"></app-paginator>
+    <app-paginator (changePageEvent)="changePage($event)" [page]="page" [isFirstPage]="isFirstPage" [isLastPage]="isLastPage" [totalPages]="totalPages" *ngIf="locations.length > 0"></app-paginator>
 </div>
+
+<p class="no-locations" *ngIf="locationsAreLoaded && locations.length == 0">
+    {{'ADMIN_PANEL.LOCATIONS.NO_LOCATIONS' | translate}}
+</p>
