@@ -79,7 +79,7 @@ public class ProvinceService implements IProvinceService {
 
     @Override
     @Transactional(readOnly = true)
-    public Long getCount() {
+    public int getCount() {
         return repository.findCount();
     }
 }

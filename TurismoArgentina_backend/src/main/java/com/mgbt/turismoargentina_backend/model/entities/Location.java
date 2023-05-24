@@ -3,11 +3,17 @@ package com.mgbt.turismoargentina_backend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "locations", schema="turismo_argentina")
 public class Location implements Serializable {
@@ -47,5 +53,19 @@ public class Location implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","image","deletionDate"})
     @JoinColumn(name = "id_province", nullable = false)
+    @ToString.Exclude
     private Province province;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Location location = (Location) o;
+        return idLocation != null && Objects.equals(idLocation, location.idLocation);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

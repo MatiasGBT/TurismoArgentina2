@@ -17,5 +17,5 @@ public interface IProvinceService {
     Province findByName(String name);
     List<Province> getThreeRandom();
     List<String> getAllProvinceNames();
-    Long getCount();
+    int getCount();
 }

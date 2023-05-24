@@ -1,11 +1,17 @@
 package com.mgbt.turismoargentina_backend.model.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users", schema="turismo_argentina")
 public class User implements Serializable {
@@ -38,5 +44,18 @@ public class User implements Serializable {
     @PrePersist
     public void setUp() {
         this.creationDate = new Date();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return idUser != null && Objects.equals(idUser, user.idUser);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

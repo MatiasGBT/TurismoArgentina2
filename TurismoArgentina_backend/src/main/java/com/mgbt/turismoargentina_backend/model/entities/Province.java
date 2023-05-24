@@ -2,11 +2,17 @@ package com.mgbt.turismoargentina_backend.model.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "provinces", schema="turismo_argentina")
 public class Province implements Serializable {
@@ -37,4 +43,17 @@ public class Province implements Serializable {
     @Column(name = "deletion_date")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date deletionDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Province province = (Province) o;
+        return idProvince != null && Objects.equals(idProvince, province.idProvince);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

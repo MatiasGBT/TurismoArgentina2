@@ -29,11 +29,11 @@ public interface ILocationRepository extends JpaRepository<Location, Long> {
             "WHERE l.deletion_date IS NULL", nativeQuery = true)
     List<String> findAllLocationNames();
 
-    Page<Location> findByProvinceName(Pageable pageable, String provinceName);
+    Page<Location> findByProvinceNameAndDeletionDateIsNull(Pageable pageable, String provinceName);
 
-    List<Location> findByProvinceIdProvince(Long idProvince);
+    List<Location> findByProvinceIdProvinceAndDeletionDateIsNull(Long idProvince);
 
     @Query(value = "SELECT COUNT(*) FROM turismo_argentina.locations l " +
             "WHERE l.deletion_date IS NULL", nativeQuery = true)
-    Long findCount();
+    int findCount();
 }

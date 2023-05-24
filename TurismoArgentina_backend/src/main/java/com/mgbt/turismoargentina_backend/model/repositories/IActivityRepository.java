@@ -23,11 +23,11 @@ public interface IActivityRepository extends JpaRepository<Activity, Long> {
             nativeQuery = true)
     List<Activity> findFiveRandom();
 
-    Page<Activity> findByLocationName(Pageable pageable, String locationName);
+    Page<Activity> findByLocationNameAndDeletionDateIsNull(Pageable pageable, String locationName);
 
-    List<Activity> findByLocationIdLocation(Long idLocation);
+    List<Activity> findByLocationIdLocationAndDeletionDateIsNull(Long idLocation);
 
     @Query(value = "SELECT COUNT(*) FROM turismo_argentina.activities a " +
             "WHERE a.deletion_date IS NULL", nativeQuery = true)
-    Long findCount();
+    int findCount();
 }

@@ -69,18 +69,18 @@ public class ActivityService implements IActivityService {
     @Override
     @Transactional(readOnly = true)
     public Page<Activity> getByLocationName(Pageable pageable, String locationName) {
-        return repository.findByLocationName(pageable, locationName);
+        return repository.findByLocationNameAndDeletionDateIsNull(pageable, locationName);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Activity> getByLocationId(Long idLocation) {
-        return repository.findByLocationIdLocation(idLocation);
+        return repository.findByLocationIdLocationAndDeletionDateIsNull(idLocation);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Long getCount() {
+    public int getCount() {
         return repository.findCount();
     }
 

@@ -3,11 +3,17 @@ package com.mgbt.turismoargentina_backend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "activities", schema="turismo_argentina")
 public class Activity implements Serializable {
@@ -58,5 +64,19 @@ public class Activity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","description","image","price","deletionDate"})
     @JoinColumn(name = "id_location", nullable = false)
+    @ToString.Exclude
     private Location location;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Activity activity = (Activity) o;
+        return idActivity != null && Objects.equals(idActivity, activity.idActivity);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

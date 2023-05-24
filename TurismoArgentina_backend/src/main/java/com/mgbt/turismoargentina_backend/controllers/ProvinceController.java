@@ -152,7 +152,7 @@ public class ProvinceController {
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
     public ResponseEntity<?> getCount(Locale locale) {
         try {
-            Long count = this.provinceService.getCount();
+            int count = this.provinceService.getCount();
             return new ResponseEntity<>(count, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

@@ -80,18 +80,18 @@ public class LocationService implements ILocationService {
     @Override
     @Transactional(readOnly = true)
     public Page<Location> getByProvinceName(Pageable pageable, String provinceName) {
-        return repository.findByProvinceName(pageable, provinceName);
+        return repository.findByProvinceNameAndDeletionDateIsNull(pageable, provinceName);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Location> getByProvinceId(Long idProvince) {
-        return repository.findByProvinceIdProvince(idProvince);
+        return repository.findByProvinceIdProvinceAndDeletionDateIsNull(idProvince);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Long getCount() {
+    public int getCount() {
         return repository.findCount();
     }
 }

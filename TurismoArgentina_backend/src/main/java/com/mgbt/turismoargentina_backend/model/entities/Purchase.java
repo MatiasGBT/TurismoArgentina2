@@ -3,11 +3,17 @@ package com.mgbt.turismoargentina_backend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
 import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "purchases", schema="turismo_argentina")
 public class Purchase implements Serializable {
@@ -29,6 +35,7 @@ public class Purchase implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","name","lastName","creationDate","deletionDate"})
     @JoinColumn(name = "id_user", nullable = false)
     @NotNull(message = "User is mandatory")
+    @ToString.Exclude
     private User user;
 
     @ManyToMany
@@ -39,6 +46,7 @@ public class Purchase implements Serializable {
             name = "purchases_locations",
             joinColumns = @JoinColumn(name = "id_purchase"),
             inverseJoinColumns = @JoinColumn(name = "id_location"))
+    @ToString.Exclude
     List<Location> locations;
 
     @ManyToMany
@@ -49,6 +57,7 @@ public class Purchase implements Serializable {
             name = "purchases_activities",
             joinColumns = @JoinColumn(name = "id_purchase"),
             inverseJoinColumns = @JoinColumn(name = "id_activity"))
+    @ToString.Exclude
     List<Activity> activities;
 
     @Column(name = "price")
@@ -62,5 +71,18 @@ public class Purchase implements Serializable {
     public void setUp() {
         this.date = new Date();
         this.isRefunded = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Purchase purchase = (Purchase) o;
+        return idPurchase != null && Objects.equals(idPurchase, purchase.idPurchase);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

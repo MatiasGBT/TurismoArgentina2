@@ -148,7 +148,7 @@ public class ActivityController {
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
     public ResponseEntity<?> getCount(Locale locale) {
         try {
-            Long count = this.activityService.getCount();
+            int count = this.activityService.getCount();
             return new ResponseEntity<>(count, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);

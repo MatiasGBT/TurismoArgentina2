@@ -2,11 +2,16 @@ package com.mgbt.turismoargentina_backend.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "redeemed_coupons", schema="turismo_argentina")
 public class RedeemedCoupon implements Serializable {
@@ -31,11 +36,13 @@ public class RedeemedCoupon implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","name","lastName","creationDate","deletionDate"})
     @JoinColumn(name = "id_user", nullable = false)
+    @ToString.Exclude
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","redeemedCoupons"})
     @JoinColumn(name = "id_coupon", nullable = false)
+    @ToString.Exclude
     private Coupon coupon;
 
     @Column(name = "date")
@@ -44,4 +51,17 @@ public class RedeemedCoupon implements Serializable {
 
     @Column(name="used", columnDefinition = "BOOLEAN", nullable = false)
     private Boolean isUsed;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RedeemedCoupon that = (RedeemedCoupon) o;
+        return idRedeemedCoupon != null && Objects.equals(idRedeemedCoupon, that.idRedeemedCoupon);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

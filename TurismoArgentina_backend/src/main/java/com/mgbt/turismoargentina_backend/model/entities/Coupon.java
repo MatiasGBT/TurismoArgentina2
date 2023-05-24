@@ -3,11 +3,17 @@ package com.mgbt.turismoargentina_backend.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import java.io.*;
 import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "coupons", schema="turismo_argentina")
 public class Coupon implements Serializable {
@@ -43,5 +49,19 @@ public class Coupon implements Serializable {
 
     @OneToMany(mappedBy="coupon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
+    @ToString.Exclude
     private List<RedeemedCoupon> redeemedCoupons;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Coupon coupon = (Coupon) o;
+        return idCoupon != null && Objects.equals(idCoupon, coupon.idCoupon);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
