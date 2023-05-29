@@ -51,14 +51,13 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public User checkIfUserIsPersisted(User userFound, User userFromToken) {
+    public void checkIfUserIsPersisted(User userFound, User userFromToken) {
         if (!userFound.getName().equals(userFromToken.getName()) ||
                 !userFound.getLastName().equals(userFromToken.getLastName())) {
             userFound.setName(userFromToken.getName());
             userFound.setLastName(userFromToken.getLastName());
             this.save(userFound);
         }
-        return userFound;
     }
 
     @Override

@@ -11,6 +11,6 @@ public interface IUserService {
     void delete(User entity);
     User findById(Long id);
     User findByUsername(String username);
-    User checkIfUserIsPersisted(User userFound, User userFromToken);
+    void checkIfUserIsPersisted(User userFound, User userFromToken);
     Long getCount();
 }

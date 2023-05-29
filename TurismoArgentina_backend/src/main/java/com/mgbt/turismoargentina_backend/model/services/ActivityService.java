@@ -16,6 +16,9 @@ public class ActivityService implements IActivityService {
     @Autowired
     IActivityRepository repository;
 
+    @Autowired
+    IFileService fileService;
+
     @Override
     @Transactional(readOnly = true)
     public Page<Activity> getAllNonDeleted(Pageable pageable) {
@@ -85,20 +88,34 @@ public class ActivityService implements IActivityService {
     }
 
     @Override
-    public String getPreviousImage(Activity activity, Integer imageNumber, String fileName) {
-        String previousImage;
-        if (imageNumber == 1) {
-            previousImage = activity.getImage1();
-            activity.setImage1(fileName);
-        } else if (imageNumber == 2) {
-            previousImage = activity.getImage2();
-            activity.setImage2(fileName);
-        } else if (imageNumber == 3) {
-            previousImage = activity.getImage3();
-            activity.setImage3(fileName);
-        } else {
+    public void updateImage(Activity activity, Integer imageNumber, String fileName, String finalDirectory) {
+        if (imageNumber < 1 || imageNumber > 3) {
             throw new ActivityImageNumberException("The activity can only have three images, so the image number must be from 1 to 3");
         }
-        return previousImage;
+        String previousImage = this.getPreviousImage(activity, imageNumber);
+        if (previousImage != null && !previousImage.isBlank()) {
+            fileService.delete(previousImage, finalDirectory);
+        }
+        this.setNewImage(activity, imageNumber, fileName);
+    }
+
+    private String getPreviousImage(Activity activity, Integer imageNumber) {
+        if (imageNumber == 1) {
+            return activity.getImage1();
+        } else if (imageNumber == 2) {
+            return activity.getImage2();
+        } else {
+            return activity.getImage3();
+        }
+    }
+
+    private void setNewImage(Activity activity, Integer imageNumber, String fileName) {
+        if (imageNumber == 1) {
+            activity.setImage1(fileName);
+        } else if (imageNumber == 2) {
+            activity.setImage2(fileName);
+        } else {
+            activity.setImage3(fileName);
+        }
     }
 }

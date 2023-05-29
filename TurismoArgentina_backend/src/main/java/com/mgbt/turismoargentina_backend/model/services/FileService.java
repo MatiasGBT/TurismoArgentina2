@@ -19,7 +19,7 @@ public class FileService implements IFileService {
         Resource resource = null;
         HttpHeaders header = null;
         try {
-            resource = this.charge(fileName, finalDirectory);
+            resource = this.getImageResource(fileName, finalDirectory);
             header = new HttpHeaders();
             header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
         } catch (Exception e) {
@@ -28,8 +28,8 @@ public class FileService implements IFileService {
         return new ResponseEntity<>(resource, header, HttpStatus.OK);
     }
 
-    private Resource charge(String fileName, String finalDirectory) throws MalformedURLException {
-        Path filePath = getPath(fileName, finalDirectory);
+    private Resource getImageResource(String fileName, String finalDirectory) throws MalformedURLException {
+        Path filePath = this.getPath(fileName, finalDirectory);
         Resource resource = new UrlResource(filePath.toUri());
         if(!resource.exists() && !resource.isReadable()) {
             filePath = Paths.get("src/main/resources/static/images").resolve("no-image.jpg").toAbsolutePath();
@@ -49,7 +49,7 @@ public class FileService implements IFileService {
         if (fileName.length() > 80) {
             throw new FileNameTooLongException("The file name is too long (max 40 characters)");
         } else {
-            Path filePath = getPath(fileName, finalDirectory);
+            Path filePath = this.getPath(fileName, finalDirectory);
             Files.copy(file.getInputStream(), filePath);
             return fileName;
         }
@@ -58,7 +58,7 @@ public class FileService implements IFileService {
     @Override
     public Boolean delete(String fileName, String finalDirectory) {
         if (fileName != null && fileName.length() > 0) {
-            Path lastFilePath = getPath(fileName, finalDirectory);
+            Path lastFilePath = this.getPath(fileName, finalDirectory);
             File lastFile = lastFilePath.toFile();
             if (lastFile.exists() && lastFile.canRead()) {
                 return lastFile.delete();

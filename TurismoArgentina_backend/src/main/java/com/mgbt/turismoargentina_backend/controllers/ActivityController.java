@@ -212,10 +212,7 @@ public class ActivityController {
             Map<String, Object> response = new HashMap<>();
             Activity activity = activityService.findById(idActivity);
             String fileName = fileService.save(image, FINAL_DIRECTORY);
-            String previousImage = activityService.getPreviousImage(activity, imageNumber, fileName);
-            if (previousImage != null && !previousImage.isBlank()) {
-                fileService.delete(previousImage, FINAL_DIRECTORY);
-            }
+            activityService.updateImage(activity, imageNumber, fileName, FINAL_DIRECTORY);
             activityService.save(activity);
             response.put("message", messageSource.getMessage("image.upload", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);

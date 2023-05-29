@@ -18,5 +18,5 @@ public interface IActivityService {
     Page<Activity> getByLocationName(Pageable pageable, String locationName);
     List<Activity> getByLocationId(Long idLocation);
     int getCount();
-    String getPreviousImage(Activity activity, Integer imageNumber, String fileName);
+    void updateImage(Activity activity, Integer imageNumber, String fileName, String finalDirectory);
 }
