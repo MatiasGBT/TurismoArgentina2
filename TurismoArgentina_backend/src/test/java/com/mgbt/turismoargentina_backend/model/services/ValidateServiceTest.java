@@ -1,6 +1,7 @@
 package com.mgbt.turismoargentina_backend.model.services;
 
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
+import com.mgbt.turismoargentina_backend.model.services.impl.ValidateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,12 +29,12 @@ class ValidateServiceTest {
     @Test
     void checkIfResultHasErrors_true() {
         when(result.hasErrors()).thenReturn(true);
-        assertThrows(ResultHasErrorsException.class, ()-> validateService.checkIfResultHasErrors(result));
+        assertThrows(ResultHasErrorsException.class, ()-> validateService.validateResult(result));
     }
 
     @Test
     void checkIfResultHasErrors_false() {
         when(result.hasErrors()).thenReturn(false);
-        assertDoesNotThrow(()-> validateService.checkIfResultHasErrors(result));
+        assertDoesNotThrow(()-> validateService.validateResult(result));
     }
 }

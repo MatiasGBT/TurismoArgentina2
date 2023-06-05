@@ -11,5 +11,5 @@ public interface IRedeemedCouponService {
     void delete(RedeemedCoupon entity);
     RedeemedCoupon findById(Long id);
     RedeemedCoupon findByCouponAndUser(Coupon coupon, User user);
-    void checkIfCouponIsValid(RedeemedCoupon redeemedCoupon);
+    void validateCoupon(RedeemedCoupon redeemedCoupon);
 }

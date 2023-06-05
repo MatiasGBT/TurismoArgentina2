@@ -6,6 +6,7 @@ import com.mgbt.turismoargentina_backend.model.entities.Location;
 import com.mgbt.turismoargentina_backend.model.entities.Purchase;
 import com.mgbt.turismoargentina_backend.model.entities.User;
 import com.mgbt.turismoargentina_backend.model.repositories.IPurchaseRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.PurchaseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -170,7 +171,7 @@ class PurchaseServiceTest {
     @Test
     void checkIfLocationsAndActivitiesAreEmpty() {
         purchase1.setLocations(List.of(new Location()));
-        assertDoesNotThrow(() -> purchaseService.checkIfLocationsAndActivitiesAreEmpty(purchase1));
-        assertThrows(PurchaseIncompleteException.class, () -> purchaseService.checkIfLocationsAndActivitiesAreEmpty(purchase2));
+        assertDoesNotThrow(() -> purchaseService.validateIfLocationsAndActivitiesAreEmpty(purchase1));
+        assertThrows(PurchaseIncompleteException.class, () -> purchaseService.validateIfLocationsAndActivitiesAreEmpty(purchase2));
     }
 }

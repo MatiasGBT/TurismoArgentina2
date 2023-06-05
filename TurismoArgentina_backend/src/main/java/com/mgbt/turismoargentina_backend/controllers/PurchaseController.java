@@ -76,8 +76,8 @@ public class PurchaseController {
     })
     public ResponseEntity<?> create(@Valid @RequestBody Purchase purchase, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
-            purchaseService.checkIfLocationsAndActivitiesAreEmpty(purchase);
+            validateService.validateResult(result);
+            purchaseService.validateIfLocationsAndActivitiesAreEmpty(purchase);
             Map<String, Object> response = new HashMap<>();
             purchase = purchaseService.save(purchase);
             response.put("purchase", purchase);
@@ -104,12 +104,12 @@ public class PurchaseController {
     })
     public ResponseEntity<?> update(@Valid @RequestBody Purchase purchase, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
-            purchaseService.checkIfLocationsAndActivitiesAreEmpty(purchase);
+            validateService.validateResult(result);
+            purchaseService.validateIfLocationsAndActivitiesAreEmpty(purchase);
             Map<String, Object> response = new HashMap<>();
             purchaseService.save(purchase);
             response.put("message", messageSource.getMessage("purchaseController.updated", null, locale));
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
         } catch (ResultHasErrorsException ex) {
@@ -123,7 +123,7 @@ public class PurchaseController {
 
     @GetMapping("/admin/count/{refunded}")
     @Operation(summary = "Gets number of refunded or non refunded purchases.")
-    @ApiResponse(responseCode = "200", description = "Refunded or non refunded purchases",
+    @ApiResponse(responseCode = "200", description = "Gets number of refunded or non refunded purchases",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
     public ResponseEntity<?> getCount(@PathVariable boolean refunded, Locale locale) {
         try {
@@ -140,7 +140,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/admin/money/{refunded}")
-    @Operation(summary = "Gets number of refunded or non refunded purchases.")
+    @Operation(summary = "Gets total money of refunded or non refunded purchases.")
     @ApiResponse(responseCode = "200", description = "Refunded or non refunded purchases",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
     public ResponseEntity<?> getMoney(@PathVariable boolean refunded, Locale locale) {

@@ -3,6 +3,7 @@ package com.mgbt.turismoargentina_backend.model.services;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entities.Coupon;
 import com.mgbt.turismoargentina_backend.model.repositories.ICouponRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.CouponService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

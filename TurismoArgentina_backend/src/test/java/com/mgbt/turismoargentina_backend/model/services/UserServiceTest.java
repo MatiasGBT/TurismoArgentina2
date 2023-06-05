@@ -3,6 +3,7 @@ package com.mgbt.turismoargentina_backend.model.services;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entities.User;
 import com.mgbt.turismoargentina_backend.model.repositories.IUserRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -100,7 +101,7 @@ class UserServiceTest {
                 .lastName(user.getLastName())
                 .creationDate(user.getCreationDate())
                 .build();
-        userService.checkIfUserIsPersisted(user, user2);
+        userService.validateIfUserIsPersisted(user, user2);
         assertEquals(user.getName(), "Albert");
         assertEquals(user.getLastName(), "Wesker");
         verify(userRepository, times(0)).save(user);
@@ -115,7 +116,7 @@ class UserServiceTest {
                 .creationDate(user.getCreationDate())
                 .build();
         when(userRepository.save(user)).thenReturn(user);
-        userService.checkIfUserIsPersisted(user, user2);
+        userService.validateIfUserIsPersisted(user, user2);
         assertEquals(user.getName(), user2.getName());
         assertEquals(user.getLastName(), user2.getLastName());
         verify(userRepository, times(1)).save(user);

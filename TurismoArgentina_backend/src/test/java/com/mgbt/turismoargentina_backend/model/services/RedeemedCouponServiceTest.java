@@ -5,10 +5,10 @@ import com.mgbt.turismoargentina_backend.exceptions.CouponIsAlreadyUsedException
 import com.mgbt.turismoargentina_backend.exceptions.CouponIsNotValidYetException;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entities.Coupon;
-import com.mgbt.turismoargentina_backend.model.entities.Purchase;
 import com.mgbt.turismoargentina_backend.model.entities.RedeemedCoupon;
 import com.mgbt.turismoargentina_backend.model.entities.User;
 import com.mgbt.turismoargentina_backend.model.repositories.IRedeemedCouponRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.RedeemedCouponService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -124,11 +124,11 @@ class RedeemedCouponServiceTest {
 
     @Test
     void checkIfCouponIsValid() {
-        assertThrows(CouponIsAlreadyUsedException.class, () -> redeemedCouponService.checkIfCouponIsValid(redeemedCoupon1));
+        assertThrows(CouponIsAlreadyUsedException.class, () -> redeemedCouponService.validateCoupon(redeemedCoupon1));
         redeemedCoupon1.setDate(new Date(1684119600000L)); //May 15, 2023
         redeemedCoupon2.setDate(new Date(1701745200000L)); //December 5, 2023
         redeemedCoupon1.setIsUsed(false);
-        assertThrows(CouponIsNotValidYetException.class, () -> redeemedCouponService.checkIfCouponIsValid(redeemedCoupon1));
-        assertThrows(CouponExpiredException.class, () -> redeemedCouponService.checkIfCouponIsValid(redeemedCoupon2));
+        assertThrows(CouponIsNotValidYetException.class, () -> redeemedCouponService.validateCoupon(redeemedCoupon1));
+        assertThrows(CouponExpiredException.class, () -> redeemedCouponService.validateCoupon(redeemedCoupon2));
     }
 }

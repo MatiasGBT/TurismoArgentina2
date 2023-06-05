@@ -169,7 +169,7 @@ public class ProvinceController {
     })
     public ResponseEntity<?> update(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             provinceService.save(province);
             response.put("message", messageSource.getMessage("provinceController.updated", null, locale));
@@ -191,7 +191,7 @@ public class ProvinceController {
     })
     public ResponseEntity<?> create(@Valid @RequestBody Province province, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             province = provinceService.save(province);
             response.put("province", province);
@@ -208,7 +208,7 @@ public class ProvinceController {
 
     @PostMapping("/admin/img")
     @Operation(summary = "Upload an image of a province and removes the previous one if it had one.")
-    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+    @ApiResponse(responseCode = "201", description = "Image saved successfully",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
     public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
                                          @RequestParam("id") Long idProvince,
@@ -224,7 +224,7 @@ public class ProvinceController {
             province.setImage(fileName);
             provinceService.save(province);
             response.put("message", messageSource.getMessage("image.upload", null, locale));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (IOException ex) {
             return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {

@@ -1,5 +1,6 @@
 package com.mgbt.turismoargentina_backend.model.services;
 
+import com.mgbt.turismoargentina_backend.model.services.impl.ExceptionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

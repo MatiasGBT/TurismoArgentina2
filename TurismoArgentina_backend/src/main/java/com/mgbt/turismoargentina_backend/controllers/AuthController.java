@@ -38,7 +38,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody User user, Locale locale) {
         try {
             User userFound = userService.findByUsername(user.getUsername());
-            userService.checkIfUserIsPersisted(userFound, user); //Needed if the user updates their first and last name from Keycloak account dashboard
+            userService.validateIfUserIsPersisted(userFound, user); //Needed if the user updates their first and last name from Keycloak account dashboard
             Map<String, Object> response = new HashMap<>();
             response.put("message", messageSource.getMessage("authController.userFound", null, locale));
             response.put("user", userFound);

@@ -1,6 +1,7 @@
 package com.mgbt.turismoargentina_backend.model.services;
 
 import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
+import com.mgbt.turismoargentina_backend.model.services.impl.FileService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

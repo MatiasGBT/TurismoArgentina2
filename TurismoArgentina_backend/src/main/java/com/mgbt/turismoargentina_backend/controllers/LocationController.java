@@ -101,7 +101,7 @@ public class LocationController {
             @ApiResponse(responseCode = "404", description = "Location not found",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
-    public ResponseEntity<?> getById(@RequestParam String name, Locale locale) {
+    public ResponseEntity<?> getByName(@RequestParam String name, Locale locale) {
         try {
             Location location = this.locationService.findByName(name);
             return new ResponseEntity<>(location, HttpStatus.OK);
@@ -195,7 +195,7 @@ public class LocationController {
     })
     public ResponseEntity<?> update(@Valid @RequestBody Location location, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             locationService.save(location);
             response.put("message", messageSource.getMessage("locationController.updated", null, locale));
@@ -217,7 +217,7 @@ public class LocationController {
     })
     public ResponseEntity<?> create(@Valid @RequestBody Location location, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             location = locationService.save(location);
             response.put("location", location);
@@ -232,7 +232,7 @@ public class LocationController {
 
     @PostMapping("/admin/img")
     @Operation(summary = "Upload an image of a location and removes the previous one if it had one.")
-    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+    @ApiResponse(responseCode = "201", description = "Image saved successfully",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
     public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
                                          @RequestParam("id") Long idLocation,
@@ -248,7 +248,7 @@ public class LocationController {
             location.setImage(fileName);
             locationService.save(location);
             response.put("message", messageSource.getMessage("image.upload", null, locale));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (IOException ex) {
             return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {

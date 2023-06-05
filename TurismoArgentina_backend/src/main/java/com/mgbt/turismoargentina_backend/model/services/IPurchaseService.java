@@ -16,5 +16,5 @@ public interface IPurchaseService {
     Long getCountIsRefunded();
     Double getMoneyNotRefunded();
     Double getMoneyRefunded();
-    void checkIfLocationsAndActivitiesAreEmpty(Purchase purchase);
+    void validateIfLocationsAndActivitiesAreEmpty(Purchase purchase);
 }

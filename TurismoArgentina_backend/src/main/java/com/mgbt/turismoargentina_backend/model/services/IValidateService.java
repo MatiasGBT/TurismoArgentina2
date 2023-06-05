@@ -5,5 +5,5 @@ import org.springframework.validation.BindingResult;
 
 @Service
 public interface IValidateService {
-    void checkIfResultHasErrors(BindingResult result);
+    void validateResult(BindingResult result);
 }

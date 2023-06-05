@@ -102,7 +102,7 @@ public class CouponController {
             Coupon coupon = couponService.findByName(couponName);
             User user = userService.findById(idUser);
             RedeemedCoupon redeemedCoupon = redeemedCouponService.findByCouponAndUser(coupon, user);
-            redeemedCouponService.checkIfCouponIsValid(redeemedCoupon);
+            redeemedCouponService.validateCoupon(redeemedCoupon);
             redeemedCoupon = redeemedCouponService.save(redeemedCoupon);
             Map<String, Object> response = new HashMap<>();
             response.put("redeemedCoupon", redeemedCoupon);
@@ -156,7 +156,7 @@ public class CouponController {
     })
     public ResponseEntity<?> update(@Valid @RequestBody Coupon coupon, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             couponService.save(coupon);
             response.put("message", messageSource.getMessage("couponController.updated", null, locale));
@@ -178,7 +178,7 @@ public class CouponController {
     })
     public ResponseEntity<?> create(@Valid @RequestBody Coupon coupon, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             coupon = couponService.save(coupon);
             response.put("coupon", coupon);

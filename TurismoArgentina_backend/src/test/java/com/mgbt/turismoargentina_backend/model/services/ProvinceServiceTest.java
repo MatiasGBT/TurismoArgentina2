@@ -3,6 +3,7 @@ package com.mgbt.turismoargentina_backend.model.services;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entities.Province;
 import com.mgbt.turismoargentina_backend.model.repositories.IProvinceRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.ProvinceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -5,6 +5,8 @@ import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
 import com.mgbt.turismoargentina_backend.model.entities.Activity;
 import com.mgbt.turismoargentina_backend.model.entities.Location;
 import com.mgbt.turismoargentina_backend.model.repositories.IActivityRepository;
+import com.mgbt.turismoargentina_backend.model.services.impl.ActivityService;
+import com.mgbt.turismoargentina_backend.model.services.impl.FileService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

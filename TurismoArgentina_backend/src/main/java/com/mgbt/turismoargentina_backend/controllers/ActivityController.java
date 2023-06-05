@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.controllers;
 
 import com.mgbt.turismoargentina_backend.exceptions.ActivityImageNumberException;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Activity;
 import com.mgbt.turismoargentina_backend.model.services.*;
 import com.mgbt.turismoargentina_backend.utility_classes.*;
@@ -165,14 +166,14 @@ public class ActivityController {
     })
     public ResponseEntity<?> update(@Valid @RequestBody Activity activity, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             activityService.save(activity);
             response.put("message", messageSource.getMessage("activityController.updated", null, locale));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
-        } catch (ValidationException ex) {
+        } catch (ResultHasErrorsException ex) {
             return exceptionService.throwResultHasErrorsException(result, locale);
         }
     }
@@ -187,7 +188,7 @@ public class ActivityController {
     })
     public ResponseEntity<?> create(@Valid @RequestBody Activity activity, BindingResult result, Locale locale) {
         try {
-            validateService.checkIfResultHasErrors(result);
+            validateService.validateResult(result);
             Map<String, Object> response = new HashMap<>();
             activity = activityService.save(activity);
             response.put("activity", activity);
@@ -195,14 +196,14 @@ public class ActivityController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
-        } catch (ValidationException ex) {
+        } catch (ResultHasErrorsException ex) {
             return exceptionService.throwResultHasErrorsException(result, locale);
         }
     }
 
     @PostMapping("/admin/img")
     @Operation(summary = "Upload an image of an activity and removes the previous one if it had one.")
-    @ApiResponse(responseCode = "200", description = "Image saved successfully",
+    @ApiResponse(responseCode = "201", description = "Image saved successfully",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
     public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
                                          @RequestParam("id") Long idActivity,
@@ -215,7 +216,7 @@ public class ActivityController {
             activityService.updateImage(activity, imageNumber, fileName, FINAL_DIRECTORY);
             activityService.save(activity);
             response.put("message", messageSource.getMessage("image.upload", null, locale));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (IOException ex) {
             return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {
