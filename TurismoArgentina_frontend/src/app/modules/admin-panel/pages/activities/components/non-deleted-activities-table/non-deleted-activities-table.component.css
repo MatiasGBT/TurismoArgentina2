@@ -128,7 +128,7 @@ table tbody tr td {
 }
 
 @media (min-width: 1038px) {
-    .table-container.with-content {
+    .table-container-with-content {
         min-height: 570px;
     }
 
