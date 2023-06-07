@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.controllers;
 
 import com.mgbt.turismoargentina_backend.exceptions.ActivityImageNumberException;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Activity;
 import com.mgbt.turismoargentina_backend.model.services.*;
@@ -10,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.*;
 import jakarta.validation.Valid;
-import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
@@ -140,7 +140,10 @@ public class ActivityController {
     @Operation(summary = "Gets file from locations directory by filename")
     @ApiResponse(description = "Image file", content = { @Content(mediaType = "multipart/form-data") })
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
-        return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
+        Resource resource = fileService.getPhoto(fileName, FINAL_DIRECTORY);
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+        return new ResponseEntity<>(resource, header, HttpStatus.OK);
     }
 
     @GetMapping("/admin/count")
@@ -203,8 +206,14 @@ public class ActivityController {
 
     @PostMapping("/admin/img")
     @Operation(summary = "Upload an image of an activity and removes the previous one if it had one.")
-    @ApiResponse(responseCode = "201", description = "Image saved successfully",
-            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Image saved successfully",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) }),
+            @ApiResponse(responseCode = "400", description = "The number of the image cannot be greater than three",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) }),
+            @ApiResponse(responseCode = "400", description = "The name of the image must have a maximum of 40 characters",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
     public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
                                          @RequestParam("id") Long idActivity,
                                          @RequestParam("imageNumber") Integer imageNumber,
@@ -226,6 +235,8 @@ public class ActivityController {
             response.put("message", messageSource.getMessage("error.imageNumber.message", null, locale));
             response.put("error", messageSource.getMessage("error.imageNumber.error", null, locale));
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (FileNameTooLongException ex) {
+            return this.exceptionService.throwFileNameTooLongException(locale);
         }
     }
 }

@@ -118,4 +118,15 @@ class ExceptionServiceTest {
         assertEquals(responseEntity.getBody().get("error"), "Must have at least one location or activity");
         assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
     }
+
+    @Test
+    void throwFileNameTooLongException() {
+        when(messageSource.getMessage("error.fileNameTooLong.message", null, locale)).thenReturn("File name too long");
+        when(messageSource.getMessage("error.fileNameTooLong.error", null, locale)).thenReturn("The name of the image must be a maximum of 40 characters");
+        ResponseEntity<Map<String, Object>> responseEntity = exceptionService.throwFileNameTooLongException(locale);
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getBody().get("message"), "File name too long");
+        assertEquals(responseEntity.getBody().get("error"), "The name of the image must be a maximum of 40 characters");
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
+    }
 }

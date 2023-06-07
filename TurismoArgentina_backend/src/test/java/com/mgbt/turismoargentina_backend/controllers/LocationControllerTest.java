@@ -2,6 +2,7 @@ package com.mgbt.turismoargentina_backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Location;
 import com.mgbt.turismoargentina_backend.model.entities.Province;
@@ -272,7 +273,7 @@ class LocationControllerTest {
         //Simulated image
         byte[] imageContent = new byte[]{};
         Resource imageResource = new ByteArrayResource(imageContent);
-        when(fileService.getPhoto(eq("caba.jpg"), eq("/locations"))).thenReturn(new ResponseEntity<>(imageResource, HttpStatus.OK));
+        when(fileService.getPhoto(eq("caba.jpg"), eq("/locations"))).thenReturn(imageResource);
         ResultActions response = mockMvc.perform(get("/api/locations/img/caba.jpg"));
         response.andDo(print())
                 .andExpect(status().isOk())
@@ -364,5 +365,22 @@ class LocationControllerTest {
         response.andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message", is(messageSource.getMessage("image.upload", null, locale))));
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
+    void uploadPhoto_FileNameTooLong() throws Exception {
+        byte[] imageContent = new byte[]{};
+        MultipartFile multipartFile = new MockMultipartFile("image", "phraseOverFortyCharactersWhichCausesAnError.jpeg", MediaType.IMAGE_JPEG_VALUE, imageContent);
+        Long idLocation = 1L;
+        when(fileService.save(any(MultipartFile.class), eq("/locations"))).thenThrow(FileNameTooLongException.class);
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/locations/admin/img")
+                .file("image", multipartFile.getBytes())
+                .param("id", idLocation.toString())
+                .with(csrf().asHeader()));
+        response.andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(messageSource.getMessage("error.fileNameTooLong.message", null, locale))))
+                .andExpect(jsonPath("$.error", is(messageSource.getMessage("error.fileNameTooLong.error", null, locale))));
     }
 }

@@ -1,6 +1,7 @@
 package com.mgbt.turismoargentina_backend.controllers;
 
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Location;
 import com.mgbt.turismoargentina_backend.model.services.*;
@@ -169,7 +170,10 @@ public class LocationController {
     @Operation(summary = "Gets file from locations directory by filename")
     @ApiResponse(description = "Image file", content = { @Content(mediaType = "multipart/form-data") })
     public ResponseEntity<Resource> getPhoto(@PathVariable String fileName) {
-        return this.fileService.getPhoto(fileName, FINAL_DIRECTORY);
+        Resource resource = fileService.getPhoto(fileName, FINAL_DIRECTORY);
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+        return new ResponseEntity<>(resource, header, HttpStatus.OK);
     }
 
     @GetMapping("/admin/count")
@@ -232,8 +236,12 @@ public class LocationController {
 
     @PostMapping("/admin/img")
     @Operation(summary = "Upload an image of a location and removes the previous one if it had one.")
-    @ApiResponse(responseCode = "201", description = "Image saved successfully",
-            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Image saved successfully",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = JsonMessage.class)) }),
+            @ApiResponse(responseCode = "400", description = "The name of the image must have a maximum of 40 characters",
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
+    })
     public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile image,
                                          @RequestParam("id") Long idLocation,
                                          Locale locale) {
@@ -253,6 +261,8 @@ public class LocationController {
             return this.exceptionService.throwIOException(ex, locale);
         } catch (DataAccessException ex) {
             return this.exceptionService.throwDataAccessException(ex, locale);
+        } catch (FileNameTooLongException ex) {
+            return this.exceptionService.throwFileNameTooLongException(locale);
         }
     }
 }

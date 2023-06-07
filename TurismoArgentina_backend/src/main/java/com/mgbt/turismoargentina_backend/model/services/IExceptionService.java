@@ -15,4 +15,5 @@ public interface IExceptionService {
     ResponseEntity<Map<String, Object>> throwIOException(IOException ex, Locale locale);
     ResponseEntity<Map<String, Object>> throwNormalException(Exception ex, Locale locale);
     ResponseEntity<Map<String, Object>> throwPurchaseIncompleteException(Locale locale);
+    ResponseEntity<Map<String, Object>> throwFileNameTooLongException(Locale locale);
 }

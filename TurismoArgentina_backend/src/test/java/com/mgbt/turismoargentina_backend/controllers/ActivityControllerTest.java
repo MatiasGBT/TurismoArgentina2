@@ -1,7 +1,9 @@
 package com.mgbt.turismoargentina_backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mgbt.turismoargentina_backend.exceptions.ActivityImageNumberException;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Activity;
 import com.mgbt.turismoargentina_backend.model.entities.Location;
@@ -21,9 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,10 +37,8 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -260,7 +258,7 @@ class ActivityControllerTest {
         //Simulated image
         byte[] imageContent = new byte[]{};
         Resource imageResource = new ByteArrayResource(imageContent);
-        when(fileService.getPhoto(eq("paseobarcotrencamion1.jpg"), eq("/activities"))).thenReturn(new ResponseEntity<>(imageResource, HttpStatus.OK));
+        when(fileService.getPhoto(eq("paseobarcotrencamion1.jpg"), eq("/activities"))).thenReturn(imageResource);
         ResultActions response = mockMvc.perform(get("/api/activities/img/paseobarcotrencamion1.jpg"));
         response.andDo(print())
                 .andExpect(status().isOk())
@@ -344,7 +342,6 @@ class ActivityControllerTest {
         MultipartFile multipartFile = new MockMultipartFile("image", "new_image.jpeg", MediaType.IMAGE_JPEG_VALUE, imageContent);
         Long idActivity = 1L;
         Integer imageNumber = 1;
-        when(activityService.findById(idActivity)).thenReturn(paseoBarcoTrenCamion);
         when(fileService.save(multipartFile, "/activities")).thenReturn("new_image.jpg");
         ResultActions response = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/activities/admin/img")
                 .file("image", multipartFile.getBytes())
@@ -354,5 +351,48 @@ class ActivityControllerTest {
         response.andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message", is(messageSource.getMessage("image.upload", null, locale))));
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
+    void uploadPhoto_ActivityImageNumber() throws Exception {
+        byte[] imageContent = new byte[]{};
+        MultipartFile multipartFile = new MockMultipartFile("image", "new_image.jpeg", MediaType.IMAGE_JPEG_VALUE, imageContent);
+        Long idActivity = 1L;
+        Integer imageNumber = 4;
+        when(activityService.findById(idActivity)).thenReturn(paseoBarcoTrenCamion);
+        when(fileService.save(any(MultipartFile.class), eq("/activities"))).thenReturn("new_image.jpeg");
+        doThrow(ActivityImageNumberException.class)
+                .when(activityService)
+                .updateImage(any(Activity.class), any(Integer.class), anyString(), eq("/activities"));
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/activities/admin/img")
+                .file("image", multipartFile.getBytes())
+                .param("id", idActivity.toString())
+                .param("imageNumber", imageNumber.toString())
+                .with(csrf().asHeader()));
+        verify(activityService).updateImage(any(Activity.class), eq(imageNumber), anyString(), eq("/activities"));
+        response.andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(messageSource.getMessage("error.imageNumber.message", null, locale))))
+                .andExpect(jsonPath("$.error", is(messageSource.getMessage("error.imageNumber.error", null, locale))));
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
+    void uploadPhoto_FileNameTooLong() throws Exception {
+        byte[] imageContent = new byte[]{};
+        MultipartFile multipartFile = new MockMultipartFile("image", "phraseOverFortyCharactersWhichCausesAnError.jpeg", MediaType.IMAGE_JPEG_VALUE, imageContent);
+        Long idActivity = 1L;
+        Integer imageNumber = 1;
+        when(fileService.save(any(MultipartFile.class), eq("/activities"))).thenThrow(FileNameTooLongException.class);
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/activities/admin/img")
+                .file("image", multipartFile.getBytes())
+                .param("id", idActivity.toString())
+                .param("imageNumber", imageNumber.toString())
+                .with(csrf().asHeader()));
+        response.andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(messageSource.getMessage("error.fileNameTooLong.message", null, locale))))
+                .andExpect(jsonPath("$.error", is(messageSource.getMessage("error.fileNameTooLong.error", null, locale))));
     }
 }

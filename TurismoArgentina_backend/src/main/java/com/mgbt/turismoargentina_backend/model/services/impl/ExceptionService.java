@@ -70,4 +70,12 @@ public class ExceptionService implements IExceptionService {
         response.put("error", messageSource.getMessage("error.purchaseIncomplete.error", null, locale));
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> throwFileNameTooLongException(Locale locale) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", messageSource.getMessage("error.fileNameTooLong.message", null, locale));
+        response.put("error", messageSource.getMessage("error.fileNameTooLong.error", null, locale));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mgbt.turismoargentina_backend.exceptions.EntityNotFoundException;
+import com.mgbt.turismoargentina_backend.exceptions.FileNameTooLongException;
 import com.mgbt.turismoargentina_backend.exceptions.ResultHasErrorsException;
 import com.mgbt.turismoargentina_backend.model.entities.Province;
 import com.mgbt.turismoargentina_backend.model.services.impl.FileService;
@@ -28,9 +29,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -232,7 +231,7 @@ class ProvinceControllerTest {
         //Simulated image
         byte[] imageContent = new byte[]{};
         Resource imageResource = new ByteArrayResource(imageContent);
-        when(fileService.getPhoto(eq("bsas.jpg"), eq("/provinces"))).thenReturn(new ResponseEntity<>(imageResource, HttpStatus.OK));
+        when(fileService.getPhoto(eq("bsas.jpg"), eq("/provinces"))).thenReturn(imageResource);
         ResultActions response = mockMvc.perform(get("/api/provinces/img/bsas.jpg"));
         response.andDo(print())
                 .andExpect(status().isOk())
@@ -324,5 +323,22 @@ class ProvinceControllerTest {
         response.andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message", is(messageSource.getMessage("image.upload", null, locale))));
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
+    void uploadPhoto_FileNameTooLong() throws Exception {
+        byte[] imageContent = new byte[]{};
+        MultipartFile multipartFile = new MockMultipartFile("image", "phraseOverFortyCharactersWhichCausesAnError.jpeg", MediaType.IMAGE_JPEG_VALUE, imageContent);
+        Long idProvince = 1L;
+        when(fileService.save(any(MultipartFile.class), eq("/provinces"))).thenThrow(FileNameTooLongException.class);
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/provinces/admin/img")
+                .file("image", multipartFile.getBytes())
+                .param("id", idProvince.toString())
+                .with(csrf().asHeader()));
+        response.andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(messageSource.getMessage("error.fileNameTooLong.message", null, locale))))
+                .andExpect(jsonPath("$.error", is(messageSource.getMessage("error.fileNameTooLong.error", null, locale))));
     }
 }
