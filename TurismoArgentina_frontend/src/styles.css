@@ -15,6 +15,14 @@
     min-width: 151px;
 }
 
+.swal2-timer-progress-bar-container {
+    padding: 5px 25px;
+}
+
+.swal2-timer-progress-bar {
+    border-radius: 25px;
+}
+
 @font-face {
     font-family: 'Pangea';
     src: url('assets/fonts/PangeaAfrikanTrial-SemiBold.otf');

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Activity } from '../models/activity';
 import { CatchErrorService } from './catch-error.service';
@@ -134,16 +134,18 @@ export class ActivityService {
     );
   }
 
-  public uploadPhoto(image: File, idActivity: number, imageNumber: number): Observable<any> {
+  public async uploadPhoto(image: File, idActivity: number, imageNumber: number): Promise<any> {
     let formData = new FormData();
     formData.append("image", image);
     formData.append("id", idActivity.toString());
     formData.append("imageNumber", imageNumber.toString());
-    return this.http.post(`${this.baseUrl}/admin/img`, formData).pipe(
-      catchError(ex => {
-        this.catchErrorService.showError(ex);
-        return throwError(() => ex);
-      })
-    );
+    return new Promise<string>((resolve) => {
+      this.http.post(`${this.baseUrl}/admin/img`, formData).pipe(
+        catchError(ex => {
+          this.catchErrorService.showError(ex);
+          return throwError(() => ex);
+        })
+      ).subscribe(response => resolve(JSON.stringify(response)));
+    });
   }
 }

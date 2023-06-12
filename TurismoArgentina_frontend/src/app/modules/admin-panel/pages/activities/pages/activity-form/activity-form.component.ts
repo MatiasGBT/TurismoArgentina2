@@ -81,11 +81,10 @@ export class ActivityFormComponent implements OnInit {
 
   public updateActivity(): void {
     this.activityService.update(this.activity).subscribe(response => {
-      Swal.fire({title: response.message, timer: 1500, timerProgressBar: true, showConfirmButton: false});
-      if (this.image1) this.uploadPhoto(1);
-      if (this.image2) this.uploadPhoto(2);
-      if (this.image3) this.uploadPhoto(3);
-      this.router.navigate(['/admin/activities']);
+      this.uploadChargedPhotos().then(() => {
+        Swal.fire({title: response.message, timer: 1500, timerProgressBar: true, showConfirmButton: false});
+        this.router.navigate(['/admin/activities']);
+      });
     });
   }
 
@@ -96,28 +95,31 @@ export class ActivityFormComponent implements OnInit {
     created first to do that.*/
     this.activity.image1 = "Empty for now";
     this.activityService.create(this.activity).subscribe(response => {
-      Swal.fire({title: response.message, timer: 1500, timerProgressBar: true, showConfirmButton: false});
       this.activity = response.activity;
-      if (this.image1) this.uploadPhoto(1);
-      if (this.image2) this.uploadPhoto(2);
-      if (this.image3) this.uploadPhoto(3);
-      this.router.navigate(['/admin/activities']);
+      this.uploadChargedPhotos().then(() => {
+        Swal.fire({title: response.message, timer: 1500, timerProgressBar: true, showConfirmButton: false});
+        this.router.navigate(['/admin/activities']);
+      });
     });
   }
 
-  private uploadPhoto(imageNumber: number): void {
-    if (imageNumber == 1) {
-      this.activityService.uploadPhoto(this.image1, this.activity.idActivity, imageNumber).subscribe(response => {
-        console.log(response.message);
-      });
-    } else if (imageNumber == 2) {
-      this.activityService.uploadPhoto(this.image2, this.activity.idActivity, imageNumber).subscribe(response => {
-        console.log(response.message);
-      });
-    } else if (imageNumber == 3) {
-      this.activityService.uploadPhoto(this.image3, this.activity.idActivity, imageNumber).subscribe(response => {
-        console.log(response.message);
-      });
+  private async uploadChargedPhotos(): Promise<void> {
+    if (this.image1) await this.uploadPhoto(1);
+    if (this.image2) await this.uploadPhoto(2);
+    if (this.image3) await this.uploadPhoto(3);
+  }
+
+  private async uploadPhoto(imageNumber: number): Promise<void> {
+    let consoleMessage: any = {};
+    if (imageNumber === 1) {
+      consoleMessage = await this.activityService.uploadPhoto(this.image1, this.activity.idActivity, imageNumber);
+      console.log(JSON.parse(consoleMessage).message);
+    } else if (imageNumber === 2) {
+      consoleMessage = await this.activityService.uploadPhoto(this.image2, this.activity.idActivity, imageNumber);
+      console.log(JSON.parse(consoleMessage).message);
+    } else {
+      consoleMessage = await this.activityService.uploadPhoto(this.image3, this.activity.idActivity, imageNumber);
+      console.log(JSON.parse(consoleMessage).message);
     }
   }
 

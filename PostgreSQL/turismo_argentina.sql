@@ -64,7 +64,7 @@ ALTER TABLE turismo_argentina.activities ALTER COLUMN id_activity ADD GENERATED 
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
+    CACHE 42
 );
 
 
@@ -128,7 +128,7 @@ ALTER TABLE turismo_argentina.locations ALTER COLUMN id_location ADD GENERATED A
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
+    CACHE 31
 );
 
 
@@ -159,7 +159,7 @@ ALTER TABLE turismo_argentina.provinces ALTER COLUMN id_province ADD GENERATED A
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
+    CACHE 11
 );
 
 
