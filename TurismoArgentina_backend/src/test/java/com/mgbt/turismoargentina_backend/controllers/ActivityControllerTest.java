@@ -127,7 +127,7 @@ class ActivityControllerTest {
     void getAllNonDeleted() throws Exception {
         Page<Activity> page = new PageImpl<>(List.of(paseoBarcoTrenCamion, barcoMotor, vueloPanoramico));
         when(activityService.getAllNonDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/activities/list/0/false"));
+        ResultActions response = mockMvc.perform(get("/api/activities?page=0&deleted=false"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -143,7 +143,7 @@ class ActivityControllerTest {
     void getAllDeleted() throws Exception {
         Page<Activity> page = new PageImpl<>(List.of(tirolinaRappel, recorridoCataratas));
         when(activityService.getAllDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/activities/list/0/true"));
+        ResultActions response = mockMvc.perform(get("/api/activities?page=0&deleted=true"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -157,7 +157,7 @@ class ActivityControllerTest {
     void getAllNonDeletedByName() throws Exception {
         Page<Activity> page = new PageImpl<>(List.of(barcoMotor, vueloPanoramico));
         when(activityService.getAllNonDeletedByName(pageable, "las")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/activities/list/0/false/las"));
+        ResultActions response = mockMvc.perform(get("/api/activities?page=0&deleted=false&name=las"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -171,7 +171,7 @@ class ActivityControllerTest {
     void getAllDeletedByName() throws Exception {
         Page<Activity> page = new PageImpl<>(List.of(tirolinaRappel));
         when(activityService.getAllDeletedByName(pageable, "Tirolina")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/activities/list/0/true/Tirolina"));
+        ResultActions response = mockMvc.perform(get("/api/activities?page=0&deleted=true&name=Tirolina"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -226,7 +226,7 @@ class ActivityControllerTest {
     void getByLocationName() throws Exception {
         Page<Activity> page = new PageImpl<>(List.of(paseoBarcoTrenCamion, barcoMotor, vueloPanoramico));
         when(activityService.getByLocationName(pageable, "Puerto Iguazú")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/activities/location/Puerto Iguazú/0"));
+        ResultActions response = mockMvc.perform(get("/api/activities?locationName=Puerto Iguazú&page=0"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -241,7 +241,7 @@ class ActivityControllerTest {
     @Test
     void getByLocationId() throws Exception {
         when(activityService.getByLocationId(1L)).thenReturn(List.of(paseoBarcoTrenCamion, barcoMotor, vueloPanoramico));
-        ResultActions response = mockMvc.perform(get("/api/activities/location/1"));
+        ResultActions response = mockMvc.perform(get("/api/activities?idLocation=1"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", is(3)))

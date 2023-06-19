@@ -17,7 +17,7 @@ export class CouponService {
     private authService: AuthService, private router: Router) { }
 
   public getAll(page: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/admin/list/${page}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/admin?page=${page}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -26,7 +26,7 @@ export class CouponService {
   }
 
   public getAllByName(page: number, name: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/admin/list/${page}/${name}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/admin?page=${page}&name=${name}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -45,7 +45,7 @@ export class CouponService {
   }
 
   public redeemCoupon(couponName: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/${couponName}/${this.authService.keycloakUser.idUser}`, null).pipe(
+    return this.http.post<any>(`${this.baseUrl}?couponName=${couponName}&idUser=${this.authService.keycloakUser.idUser}`, null).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

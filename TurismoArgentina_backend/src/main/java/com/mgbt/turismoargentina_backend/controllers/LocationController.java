@@ -42,11 +42,11 @@ public class LocationController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{page}/{deleted}")
+    @GetMapping(value = "", params = {"page", "deleted"})
     @Operation(summary = "Gets all locations paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Integer page, @PathVariable Boolean deleted, Locale locale) {
+    public ResponseEntity<?> getAll(@RequestParam Integer page, @RequestParam Boolean deleted, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Location> locations;
@@ -58,12 +58,12 @@ public class LocationController {
         }
     }
 
-    @GetMapping("/list/{page}/{deleted}/{name}")
+    @GetMapping(value = "", params = {"page", "deleted", "name"})
     @Operation(summary = "Gets all locations paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null and name like inserted name.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable Boolean deleted,
-                                    @PathVariable String name, Locale locale) {
+    public ResponseEntity<?> getAllByName(@RequestParam Integer page, @RequestParam Boolean deleted,
+                                    @RequestParam String name, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Location> locations;
@@ -94,7 +94,7 @@ public class LocationController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping(value = "", params = "name")
     @Operation(summary = "Gets a location by name.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Location object",
@@ -139,11 +139,11 @@ public class LocationController {
         }
     }
 
-    @GetMapping("/province/{provinceName}/{page}")
+    @GetMapping(value = "", params = {"provinceName", "page"})
     @Operation(summary = "Gets all locations of a province (by name) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getByProvinceName(@PathVariable Integer page, @PathVariable String provinceName, Locale locale) {
+    public ResponseEntity<?> getByProvinceName(@RequestParam Integer page, @RequestParam String provinceName, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Location> locations = this.locationService.getByProvinceName(pageable, provinceName);
@@ -153,11 +153,11 @@ public class LocationController {
         }
     }
 
-    @GetMapping("/province/{idProvince}")
+    @GetMapping(value = "", params = "idProvince")
     @Operation(summary = "Gets all locations of a province (by id).")
     @ApiResponse(responseCode = "200", description = "Array of locations",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Location.class)) })
-    public ResponseEntity<?> getByProvinceId(@PathVariable Long idProvince, Locale locale) {
+    public ResponseEntity<?> getByProvinceId(@RequestParam Long idProvince, Locale locale) {
         try {
             List<Location> locations = this.locationService.getByProvinceId(idProvince);
             return new ResponseEntity<>(locations, HttpStatus.OK);

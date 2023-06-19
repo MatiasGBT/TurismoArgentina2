@@ -43,11 +43,11 @@ public class ProvinceController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{page}/{deleted}")
+    @GetMapping(value = "", params = {"page", "deleted"})
     @Operation(summary = "Gets all provinces paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of provinces",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Integer page, @PathVariable Boolean deleted, Locale locale) {
+    public ResponseEntity<?> getAll(@RequestParam Integer page, @RequestParam Boolean deleted, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Province> provinces;
@@ -59,12 +59,12 @@ public class ProvinceController {
         }
     }
 
-    @GetMapping("/list/{page}/{deleted}/{name}")
+    @GetMapping(value = "", params = {"page", "deleted", "name"})
     @Operation(summary = "Gets all provinces paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null and name like inserted name.")
     @ApiResponse(responseCode = "200", description = "Array of provinces",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable Boolean deleted,
-                                    @PathVariable String name, Locale locale) {
+    public ResponseEntity<?> getAllByName(@RequestParam Integer page, @RequestParam Boolean deleted,
+                                    @RequestParam String name, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Province> provinces;
@@ -95,7 +95,7 @@ public class ProvinceController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping(value = "", params = "name")
     @Operation(summary = "Gets a province by name.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Province object",

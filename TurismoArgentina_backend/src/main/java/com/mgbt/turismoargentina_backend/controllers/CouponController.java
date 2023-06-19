@@ -58,11 +58,11 @@ public class CouponController {
         }
     }
 
-    @GetMapping("/admin/list/{page}")
+    @GetMapping(value = "/admin", params = "page")
     @Operation(summary = "Gets all coupons paginated.")
     @ApiResponse(responseCode = "200", description = "Array of coupons",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Integer page, Locale locale) {
+    public ResponseEntity<?> getAll(@RequestParam Integer page, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Coupon> coupons = this.couponService.getAll(pageable);
@@ -72,11 +72,11 @@ public class CouponController {
         }
     }
 
-    @GetMapping("/admin/list/{page}/{name}")
+    @GetMapping(value = "/admin", params = {"page", "name"})
     @Operation(summary = "Gets all coupons paginated and filtered by name.")
     @ApiResponse(responseCode = "200", description = "Array of coupons",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable String name, Locale locale) {
+    public ResponseEntity<?> getAllByName(@RequestParam Integer page, @RequestParam String name, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Coupon> coupons = this.couponService.getAllByName(name, pageable);
@@ -86,7 +86,7 @@ public class CouponController {
         }
     }
 
-    @PostMapping("/{couponName}/{idUser}")
+    @PostMapping(value = "", params = {"couponName", "idUser"})
     @Operation(summary = "Redeems a coupon if it exists and if the user has not redeemed it previously")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Coupon created",
@@ -96,8 +96,8 @@ public class CouponController {
             @ApiResponse(responseCode = "404", description = "Coupon or user not found",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = InternalServerError.class)) })
     })
-    public ResponseEntity<?> redeemCoupon(@PathVariable String couponName,
-                                          @PathVariable Long idUser, Locale locale) {
+    public ResponseEntity<?> redeemCoupon(@RequestParam String couponName,
+                                          @RequestParam Long idUser, Locale locale) {
         try {
             Coupon coupon = couponService.findByName(couponName);
             User user = userService.findById(idUser);

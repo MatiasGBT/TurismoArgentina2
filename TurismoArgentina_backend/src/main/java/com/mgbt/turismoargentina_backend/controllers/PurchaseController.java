@@ -33,11 +33,11 @@ public class PurchaseController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{idUser}/{page}")
+    @GetMapping(value = "", params = {"idUser", "page"})
     @Operation(summary = "Gets all purchases paginated and filtered by user.")
     @ApiResponse(responseCode = "200", description = "Array of purchases",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Long idUser, @PathVariable Integer page, Locale locale) {
+    public ResponseEntity<?> getAllByUser(@RequestParam Long idUser, @RequestParam Integer page, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Purchase> purchases = this.purchaseService.getByUser(idUser, pageable);
@@ -66,7 +66,7 @@ public class PurchaseController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "Creates a purchase with the request body.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Purchase created",
@@ -94,7 +94,7 @@ public class PurchaseController {
         }
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     @Operation(summary = "Updates a purchase with the request body.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Purchase updated",
@@ -121,11 +121,11 @@ public class PurchaseController {
         }
     }
 
-    @GetMapping("/admin/count/{refunded}")
+    @GetMapping(value = "/admin/count", params = "refunded")
     @Operation(summary = "Gets number of refunded or non refunded purchases.")
     @ApiResponse(responseCode = "200", description = "Gets number of refunded or non refunded purchases",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
-    public ResponseEntity<?> getCount(@PathVariable boolean refunded, Locale locale) {
+    public ResponseEntity<?> getCount(@RequestParam boolean refunded, Locale locale) {
         try {
             Long count;
             if (refunded) {
@@ -139,11 +139,11 @@ public class PurchaseController {
         }
     }
 
-    @GetMapping("/admin/money/{refunded}")
+    @GetMapping(value = "/admin/money", params = "refunded")
     @Operation(summary = "Gets total money of refunded or non refunded purchases.")
     @ApiResponse(responseCode = "200", description = "Refunded or non refunded purchases",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class)) })
-    public ResponseEntity<?> getMoney(@PathVariable boolean refunded, Locale locale) {
+    public ResponseEntity<?> getMoney(@RequestParam boolean refunded, Locale locale) {
         try {
             Double money;
             if (refunded) {

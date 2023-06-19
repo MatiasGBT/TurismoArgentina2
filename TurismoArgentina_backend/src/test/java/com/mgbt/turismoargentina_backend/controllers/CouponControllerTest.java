@@ -127,7 +127,7 @@ class CouponControllerTest {
     void getAll() throws Exception {
         Page<Coupon> page = new PageImpl<>(List.of(coupon1, coupon2));
         when(couponService.getAll(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/coupons/admin/list/0"));
+        ResultActions response = mockMvc.perform(get("/api/coupons/admin?page=0"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -142,7 +142,7 @@ class CouponControllerTest {
     void getAllByName() throws Exception {
         Page<Coupon> page = new PageImpl<>(List.of(coupon1));
         when(couponService.getAllByName("INVIERNO", pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/coupons/admin/list/0/INVIERNO"));
+        ResultActions response = mockMvc.perform(get("/api/coupons/admin?page=0&name=INVIERNO"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -157,7 +157,7 @@ class CouponControllerTest {
         when(userService.findById(1L)).thenReturn(user);
         when(redeemedCouponService.findByCouponAndUser(coupon1, user)).thenReturn(redeemedCoupon);
         when(redeemedCouponService.save(redeemedCoupon)).thenReturn(redeemedCoupon);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2023/1")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2023&idUser=1")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isOk())
@@ -175,7 +175,7 @@ class CouponControllerTest {
         when(userService.findById(1L)).thenReturn(user);
         when(redeemedCouponService.findByCouponAndUser(coupon1, user)).thenReturn(redeemedCoupon);
         doThrow(CouponIsAlreadyUsedException.class).when(redeemedCouponService).validateCoupon(redeemedCoupon);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2023/1")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2023&idUser=1")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isBadRequest())
@@ -193,7 +193,7 @@ class CouponControllerTest {
         when(userService.findById(1L)).thenReturn(user);
         when(redeemedCouponService.findByCouponAndUser(coupon1, user)).thenReturn(redeemedCoupon);
         doThrow(CouponIsNotValidYetException.class).when(redeemedCouponService).validateCoupon(redeemedCoupon);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2023/1")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2023&idUser=1")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isBadRequest())
@@ -211,7 +211,7 @@ class CouponControllerTest {
         when(userService.findById(1L)).thenReturn(user);
         when(redeemedCouponService.findByCouponAndUser(coupon1, user)).thenReturn(redeemedCoupon);
         doThrow(CouponExpiredException.class).when(redeemedCouponService).validateCoupon(redeemedCoupon);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2023/1")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2023&idUser=1")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isBadRequest())
@@ -224,7 +224,7 @@ class CouponControllerTest {
     void redeemCoupon_CouponNotFound() throws Exception {
         when(couponService.findByName("INVIERNO2024")).thenThrow(EntityNotFoundException.class);
         when(userService.findById(1L)).thenReturn(user);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2024/1")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2024&idUser=1")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isNotFound())
@@ -237,7 +237,7 @@ class CouponControllerTest {
     void redeemCoupon_UserNotFound() throws Exception {
         when(couponService.findByName("INVIERNO2023")).thenReturn(coupon1);
         when(userService.findById(2L)).thenThrow(EntityNotFoundException.class);
-        ResultActions response = mockMvc.perform(post("/api/coupons/INVIERNO2023/2")
+        ResultActions response = mockMvc.perform(post("/api/coupons?couponName=INVIERNO2023&idUser=2")
                 .with(csrf().asHeader()));
         response.andDo(print())
                 .andExpect(status().isNotFound())

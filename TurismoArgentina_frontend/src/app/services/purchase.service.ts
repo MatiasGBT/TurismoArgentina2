@@ -15,7 +15,7 @@ export class PurchaseService {
     private router: Router) { }
 
   public getByUser(idUser: number, page: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${idUser}/${page}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?idUser=${idUser}&page=${page}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -34,7 +34,7 @@ export class PurchaseService {
   }
 
   public create(purchase: Purchase): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/`, purchase).pipe(
+    return this.http.post<any>(`${this.baseUrl}`, purchase).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -43,7 +43,7 @@ export class PurchaseService {
   }
 
   public update(purchase: Purchase): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/`, purchase).pipe(
+    return this.http.put<any>(`${this.baseUrl}`, purchase).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -52,13 +52,13 @@ export class PurchaseService {
   }
 
   public getCount(refunded: boolean): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/admin/count/${refunded}`).pipe(
+    return this.http.get<number>(`${this.baseUrl}/admin/count?refunded=${refunded}`).pipe(
       catchError(ex => throwError(() => ex))
     );
   }
 
   public getMoney(refunded: boolean): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/admin/money/${refunded}`).pipe(
+    return this.http.get<number>(`${this.baseUrl}/admin/money?refunded=${refunded}`).pipe(
       catchError(ex => throwError(() => ex))
     );
   }

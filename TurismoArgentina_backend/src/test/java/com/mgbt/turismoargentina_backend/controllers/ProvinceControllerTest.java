@@ -106,7 +106,7 @@ class ProvinceControllerTest {
     void getAllNonDeleted() throws Exception {
         Page<Province> page = new PageImpl<>(List.of(buenosAires, salta));
         when(provinceService.getAllNonDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/provinces/list/0/false"));
+        ResultActions response = mockMvc.perform(get("/api/provinces?page=0&deleted=false"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -120,7 +120,7 @@ class ProvinceControllerTest {
     void getAllDeleted() throws Exception {
         Page<Province> page = new PageImpl<>(List.of(misiones, rioNegro));
         when(provinceService.getAllDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/provinces/list/0/true"));
+        ResultActions response = mockMvc.perform(get("/api/provinces?page=0&deleted=true"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -135,7 +135,7 @@ class ProvinceControllerTest {
     void getAllNonDeletedByName() throws Exception {
         Page<Province> page = new PageImpl<>(List.of(buenosAires));
         when(provinceService.getAllNonDeletedByName(pageable, "Buenos")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/provinces/list/0/false/Buenos"));
+        ResultActions response = mockMvc.perform(get("/api/provinces?page=0&deleted=false&name=Buenos"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -147,7 +147,7 @@ class ProvinceControllerTest {
     void getAllDeletedByName() throws Exception {
         Page<Province> page = new PageImpl<>(List.of(misiones));
         when(provinceService.getAllDeletedByName(pageable, "iones")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/provinces/list/0/true/iones"));
+        ResultActions response = mockMvc.perform(get("/api/provinces?page=0&deleted=true&name=iones"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))

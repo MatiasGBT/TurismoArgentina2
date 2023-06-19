@@ -44,11 +44,11 @@ public class ActivityController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/list/{page}/{deleted}")
+    @GetMapping(value = "", params = {"page", "deleted"})
     @Operation(summary = "Gets all activities paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAll(@PathVariable Integer page, @PathVariable Boolean deleted, Locale locale) {
+    public ResponseEntity<?> getAll(@RequestParam Integer page, @RequestParam Boolean deleted, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Activity> activities;
@@ -60,12 +60,12 @@ public class ActivityController {
         }
     }
 
-    @GetMapping("/list/{page}/{deleted}/{name}")
+    @GetMapping(value = "", params = {"page", "deleted", "name"})
     @Operation(summary = "Gets all activities paginated and filtered by deletionDate is (deleted=true) or not (deleted=false) null and name like inserted name.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getAllByName(@PathVariable Integer page, @PathVariable Boolean deleted,
-                                          @PathVariable String name, Locale locale) {
+    public ResponseEntity<?> getAllByName(@RequestParam Integer page, @RequestParam Boolean deleted,
+                                          @RequestParam String name, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Activity> activities;
@@ -109,11 +109,11 @@ public class ActivityController {
         }
     }
 
-    @GetMapping("/location/{locationName}/{page}")
+    @GetMapping(value = "", params = {"locationName", "page"})
     @Operation(summary = "Gets all activities of a location (by name) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class)) })
-    public ResponseEntity<?> getByLocationName(@PathVariable Integer page, @PathVariable String locationName, Locale locale) {
+    public ResponseEntity<?> getByLocationName(@RequestParam Integer page, @RequestParam String locationName, Locale locale) {
         try {
             Pageable pageable = PageRequest.of(page, 9);
             Page<Activity> activities = this.activityService.getByLocationName(pageable, locationName);
@@ -123,11 +123,11 @@ public class ActivityController {
         }
     }
 
-    @GetMapping("/location/{idLocation}")
+    @GetMapping(value = "", params = "idLocation")
     @Operation(summary = "Gets all activities of a location (by id) paginated.")
     @ApiResponse(responseCode = "200", description = "Array of activities",
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Activity.class)) })
-    public ResponseEntity<?> getByLocationId(@PathVariable Long idLocation, Locale locale) {
+    public ResponseEntity<?> getByLocationId(@RequestParam Long idLocation, Locale locale) {
         try {
             List<Activity> activities = this.activityService.getByLocationId(idLocation);
             return new ResponseEntity<>(activities, HttpStatus.OK);

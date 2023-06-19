@@ -22,7 +22,7 @@ export class LocationService {
   }
 
   public getAll(page: number, areDeleted: boolean): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?page=${page}&deleted=${areDeleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -31,7 +31,7 @@ export class LocationService {
   }
 
   public getAllByName(page: number, areDeleted: boolean, name: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}/${name}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?page=${page}&deleted=${areDeleted}&name=${name}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -78,7 +78,7 @@ export class LocationService {
   }
 
   public getByProvinceName(page: number, provinceName: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/province/${provinceName}/${page}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?provinceName=${provinceName}&page=${page}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -87,7 +87,7 @@ export class LocationService {
   }
 
   public getByProvinceId(idProvince: number): Observable<Location[]> {
-    return this.http.get<Location[]>(`${this.baseUrl}/province/${idProvince}`).pipe(
+    return this.http.get<Location[]>(`${this.baseUrl}?idProvince=${idProvince}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

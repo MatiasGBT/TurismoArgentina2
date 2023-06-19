@@ -118,7 +118,7 @@ class PurchaseControllerTest {
     void getAll() throws Exception {
         Page<Purchase> page = new PageImpl<>(List.of(purchase1, purchase2, purchase3, purchase4));
         when(purchaseService.getByUser(user.getIdUser(), pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/purchases/list/1/0"));
+        ResultActions response = mockMvc.perform(get("/api/purchases?idUser=1&page=0"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -245,7 +245,7 @@ class PurchaseControllerTest {
     @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
     void getCountNotRefunded() throws Exception {
         when(purchaseService.getCountIsNotRefunded()).thenReturn(3L);
-        ResultActions response = mockMvc.perform(get("/api/purchases/admin/count/false"));
+        ResultActions response = mockMvc.perform(get("/api/purchases/admin/count?refunded=false"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is(3)));
@@ -255,7 +255,7 @@ class PurchaseControllerTest {
     @WithMockUser(username = "testuser", password = "testpassword", roles = "admin")
     void getCountRefunded() throws Exception {
         when(purchaseService.getCountIsRefunded()).thenReturn(1L);
-        ResultActions response = mockMvc.perform(get("/api/purchases/admin/count/true"));
+        ResultActions response = mockMvc.perform(get("/api/purchases/admin/count?refunded=true"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is(1)));
@@ -266,7 +266,7 @@ class PurchaseControllerTest {
     void getMoneyNotRefunded() throws Exception {
         Double moneyNotRefunded = purchase1.getPrice() + purchase2.getPrice() + purchase3.getPrice();
         when(purchaseService.getMoneyNotRefunded()).thenReturn(moneyNotRefunded);
-        ResultActions response = mockMvc.perform(get("/api/purchases/admin/money/false"));
+        ResultActions response = mockMvc.perform(get("/api/purchases/admin/money?refunded=false"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is(moneyNotRefunded)));
@@ -277,7 +277,7 @@ class PurchaseControllerTest {
     void getMoneyRefunded() throws Exception {
         Double moneyRefunded = purchase4.getPrice();
         when(purchaseService.getMoneyRefunded()).thenReturn(moneyRefunded);
-        ResultActions response = mockMvc.perform(get("/api/purchases/admin/money/true"));
+        ResultActions response = mockMvc.perform(get("/api/purchases/admin/money?refunded=true"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is(moneyRefunded)));

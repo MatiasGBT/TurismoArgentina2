@@ -22,7 +22,7 @@ export class ActivityService {
   }
 
   public getAll(page: number, areDeleted: boolean): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?page=${page}&deleted=${areDeleted}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -31,7 +31,7 @@ export class ActivityService {
   }
 
   public getAllByName(page: number, areDeleted: boolean, name: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/list/${page}/${areDeleted}/${name}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?page=${page}&deleted=${areDeleted}&name=${name}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -59,7 +59,7 @@ export class ActivityService {
   }
 
   public getByLocationName(page: number, locationName: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/location/${locationName}/${page}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}?locationName=${locationName}&page=${page}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);
@@ -68,7 +68,7 @@ export class ActivityService {
   }
 
   public getByLocationId(idLocation: number): Observable<Activity[]> {
-    return this.http.get<Activity[]>(`${this.baseUrl}/location/${idLocation}`).pipe(
+    return this.http.get<Activity[]>(`${this.baseUrl}?idLocation=${idLocation}`).pipe(
       catchError(ex => {
         this.catchErrorService.showError(ex);
         return throwError(() => ex);

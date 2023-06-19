@@ -119,7 +119,7 @@ class LocationControllerTest {
     void getAllNonDeleted() throws Exception {
         Page<Location> page = new PageImpl<>(List.of(caba, marDelPlata));
         when(locationService.getAllNonDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/locations/list/0/false"));
+        ResultActions response = mockMvc.perform(get("/api/locations?page=0&deleted=false"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -133,7 +133,7 @@ class LocationControllerTest {
     void getAllDeleted() throws Exception {
         Page<Location> page = new PageImpl<>(List.of(carilo, tigre));
         when(locationService.getAllDeleted(pageable)).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/locations/list/0/true"));
+        ResultActions response = mockMvc.perform(get("/api/locations?page=0&deleted=true"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -147,7 +147,7 @@ class LocationControllerTest {
     void getAllNonDeletedByName() throws Exception {
         Page<Location> page = new PageImpl<>(List.of(caba));
         when(locationService.getAllNonDeletedByName(pageable, "Buenos")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/locations/list/0/false/Buenos"));
+        ResultActions response = mockMvc.perform(get("/api/locations?page=0&deleted=false&name=Buenos"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -159,7 +159,7 @@ class LocationControllerTest {
     void getAllDeletedByName() throws Exception {
         Page<Location> page = new PageImpl<>(List.of(carilo));
         when(locationService.getAllDeletedByName(pageable, "ariló")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/locations/list/0/true/ariló"));
+        ResultActions response = mockMvc.perform(get("/api/locations?page=0&deleted=true&name=ariló"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -245,7 +245,7 @@ class LocationControllerTest {
     void getByProvinceName() throws Exception {
         Page<Location> page = new PageImpl<>(List.of(caba, marDelPlata));
         when(locationService.getByProvinceName(pageable, "Buenos Aires")).thenReturn(page);
-        ResultActions response = mockMvc.perform(get("/api/locations/province/Buenos Aires/0"));
+        ResultActions response = mockMvc.perform(get("/api/locations?provinceName=Buenos Aires&page=0"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(page.getContent().size())))
@@ -258,7 +258,7 @@ class LocationControllerTest {
     @Test
     void getByProvinceId() throws Exception {
         when(locationService.getByProvinceId(1L)).thenReturn(List.of(caba, marDelPlata));
-        ResultActions response = mockMvc.perform(get("/api/locations/province/1"));
+        ResultActions response = mockMvc.perform(get("/api/locations?idProvince=1"));
         response.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", is(2)))
