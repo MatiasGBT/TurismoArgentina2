@@ -53,12 +53,11 @@ class ExceptionServiceTest {
     @Test
     void throwDataAccessException() {
         when(messageSource.getMessage("error.database.message", null, locale)).thenReturn("Database error");
-        when(dataAccessException.getMessage()).thenReturn("Error");
-        when(dataAccessException.getMostSpecificCause()).thenReturn(new Throwable("Could not connect"));
+        when(messageSource.getMessage("error.database.error", null, locale)).thenReturn("Please try again later");
         ResponseEntity<Map<String, Object>> responseEntity = exceptionService.throwDataAccessException(dataAccessException, locale);
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getBody().get("message"), "Database error");
-        assertEquals(responseEntity.getBody().get("error"), "Error: Could not connect");
+        assertEquals(responseEntity.getBody().get("error"), "Please try again later");
         assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

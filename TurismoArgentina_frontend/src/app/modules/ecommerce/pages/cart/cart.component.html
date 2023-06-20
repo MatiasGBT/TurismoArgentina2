@@ -1,18 +1,23 @@
 <section>
     <div id="items-container">
-        <ecommerce-cart-locations-section [locations]="locations" (removeLocationEvent)="removeLocation($event)"></ecommerce-cart-locations-section>
-        <ecommerce-cart-activities-section [activities]="activities" (removeActivityEvent)="removeActivity($event)"></ecommerce-cart-activities-section>
+        <ecommerce-cart-locations-section [locations]="locations"
+            (removeLocationEvent)="removeLocation($event)"></ecommerce-cart-locations-section>
+        <ecommerce-cart-activities-section [activities]="activities"
+            (removeActivityEvent)="removeActivity($event)"></ecommerce-cart-activities-section>
     </div>
-    
+
     <div id="buy-container">
         <p>Total: ${{totalPrice}} ARS</p>
         <button (click)="buy()" type="button" aria-label="Buy cart button" [disabled]="totalPrice <= 0">
             {{'ECOMMERCE.CART.BUY_FORM.BUY' | translate}}
         </button>
         <div id="coupon">
-            <input type="text" (keypress)="verifyInputEnter($event)" [disabled]="totalPrice <= 0" [(ngModel)]="couponName" [placeholder]="'ECOMMERCE.CART.BUY_FORM.COUPON' | translate" maxlength="30">
-            <button type="button" [disabled]="totalPrice <= 0" aria-label="Apply coupon button" (click)="redeemCoupon()">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
+            <input #couponInput type="text" (keypress)="verifyInputEnter($event)" [disabled]="totalPrice <= 0"
+                [(ngModel)]="couponName" [placeholder]="'ECOMMERCE.CART.BUY_FORM.COUPON' | translate" maxlength="30">
+            <button type="button" [disabled]="totalPrice <= 0" aria-label="Apply coupon button"
+                (click)="redeemCoupon()">{{'ECOMMERCE.CART.BUY_FORM.APPLY_COUPON' | translate}}</button>
         </div>
-        <p id="coupon-message">{{couponMessage}}</p>
+        <p id="coupon-message" *ngIf="couponMessage.length > 0">{{couponMessage}}</p>
+        <p id="coupon-error" *ngIf="couponError.length > 0">{{couponError}}</p>
     </div>
 </section>

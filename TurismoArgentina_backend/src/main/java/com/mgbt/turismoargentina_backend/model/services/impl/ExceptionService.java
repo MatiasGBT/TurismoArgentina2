@@ -20,7 +20,7 @@ public class ExceptionService implements IExceptionService {
     public ResponseEntity<Map<String, Object>> throwDataAccessException(DataAccessException ex, Locale locale) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", messageSource.getMessage("error.database.message", null, locale));
-        response.put("error", ex.getMessage() + ": " + ex.getMostSpecificCause().getMessage());
+        response.put("error", messageSource.getMessage("error.database.error", null, locale));
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

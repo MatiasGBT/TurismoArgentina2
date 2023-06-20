@@ -45,12 +45,7 @@ export class CouponService {
   }
 
   public redeemCoupon(couponName: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}?couponName=${couponName}&idUser=${this.authService.keycloakUser.idUser}`, null).pipe(
-      catchError(ex => {
-        this.catchErrorService.showError(ex);
-        return throwError(() => ex);
-      })
-    );
+    return this.http.post<any>(`${this.baseUrl}?couponName=${couponName}&idUser=${this.authService.keycloakUser.idUser}`, null);
   }
 
   public updateRedeemedCoupon(redeemedCoupon: RedeemedCoupon): Observable<any> {

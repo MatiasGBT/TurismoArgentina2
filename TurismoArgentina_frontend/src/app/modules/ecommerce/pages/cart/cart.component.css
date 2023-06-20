@@ -66,6 +66,15 @@ section {
     margin-top: 8px;
 }
 
+#coupon-error {
+    color: red;
+    margin-top: 8px;
+}
+
+.coupon-input-error {
+    animation: coupon-input-animation forwards ease .5s;
+}
+
 @media (min-width: 768px) {
     section {
         padding: 105px 25px 25px 25px;
@@ -91,5 +100,43 @@ section {
     #buy-container {
         width: 30%;
         margin: auto 0;
+    }
+}
+
+/*@keyframes coupon-input-animation {
+    33% {
+        transform: translateX(-8px);
+        border-bottom-color: red;
+    }
+    66% {
+        transform: translateX(8px);
+        border-bottom-color: red;
+    }
+    100% {
+        transform: translateX(0);
+        border-bottom-color: rgb(184, 184, 184);
+    }
+}*/
+
+@keyframes coupon-input-animation {
+    20% {
+        transform: translateX(-8px);
+        border-bottom-color: red;
+    }
+    40% {
+        transform: translateX(8px);
+        border-bottom-color: red;
+    }
+    60% {
+        transform: translateX(-8px);
+        border-bottom-color: red;
+    }
+    80% {
+        transform: translateX(8px);
+        border-bottom-color: red;
+    }
+    100% {
+        transform: translateX(0);
+        border-bottom-color: rgb(184, 184, 184);
     }
 }

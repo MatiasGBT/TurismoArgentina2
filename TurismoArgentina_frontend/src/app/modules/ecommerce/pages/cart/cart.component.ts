@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { Location } from 'src/app/models/location';
@@ -10,6 +10,7 @@ import { CouponService } from 'src/app/services/coupon.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import { TranslateTextService } from 'src/app/services/translate-text.service';
+import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,6 +25,8 @@ export class CartComponent implements OnInit {
   public couponName: string = "";
   private redeemedCoupon: RedeemedCoupon = {} as RedeemedCoupon;
   public couponMessage: string = "";
+  public couponError: string = "";
+  @ViewChild("couponInput") couponInput!: ElementRef;
 
   constructor(private purchaseService: PurchaseService, 
     private locationService: LocationService,
@@ -31,7 +34,8 @@ export class CartComponent implements OnInit {
     private authService: AuthService,
     private translateTextService: TranslateTextService,
     private router: Router,
-    private couponService: CouponService) { }
+    private couponService: CouponService,
+    private renderer2: Renderer2) { }
 
   ngOnInit(): void {
     this.locations = this.locationService.getCartLocations();
@@ -145,11 +149,27 @@ export class CartComponent implements OnInit {
   public redeemCoupon(): void {
     if (!this.authService.keycloakUser) this.showBuyErrorModal();
     else {
-      this.couponService.redeemCoupon(this.couponName).subscribe(response => {
-        this.redeemedCoupon = response.redeemedCoupon;
-        this.couponMessage = response.message;
-        this.setTotalPrice();
-      });
+      this.couponService.redeemCoupon(this.couponName)
+        .pipe(
+          catchError(ex => {
+            this.couponError = ex.error.message;
+            this.couponMessage = "";
+            this.renderer2.addClass(this.couponInput.nativeElement, "coupon-input-error");
+            setTimeout(() => {
+              this.renderer2.removeClass(this.couponInput.nativeElement, "coupon-input-error");
+            }, 500);
+            console.log(ex.error.error);
+            this.redeemedCoupon = {} as RedeemedCoupon;
+            this.setTotalPrice();
+            return throwError(() => ex);
+          })
+        )
+        .subscribe(response => {
+          this.couponError = "";
+          this.redeemedCoupon = response.redeemedCoupon;
+          this.couponMessage = response.message;
+          this.setTotalPrice();
+        });
     }
   }
 }
